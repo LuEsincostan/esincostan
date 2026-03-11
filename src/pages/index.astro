@@ -4,62 +4,117 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const year = new Date().getFullYear();
 ---
 
-<BaseLayout title="Esin Costan | Personal Website" description="Personal presentation and contact page for Esin Costan.">
-  <main class="page">
-    <header class="hero">
-      <p class="kicker">esincostan.com</p>
-      <h1>Esin Costan</h1>
-      <p class="lede">
-        I build useful, data-driven digital products with a practical focus on clarity, speed, and quality.
-      </p>
-      <nav class="quick-links" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#values">Values</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<BaseLayout title="Esin Costan | Professional + Personal" description="Professional and personal presentation page for Esin Costan.">
+  <main class="pcb-page">
+    <header class="pcb-hero">
+      <section class="intro intro-pro" aria-label="Professional profile summary">
+        <p class="intro-tag">Professional</p>
+        <p>Product strategy, engineering leadership, data-informed systems.</p>
+      </section>
+
+      <div class="intro-center">
+        <p class="domain">esincostan.com</p>
+        <h1>Esin Costan</h1>
+        <p class="tagline">Two sides, one timeline.</p>
+      </div>
+
+      <section class="intro intro-personal" aria-label="Personal profile summary">
+        <p class="intro-tag">Personal</p>
+        <p>Curiosity, endurance, and a constant bias toward practical growth.</p>
+      </section>
     </header>
 
-    <section id="about" class="card" aria-labelledby="about-title">
-      <h2 id="about-title">01. About</h2>
-      <p>
-        I am Esin Costan. This website is my personal home on the web, where I share who I am, what I work on,
-        and how to reach me.
-      </p>
+    <section class="pcb-board" aria-label="Shared timeline connecting professional and personal life">
+      <section class="side side-pro" aria-labelledby="professional-title">
+        <h2 id="professional-title">Professional</h2>
+        <ul>
+          <li>Build and scale product teams</li>
+          <li>Translate data into action</li>
+          <li>Ship maintainable digital experiences</li>
+        </ul>
+      </section>
+
+      <p class="spine-label">Shared Timeline</p>
+
+      <section class="side side-personal" aria-labelledby="personal-title">
+        <h2 id="personal-title">Personal</h2>
+        <ul>
+          <li>Long-distance sports and resilience</li>
+          <li>Learning by making and shipping</li>
+          <li>Intentional, low-noise communication</li>
+        </ul>
+      </section>
+
+      <ol class="pcb-timeline">
+        <li class="node">
+          <article class="event event-pro">
+            <p class="event-year">2016</p>
+            <p>Started leading product and analytics decisions in cross-functional teams.</p>
+          </article>
+          <div class="joint" aria-hidden="true">
+            <span class="pad"></span>
+            <span class="stamp">2016</span>
+          </div>
+        </li>
+
+        <li class="node">
+          <div class="joint" aria-hidden="true">
+            <span class="pad"></span>
+            <span class="stamp">2018</span>
+          </div>
+          <article class="event event-personal">
+            <p class="event-year">2018</p>
+            <p>Committed to endurance training as a long-term discipline and mindset practice.</p>
+          </article>
+        </li>
+
+        <li class="node">
+          <article class="event event-pro">
+            <p class="event-year">2020</p>
+            <p>Led distributed delivery programs with focus on clear accountability and quality.</p>
+          </article>
+          <div class="joint" aria-hidden="true">
+            <span class="pad"></span>
+            <span class="stamp">2020</span>
+          </div>
+          <article class="event event-personal">
+            <p class="event-year">2020</p>
+            <p>Built a personal routine around consistency, reflection, and deliberate learning.</p>
+          </article>
+        </li>
+
+        <li class="node">
+          <article class="event event-pro">
+            <p class="event-year">2023</p>
+            <p>Focused on simple architectures that keep product velocity high without debt.</p>
+          </article>
+          <div class="joint" aria-hidden="true">
+            <span class="pad"></span>
+            <span class="stamp">2023</span>
+          </div>
+        </li>
+
+        <li class="node">
+          <div class="joint" aria-hidden="true">
+            <span class="pad"></span>
+            <span class="stamp">Now</span>
+          </div>
+          <article class="event event-personal">
+            <p class="event-year">Now</p>
+            <p>Combining professional rigor with a human, grounded personal pace.</p>
+          </article>
+        </li>
+      </ol>
     </section>
 
-    <section id="work" class="card" aria-labelledby="work-title">
-      <h2 id="work-title">02. Work</h2>
-      <ul>
-        <li>Product and engineering leadership</li>
-        <li>Data-informed decision systems</li>
-        <li>Simple, maintainable web experiences</li>
-      </ul>
-    </section>
-
-    <section id="values" class="card" aria-labelledby="values-title">
-      <h2 id="values-title">03. Values</h2>
-      <p>I prefer:</p>
-      <ul>
-        <li>Clear communication over complexity</li>
-        <li>Useful shipping over perfect planning</li>
-        <li>Long-term quality over short-term hacks</li>
-      </ul>
-    </section>
-
-    <section id="contact" class="card" aria-labelledby="contact-title">
-      <h2 id="contact-title">04. Contact</h2>
+    <footer class="pcb-footer" id="contact">
       <p>
         <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
-      </p>
-      <p>
+        <span class="separator">|</span>
         <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-        /
+        <span class="separator">|</span>
         <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
       </p>
-    </section>
-
-    <footer class="footer">
       <p>© {year} Esin Costan</p>
     </footer>
   </main>
