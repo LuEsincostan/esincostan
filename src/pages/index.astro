@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const year = new Date().getFullYear();
+---
+
+<BaseLayout title="Esin Costan | Personal Website" description="Personal presentation and contact page for Esin Costan.">
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">esincostan.com</p>
+      <h1>Esin Costan</h1>
+      <p class="lede">
+        I build useful, data-driven digital products with a practical focus on clarity, speed, and quality.
+      </p>
+      <nav class="quick-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#values">Values</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="about" class="card" aria-labelledby="about-title">
+      <h2 id="about-title">01. About</h2>
+      <p>
+        I am Esin Costan. This website is my personal home on the web, where I share who I am, what I work on,
+        and how to reach me.
+      </p>
+    </section>
+
+    <section id="work" class="card" aria-labelledby="work-title">
+      <h2 id="work-title">02. Work</h2>
+      <ul>
+        <li>Product and engineering leadership</li>
+        <li>Data-informed decision systems</li>
+        <li>Simple, maintainable web experiences</li>
+      </ul>
+    </section>
+
+    <section id="values" class="card" aria-labelledby="values-title">
+      <h2 id="values-title">03. Values</h2>
+      <p>I prefer:</p>
+      <ul>
+        <li>Clear communication over complexity</li>
+        <li>Useful shipping over perfect planning</li>
+        <li>Long-term quality over short-term hacks</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="card" aria-labelledby="contact-title">
+      <h2 id="contact-title">04. Contact</h2>
+      <p>
+        <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
+      </p>
+      <p>
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+        /
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>© {year} Esin Costan</p>
+    </footer>
+  </main>
+</BaseLayout>
