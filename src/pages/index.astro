@@ -1,174 +1,240 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const year = new Date().getFullYear();
+type TimelineSide = "professional" | "personal";
+
+interface TimelineEvent {
+  sortKey: string;
+  dateLabel: string;
+  side: TimelineSide;
+  summary: string;
+  details: string;
+}
+
+const events: TimelineEvent[] = [
+  {
+    sortKey: "2026-08",
+    dateLabel: "2026",
+    side: "professional",
+    summary: "Shared Dataiku 575 Lab announcement on open-source AI governance.",
+    details:
+      "Highlighted explainability and privacy-focused tooling for agentic workflows in production."
+  },
+  {
+    sortKey: "2025-03",
+    dateLabel: "2025",
+    side: "professional",
+    summary: "Issued Dataiku Core Designer certification.",
+    details:
+      "Expanded practical enablement work with AI workshops and customer sessions in Switzerland."
+  },
+  {
+    sortKey: "2024-08",
+    dateLabel: "2024",
+    side: "professional",
+    summary: "Earned Microsoft Fabric Analytics Engineer Associate.",
+    details:
+      "Strengthened engineering depth across analytics architecture and modern cloud data platforms."
+  },
+  {
+    sortKey: "2024-01",
+    dateLabel: "2024",
+    side: "personal",
+    summary: "Built a sustainable weekly routine around consistency and reflection.",
+    details:
+      "Focused on balancing training, recovery, and long-term growth habits without short-term spikes."
+  },
+  {
+    sortKey: "2018-07",
+    dateLabel: "2018",
+    side: "personal",
+    summary: "Committed to endurance sports as a long-term discipline.",
+    details:
+      "Shifted from occasional efforts to structured progression with measurable personal benchmarks."
+  },
+  {
+    sortKey: "2018-01",
+    dateLabel: "2018",
+    side: "professional",
+    summary: "Completed Tableau Server Certified Professional.",
+    details:
+      "Formalized technical specialization in enterprise analytics delivery and platform operations."
+  },
+  {
+    sortKey: "2016-11",
+    dateLabel: "2016",
+    side: "professional",
+    summary: "Earned Tableau Desktop 10 Qualified Associate.",
+    details:
+      "Built core foundations in visual analytics and stakeholder-ready data storytelling."
+  }
+].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
 ---
 
-<BaseLayout title="Esin Costan | Professional + Personal" description="Professional and personal presentation page for Esin Costan.">
-  <main class="pcb-page">
-    <header class="pcb-hero">
-      <section class="intro intro-pro" aria-label="Professional profile summary">
-        <p class="intro-tag">Professional</p>
-        <p>Dataiku (Zurich), analytics engineering, technical sales, and AI enablement.</p>
-      </section>
-
-      <div class="intro-center">
-        <p class="domain">esincostan.com</p>
-        <h1>Esin Costan</h1>
-        <p class="tagline">Two sides, one timeline.</p>
+<BaseLayout title="Ludwig Ehlert | Timeline" description="Professional and personal timeline of Ludwig Ehlert.">
+  <main class="split-page">
+    <header class="site-header">
+      <div class="name-box">
+        <h1>Ludwig Ehlert</h1>
+        <p class="contact-line">
+          <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
+          <span aria-hidden="true">|</span>
+          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <span aria-hidden="true">|</span>
+          <a href="https://www.linkedin.com/in/ludwigehlert/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </p>
       </div>
-
-      <section class="intro intro-personal" aria-label="Personal profile summary">
-        <p class="intro-tag">Personal</p>
-        <p>Curiosity, endurance, and a constant bias toward practical growth.</p>
-      </section>
     </header>
 
-    <section class="pcb-board" aria-label="Shared timeline connecting professional and personal life">
-      <section class="side side-pro" aria-labelledby="professional-title">
-        <h2 id="professional-title">Professional</h2>
-        <ul>
-          <li>Current company: Dataiku (Zurich, Switzerland)</li>
-          <li>Visible profile reach: 1K followers / 500+ connections</li>
-          <li>Focus areas: enterprise AI adoption and data tooling</li>
-        </ul>
-      </section>
-
-      <section class="side side-personal" aria-labelledby="personal-title">
-        <h2 id="personal-title">Personal</h2>
-        <ul>
-          <li>Long-distance sports and resilience</li>
-          <li>Learning by making and shipping</li>
-          <li>Intentional, low-noise communication</li>
-        </ul>
-      </section>
-
-      <div class="tree-core" aria-hidden="true">
-        <svg class="tree-svg" viewBox="0 0 220 900" role="presentation">
-          <g class="tree-traces">
-            <path d="M110 890 V620" />
-            <path d="M96 890 V650" />
-            <path d="M124 890 V650" />
-
-            <path d="M110 620 V220" />
-            <path d="M110 560 H76 V510 H48" />
-            <path d="M110 560 H144 V510 H172" />
-            <path d="M110 530 H84 V470 H60 V430 H34" />
-            <path d="M110 530 H136 V470 H160 V430 H186" />
-            <path d="M110 500 H90 V435 H66" />
-            <path d="M110 500 H130 V435 H154" />
-            <path d="M110 470 H94 V390 H78 V340 H58" />
-            <path d="M110 470 H126 V390 H142 V340 H162" />
-            <path d="M110 440 H86 V356 H64 V312 H44" />
-            <path d="M110 440 H134 V356 H156 V312 H176" />
-            <path d="M110 408 H96 V336 H80 V292" />
-            <path d="M110 408 H124 V336 H140 V292" />
-            <path d="M110 372 H100 V300 H86 V252" />
-            <path d="M110 372 H120 V300 H134 V252" />
-            <path d="M110 340 H96 V270 H72 V224" />
-            <path d="M110 340 H124 V270 H148 V224" />
-          </g>
-          <g class="tree-pads">
-            <circle cx="110" cy="620" r="7" />
-            <circle cx="48" cy="510" r="6" />
-            <circle cx="172" cy="510" r="6" />
-            <circle cx="34" cy="430" r="6" />
-            <circle cx="186" cy="430" r="6" />
-            <circle cx="66" cy="435" r="6" />
-            <circle cx="154" cy="435" r="6" />
-            <circle cx="58" cy="340" r="6" />
-            <circle cx="162" cy="340" r="6" />
-            <circle cx="44" cy="312" r="6" />
-            <circle cx="176" cy="312" r="6" />
-            <circle cx="80" cy="292" r="6" />
-            <circle cx="140" cy="292" r="6" />
-            <circle cx="86" cy="252" r="6" />
-            <circle cx="134" cy="252" r="6" />
-            <circle cx="72" cy="224" r="6" />
-            <circle cx="148" cy="224" r="6" />
-          </g>
-        </svg>
+    <section class="info-strip">
+      <button id="info-toggle" class="info-button" type="button" aria-expanded="false" aria-controls="name-info">
+        Info
+      </button>
+      <div id="name-info" class="name-info" hidden>
+        Placeholder section for the future explanation of the name <strong>esincostan</strong>.
       </div>
-
-      <ol class="pcb-timeline">
-        <li class="node">
-          <article class="event event-pro">
-            <p class="event-year">2016</p>
-            <p>Earned Tableau Desktop 10 Qualified Associate (issued Nov 2016).</p>
-          </article>
-          <div class="joint" aria-hidden="true">
-            <span class="pad"></span>
-            <span class="stamp">2016</span>
-          </div>
-        </li>
-
-        <li class="node">
-          <article class="event event-pro">
-            <p class="event-year">2018</p>
-            <p>Completed Tableau Server Certified Professional (issued Jan 2018).</p>
-          </article>
-          <div class="joint" aria-hidden="true">
-            <span class="pad"></span>
-            <span class="stamp">2018</span>
-          </div>
-          <article class="event event-personal">
-            <p class="event-year">2018</p>
-            <p>Committed to endurance training as a long-term discipline and mindset practice.</p>
-          </article>
-        </li>
-
-        <li class="node">
-          <article class="event event-pro">
-            <p class="event-year">2024</p>
-            <p>Earned Microsoft Certified: Fabric Analytics Engineer Associate (Aug 2024).</p>
-          </article>
-          <div class="joint" aria-hidden="true">
-            <span class="pad"></span>
-            <span class="stamp">2024</span>
-          </div>
-          <article class="event event-personal">
-            <p class="event-year">2024</p>
-            <p>Built a personal routine around consistency, reflection, and deliberate learning.</p>
-          </article>
-        </li>
-
-        <li class="node">
-          <article class="event event-pro">
-            <p class="event-year">2025</p>
-            <p>Issued Dataiku Core Designer (Mar 2025) and active in AI workshops in Switzerland.</p>
-          </article>
-          <div class="joint" aria-hidden="true">
-            <span class="pad"></span>
-            <span class="stamp">2025</span>
-          </div>
-        </li>
-
-        <li class="node">
-          <article class="event event-pro">
-            <p class="event-year">2026</p>
-            <p>Shared Dataiku 575 Lab announcement focused on open source AI governance tooling.</p>
-          </article>
-          <div class="joint" aria-hidden="true">
-            <span class="pad"></span>
-            <span class="stamp">2026</span>
-          </div>
-          <article class="event event-personal">
-            <p class="event-year">Now</p>
-            <p>Combining professional rigor with a human, grounded personal pace.</p>
-          </article>
-        </li>
-      </ol>
     </section>
 
-    <footer class="pcb-footer" id="contact">
-      <p>
-        <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
-        <span class="separator">|</span>
-        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-        <span class="separator">|</span>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </p>
-      <p>© {year} Esin Costan</p>
-    </footer>
+    <section id="timeline-shell" class="timeline-shell" data-focus="center" aria-label="Professional and personal timeline">
+      <div class="timeline-controls">
+        <button class="nav-button" type="button" data-nav="left" aria-label="Focus professional side">←</button>
+        <p class="controls-label">Latest First Timeline</p>
+        <button class="nav-button" type="button" data-nav="right" aria-label="Focus personal side">→</button>
+      </div>
+
+      <div
+        id="timeline-interactive"
+        class="timeline-interactive"
+        tabindex="0"
+        role="region"
+        aria-label="Swipe, drag, click, or use arrow keys to change focus"
+      >
+        <ol class="timeline-list">
+          {
+            events.map((event) => (
+              <li class={`timeline-item side-${event.side}`}>
+                <article class="event-card" data-side={event.side}>
+                  <p class="event-summary">{event.summary}</p>
+                  <p class="event-details" data-side-detail={event.side} aria-expanded="false">
+                    {event.details}
+                  </p>
+                </article>
+                <div class="axis-node" aria-hidden="true">
+                  <span class="node-dot"></span>
+                  <span class="node-date">{event.dateLabel}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
   </main>
+
+  <script>
+    (() => {
+      const shell = document.getElementById("timeline-shell");
+      const interactive = document.getElementById("timeline-interactive");
+      const infoToggle = document.getElementById("info-toggle");
+      const infoPanel = document.getElementById("name-info");
+      const navButtons = Array.from(document.querySelectorAll("[data-nav]"));
+      const details = Array.from(document.querySelectorAll("[data-side-detail]"));
+
+      if (!shell || !interactive || !infoToggle || !infoPanel) return;
+
+      const states = ["left", "center", "right"];
+      let index = 1;
+      let startX = 0;
+      let moved = false;
+
+      const updateDetailsAria = () => {
+        const focus = states[index];
+        const expandedSide =
+          focus === "left" ? "professional" : focus === "right" ? "personal" : "";
+
+        details.forEach((el) => {
+          const isExpanded = expandedSide !== "" && el.dataset.sideDetail === expandedSide;
+          el.setAttribute("aria-expanded", String(isExpanded));
+        });
+      };
+
+      const applyFocus = () => {
+        shell.dataset.focus = states[index];
+        updateDetailsAria();
+      };
+
+      const shiftFocus = (delta) => {
+        const next = Math.max(0, Math.min(states.length - 1, index + delta));
+        if (next === index) return;
+        index = next;
+        applyFocus();
+      };
+
+      navButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const dir = button.getAttribute("data-nav");
+          if (dir === "left") shiftFocus(-1);
+          if (dir === "right") shiftFocus(1);
+          interactive.focus();
+        });
+      });
+
+      interactive.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          shiftFocus(-1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          shiftFocus(1);
+        }
+      });
+
+      interactive.addEventListener("pointerdown", (event) => {
+        startX = event.clientX;
+        moved = false;
+      });
+
+      interactive.addEventListener("pointermove", (event) => {
+        if (Math.abs(event.clientX - startX) > 8) moved = true;
+      });
+
+      interactive.addEventListener("pointerup", (event) => {
+        const deltaX = event.clientX - startX;
+        const threshold = 42;
+
+        if (Math.abs(deltaX) >= threshold) {
+          // Swipe left = reveal right side, swipe right = reveal left side.
+          if (deltaX < 0) shiftFocus(1);
+          if (deltaX > 0) shiftFocus(-1);
+          return;
+        }
+
+        if (!moved) {
+          const rect = interactive.getBoundingClientRect();
+          const relativeX = event.clientX - rect.left;
+          const ratio = relativeX / rect.width;
+
+          if (ratio < 0.35) {
+            index = 0;
+            applyFocus();
+          } else if (ratio > 0.65) {
+            index = 2;
+            applyFocus();
+          } else {
+            index = 1;
+            applyFocus();
+          }
+        }
+      });
+
+      infoToggle.addEventListener("click", () => {
+        const expanded = infoToggle.getAttribute("aria-expanded") === "true";
+        infoToggle.setAttribute("aria-expanded", String(!expanded));
+        infoPanel.hidden = expanded;
+      });
+
+      applyFocus();
+    })();
+  </script>
 </BaseLayout>
