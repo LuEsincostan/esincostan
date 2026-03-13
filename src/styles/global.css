@@ -1,231 +1,249 @@
+/* ── Registered property: enables gradient animation on split ───── */
+@property --split-pos {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 50%;
+}
+
+/* ── Variables ─────────────────────────────────────────────────── */
 :root {
-  --left-bg: #000;
-  --left-fg: #fff;
-  --right-bg: #fff;
-  --right-fg: #000;
-  --line: #868686;
-  --axis-width: 86px;
-  --transition: 220ms ease;
+  --left-bg: #100d0b;       /* warm dark charcoal */
+  --left-fg: #ede8de;       /* warm cream */
+  --right-bg: #0c0d15;      /* cool dark slate-indigo */
+  --right-fg: #dce2f0;      /* cool off-white */
+  --line: #5e5c68;          /* neutral muted purple-gray */
+  --axis-width: 92px;
+  --transition: 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --left-bg: #fff;
-    --left-fg: #000;
-    --right-bg: #000;
-    --right-fg: #fff;
-    --line: #999;
-  }
-}
+/* ── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
 
-* {
-  box-sizing: border-box;
-}
-
-html,
+/* ── Base ───────────────────────────────────────────────────────── */
 body {
-  margin: 0;
-  min-height: 100%;
-}
-
-body {
-  font-family: "IBM Plex Mono", "Cascadia Code", "SF Mono", Consolas, monospace;
-  line-height: 1.45;
-  background: linear-gradient(90deg, var(--left-bg) 0 50%, var(--right-bg) 50% 100%);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  /* Organic diagonal gradient + subtle radial glows on each side */
+  background:
+    radial-gradient(ellipse 55% 65% at 12% 35%, rgba(190, 115, 38, 0.055) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 65% at 88% 35%, rgba(58, 88, 215, 0.06) 0%, transparent 65%),
+    linear-gradient(105deg, #100d0b 0%, #100d0b 30%, #0e0c11 46%, #0c0d15 58%, #0c0d15 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
   color: inherit;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-decoration: none;
+  transition: opacity 160ms ease;
 }
 
-a:hover {
-  text-decoration-style: double;
-}
+a:hover { opacity: 0.6; }
 
+/* ── Layout ─────────────────────────────────────────────────────── */
 .split-page {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto auto 1fr;
 }
 
+/* ── Site Header ────────────────────────────────────────────────── */
 .site-header {
   position: relative;
-  display: grid;
-  place-items: center;
-  padding: 1.05rem 0.9rem 0.85rem;
-}
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Header gradient bridges both bg tones */
+  background: linear-gradient(105deg, var(--left-bg) 0%, #0e0c11 50%, var(--right-bg) 100%);
+  padding: 2.4rem 1.5rem 2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 18%, transparent);
 }
 
 .name-box {
-  position: relative;
-  z-index: 1;
   text-align: center;
-  border: 1px solid var(--line);
-  background: #fff;
-  color: #000;
-  padding: 0.6rem 0.85rem;
-  min-width: min(90vw, 420px);
-}
-
-@media (prefers-color-scheme: dark) {
-  .name-box {
-    background: #000;
-    color: #fff;
-  }
+  color: var(--left-fg);
 }
 
 .name-box h1 {
   margin: 0;
-  font-size: clamp(1.15rem, 3vw, 1.6rem);
-  letter-spacing: 0.03em;
+  font-family: "IBM Plex Mono", "Cascadia Code", "SF Mono", Consolas, monospace;
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.045em;
 }
 
 .contact-line {
-  margin: 0.28rem 0 0;
-  font-size: 0.74rem;
+  margin: 0.7rem 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
   display: flex;
   justify-content: center;
-  gap: 0.42rem;
+  align-items: center;
+  gap: 1.6rem;
   flex-wrap: wrap;
+  color: color-mix(in srgb, var(--left-fg) 36%, transparent);
 }
 
-.info-strip {
-  position: relative;
+.contact-line a:hover {
+  color: var(--left-fg);
+  opacity: 1;
+}
+
+/* ── Info Icon ──────────────────────────────────────────────────── */
+.info-icon-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--left-fg) 18%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--left-fg) 35%, transparent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-style: italic;
+  cursor: pointer;
   display: grid;
   place-items: center;
-  padding: 0.65rem 1rem 0.72rem;
-  border-bottom: 1px solid var(--line);
+  line-height: 1;
+  transition:
+    border-color var(--transition),
+    color var(--transition),
+    background var(--transition);
 }
 
-.info-button {
-  font: inherit;
-  font-size: 0.74rem;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: #000;
-  padding: 0.3rem 0.8rem;
-  cursor: pointer;
+.info-icon-btn:hover {
+  border-color: color-mix(in srgb, var(--left-fg) 45%, transparent);
+  color: var(--left-fg);
+  background: color-mix(in srgb, var(--left-fg) 7%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .info-button {
-    color: #fff;
-  }
-}
-
+/* ── Name Info Panel ────────────────────────────────────────────── */
 .name-info {
-  margin-top: 0.5rem;
-  max-width: 760px;
+  margin-top: 1rem;
+  max-width: 540px;
   width: 100%;
-  border: 1px solid var(--line);
-  padding: 0.6rem 0.75rem;
-  font-size: 0.74rem;
-  background: rgb(255 255 255 / 0.96);
-  color: #000;
+  border: 1px solid color-mix(in srgb, var(--left-fg) 12%, transparent);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.79rem;
+  line-height: 1.6;
+  background: color-mix(in srgb, var(--left-fg) 5%, transparent);
+  color: color-mix(in srgb, var(--left-fg) 70%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .name-info {
-    background: rgb(0 0 0 / 0.96);
-    color: #fff;
-  }
-}
-
+/* ── Timeline Shell ─────────────────────────────────────────────── */
 .timeline-shell {
+  --split-pos: 50%;
   --left-fr: 50fr;
   --right-fr: 50fr;
-  --split-pos: 50%;
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: linear-gradient(90deg, var(--left-bg) 0 var(--split-pos), var(--right-bg) var(--split-pos) 100%);
-  transition: background-position var(--transition);
+  /* Gradient with soft blend zone around split — animates via @property */
+  background: linear-gradient(
+    90deg,
+    var(--left-bg) 0%,
+    var(--left-bg) calc(var(--split-pos) - 8%),
+    #0e0d10 var(--split-pos),
+    var(--right-bg) calc(var(--split-pos) + 8%),
+    var(--right-bg) 100%
+  );
+  transition: --split-pos var(--transition);
 }
 
-.timeline-shell[data-focus="left"] {
-  --left-fr: 65fr;
-  --right-fr: 35fr;
-  --split-pos: 65%;
-}
+.timeline-shell[data-focus="left"]   { --split-pos: 65%; --left-fr: 65fr; --right-fr: 35fr; }
+.timeline-shell[data-focus="center"] { --split-pos: 50%; --left-fr: 50fr; --right-fr: 50fr; }
+.timeline-shell[data-focus="right"]  { --split-pos: 35%; --left-fr: 35fr; --right-fr: 65fr; }
 
-.timeline-shell[data-focus="center"] {
-  --left-fr: 50fr;
-  --right-fr: 50fr;
-  --split-pos: 50%;
-}
-
-.timeline-shell[data-focus="right"] {
-  --left-fr: 35fr;
-  --right-fr: 65fr;
-  --split-pos: 35%;
-}
-
+/* ── Timeline Controls ──────────────────────────────────────────── */
 .timeline-controls {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.65rem 0.8rem;
-  border-bottom: 1px solid var(--line);
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 22%, transparent);
 }
 
 .controls-label {
   margin: 0;
-  text-align: center;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: #000;
+  color: color-mix(in srgb, var(--line) 90%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .controls-label {
-    color: #fff;
-  }
-}
+.label-pro { flex: 1; text-align: right; padding-right: 0.4em; }
+.label-sep { flex: 0 0 auto; }
+.label-per { flex: 1; text-align: left;  padding-left: 0.4em; }
 
+/* ── Nav Buttons (pill) ─────────────────────────────────────────── */
 .nav-button {
-  font: inherit;
-  border: 1px solid var(--line);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  border: 1px solid;
   background: transparent;
-  color: #000;
-  min-width: 2rem;
-  min-height: 1.7rem;
+  padding: 0.32rem 0.9rem;
   cursor: pointer;
   line-height: 1;
+  border-radius: 9999px;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition);
 }
 
-@media (prefers-color-scheme: dark) {
-  .nav-button {
-    color: #fff;
-  }
+[data-nav="left"] {
+  justify-self: start;
+  color: var(--left-fg);
+  border-color: color-mix(in srgb, var(--left-fg) 20%, transparent);
 }
 
+[data-nav="left"]:hover {
+  background: color-mix(in srgb, var(--left-fg) 10%, transparent);
+  border-color: color-mix(in srgb, var(--left-fg) 42%, transparent);
+}
+
+[data-nav="right"] {
+  justify-self: end;
+  color: var(--right-fg);
+  border-color: color-mix(in srgb, var(--right-fg) 20%, transparent);
+}
+
+[data-nav="right"]:hover {
+  background: color-mix(in srgb, var(--right-fg) 10%, transparent);
+  border-color: color-mix(in srgb, var(--right-fg) 42%, transparent);
+}
+
+/* ── Timeline Interactive ───────────────────────────────────────── */
 .timeline-interactive {
   position: relative;
   outline: none;
 }
 
 .timeline-interactive:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--line);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--line) 45%, transparent);
 }
 
 .timeline-list {
   position: relative;
   list-style: none;
   margin: 0;
-  padding: 0.2rem 0 0.8rem;
+  padding: 1rem 0 2.5rem;
 }
 
+/* Axis line */
 .timeline-list::before {
   content: "";
   position: absolute;
@@ -233,23 +251,32 @@ a:hover {
   bottom: 0;
   left: var(--split-pos);
   width: 1px;
-  background: var(--line);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--line) 50%, transparent) 8%,
+    color-mix(in srgb, var(--line) 50%, transparent) 92%,
+    transparent
+  );
   transform: translateX(calc((var(--axis-width) / 2) * -1 + 0.5px));
   transition: left var(--transition);
 }
 
+/* ── Timeline Item ──────────────────────────────────────────────── */
 .timeline-item {
   display: grid;
   grid-template-columns: var(--left-fr) var(--axis-width) var(--right-fr);
   align-items: center;
-  min-height: 90px;
+  min-height: 108px;
   transition: grid-template-columns var(--transition);
 }
 
+/* ── Event Card ─────────────────────────────────────────────────── */
 .event-card {
   width: min(94%, 520px);
-  border: 1px solid currentColor;
-  padding: 0.48rem 0.55rem;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
   transition:
     transform var(--transition),
     opacity var(--transition),
@@ -260,17 +287,23 @@ a:hover {
   grid-column: 1;
   justify-self: end;
   color: var(--left-fg);
+  background: color-mix(in srgb, var(--left-fg) 6%, var(--left-bg));
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
 .side-personal .event-card {
   grid-column: 3;
   justify-self: start;
   color: var(--right-fg);
+  background: color-mix(in srgb, var(--right-fg) 6%, var(--right-bg));
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 
 .event-summary {
   margin: 0;
-  font-size: 0.74rem;
+  font-size: 0.83rem;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 .event-details {
@@ -278,42 +311,40 @@ a:hover {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  font-size: 0.72rem;
+  font-size: 0.77rem;
+  line-height: 1.58;
+  color: color-mix(in srgb, currentColor 60%, transparent);
   transition:
     max-height var(--transition),
     opacity var(--transition),
     margin-top var(--transition);
 }
 
+/* ── Axis Node ──────────────────────────────────────────────────── */
 .axis-node {
   grid-column: 2;
   justify-self: center;
   display: grid;
-  gap: 0.25rem;
+  gap: 0.32rem;
   justify-items: center;
 }
 
 .node-dot {
-  width: 10px;
-  height: 10px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  background: #fff;
+  background: var(--line);
 }
 
 .node-date {
-  font-size: 0.63rem;
-  letter-spacing: 0.08em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--line);
+  color: color-mix(in srgb, var(--line) 80%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  .node-dot {
-    background: #000;
-  }
-}
-
+/* ── Focus States ───────────────────────────────────────────────── */
 .timeline-shell[data-focus="left"] .event-card[data-side="professional"],
 .timeline-shell[data-focus="right"] .event-card[data-side="personal"] {
   transform: scale(1);
@@ -323,15 +354,15 @@ a:hover {
 
 .timeline-shell[data-focus="left"] .event-card[data-side="personal"],
 .timeline-shell[data-focus="right"] .event-card[data-side="professional"] {
-  transform: scale(0.96);
-  opacity: 0.72;
+  transform: scale(0.95);
+  opacity: 0.32;
   max-width: 320px;
 }
 
 .timeline-shell[data-focus="left"] .event-card[data-side="professional"] .event-details,
 .timeline-shell[data-focus="right"] .event-card[data-side="personal"] .event-details {
-  margin-top: 0.35rem;
-  max-height: 7.2rem;
+  margin-top: 0.5rem;
+  max-height: 8rem;
   opacity: 1;
 }
 
@@ -343,60 +374,31 @@ a:hover {
   overflow: hidden;
 }
 
-@media (max-width: 900px) {
-  :root {
-    --axis-width: 72px;
-  }
+/* Center state: compact, one-line summaries, no details */
+.timeline-shell[data-focus="center"] .event-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
-  .event-card {
-    width: min(97%, 420px);
-  }
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --axis-width: 76px; }
+  .event-card { width: min(97%, 420px); }
 }
 
 @media (max-width: 660px) {
-  :root {
-    --axis-width: 58px;
-  }
-
-  .site-header {
-    padding-top: 0.8rem;
-  }
-
-  .name-box {
-    min-width: min(96vw, 360px);
-    padding: 0.5rem 0.62rem;
-  }
-
-  .name-box h1 {
-    font-size: 1.16rem;
-  }
-
-  .contact-line {
-    font-size: 0.67rem;
-  }
-
-  .timeline-controls {
-    padding: 0.5rem 0.45rem;
-  }
-
-  .controls-label {
-    font-size: 0.64rem;
-  }
-
-  .timeline-item {
-    min-height: 84px;
-  }
-
-  .event-card {
-    width: min(99%, 250px);
-    padding: 0.43rem 0.47rem;
-  }
-
-  .event-summary,
-  .event-details {
-    font-size: 0.66rem;
-  }
-
+  :root { --axis-width: 58px; }
+  .site-header { padding: 1.8rem 1rem 1.4rem; }
+  .name-box h1 { font-size: 1.25rem; }
+  .contact-line { font-size: 0.66rem; gap: 1rem; }
+  .timeline-controls { padding: 0.65rem 0.75rem; }
+  .controls-label { font-size: 0.58rem; }
+  .timeline-item { min-height: 88px; }
+  .event-card { width: min(99%, 250px); padding: 0.6rem 0.75rem; }
+  .event-summary { font-size: 0.77rem; }
+  .event-details { font-size: 0.71rem; }
   .timeline-shell[data-focus="left"] .event-card[data-side="personal"],
   .timeline-shell[data-focus="right"] .event-card[data-side="professional"] {
     max-width: 180px;

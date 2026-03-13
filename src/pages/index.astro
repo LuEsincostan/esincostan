@@ -78,27 +78,20 @@ const events: TimelineEvent[] = [
         <h1>Ludwig Ehlert</h1>
         <p class="contact-line">
           <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
-          <span aria-hidden="true">|</span>
           <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-          <span aria-hidden="true">|</span>
           <a href="https://www.linkedin.com/in/ludwigehlert/" target="_blank" rel="noreferrer">LinkedIn</a>
         </p>
       </div>
-    </header>
-
-    <section class="info-strip">
-      <button id="info-toggle" class="info-button" type="button" aria-expanded="false" aria-controls="name-info">
-        Info
-      </button>
+      <button id="info-toggle" class="info-icon-btn" type="button" aria-expanded="false" aria-controls="name-info" aria-label="About this site">i</button>
       <div id="name-info" class="name-info" hidden>
         Placeholder section for the future explanation of the name <strong>esincostan</strong>.
       </div>
-    </section>
+    </header>
 
     <section id="timeline-shell" class="timeline-shell" data-focus="center" aria-label="Professional and personal timeline">
       <div class="timeline-controls">
         <button class="nav-button" type="button" data-nav="left" aria-label="Focus professional side">←</button>
-        <p class="controls-label">Latest First Timeline</p>
+        <p class="controls-label"><span class="label-pro">Professional</span><span class="label-sep">·</span><span class="label-per">Personal</span></p>
         <button class="nav-button" type="button" data-nav="right" aria-label="Focus personal side">→</button>
       </div>
 
