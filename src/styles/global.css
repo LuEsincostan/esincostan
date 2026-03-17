@@ -7,14 +7,16 @@
 
 /* ── Variables ─────────────────────────────────────────────────── */
 :root {
-  --left-bg: #16120e;       /* warm amber-charcoal */
-  --left-fg: #f5ebda;       /* bright warm cream */
-  --right-bg: #0d1020;      /* deep cool navy-indigo */
-  --right-fg: #c8d6f8;      /* vibrant cool blue-white */
-  --line: #7e7a8c;          /* brighter neutral purple-gray */
-  --axis-width: 92px;
-  --transition: 260ms cubic-bezier(0.4, 0, 0.2, 1);
-  --radius: 12px;
+  --bg:          #090b12;
+  --pro:         #f59332;                  /* amber  — professional track */
+  --per:         #38bdf8;                  /* sky    — personal track     */
+  --text:        #e8eaf0;
+  --text-dim:    rgba(232, 234, 240, 0.42);
+  --glass:       rgba(255, 255, 255, 0.05);
+  --glass-b:     rgba(255, 255, 255, 0.09);
+  --axis-width:  88px;
+  --transition:  280ms cubic-bezier(0.4, 0, 0.2, 1);
+  --radius:      14px;
 }
 
 /* ── Reset ──────────────────────────────────────────────────────── */
@@ -25,25 +27,29 @@ html, body { margin: 0; min-height: 100%; }
 body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
-  /* Organic diagonal gradient — vivid radial glows on each side */
-  background:
-    radial-gradient(ellipse 65% 55% at 8% 22%,  rgba(235, 130, 25,  0.18) 0%, transparent 62%),
-    radial-gradient(ellipse 65% 55% at 92% 22%,  rgba(60,  90,  255, 0.18) 0%, transparent 62%),
-    radial-gradient(ellipse 40% 65% at 50% 60%,  rgba(130, 70,  220, 0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 20% 80%,  rgba(200, 100, 30,  0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 80%,  rgba(40,  60,  200, 0.08) 0%, transparent 60%),
-    linear-gradient(108deg, #16120e 0%, #16120e 28%, #12111c 46%, #0d1020 58%, #0d1020 100%);
+  color: var(--text);
+  background-color: var(--bg);
+
+  /* Layer 1 (top): dot grid — technical depth
+     Layers 2–6: aurora blobs for organic color warmth */
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.055) 0.5px, transparent 0.5px),
+    radial-gradient(ellipse 68% 52% at  8% 22%, rgba(245,130, 40,0.17) 0%, transparent 62%),
+    radial-gradient(ellipse 68% 52% at 92% 22%, rgba( 56,189,248,0.17) 0%, transparent 62%),
+    radial-gradient(ellipse 44% 62% at 50% 58%, rgba(120, 60,220,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 38% at 16% 82%, rgba(245,130, 40,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 38% at 84% 82%, rgba( 56,189,248,0.07) 0%, transparent 60%);
+
+  background-size:
+    28px 28px,
+    100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: opacity 160ms ease;
-}
-
+a { color: inherit; text-decoration: none; transition: opacity 160ms ease; }
 a:hover { opacity: 0.6; }
 
 /* ── Layout ─────────────────────────────────────────────────────── */
@@ -59,27 +65,65 @@ a:hover { opacity: 0.6; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Header gradient bridges both bg tones */
-  background: linear-gradient(105deg, var(--left-bg) 0%, #131118 50%, var(--right-bg) 100%);
-  padding: 2.4rem 1.5rem 2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 18%, transparent);
+  padding: 3.6rem 2rem 2.8rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+/* Upward violet spotlight — depth behind the name */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 88% 130% at 50% -15%, rgba(110,55,215,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Eyebrow: // esincostan */
+.name-eyebrow {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.73rem;
+  letter-spacing: 0.14em;
+  color: var(--pro);
+  margin-bottom: 0.55rem;
 }
 
 .name-box {
-  text-align: center;
-  color: var(--left-fg);
+  position: relative;
+  z-index: 1;
 }
 
+/* Gradient name: amber → near-white → sky */
 .name-box h1 {
   margin: 0;
-  font-family: "IBM Plex Mono", "Cascadia Code", "SF Mono", Consolas, monospace;
-  font-size: clamp(1.4rem, 3.2vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 0.045em;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  background: linear-gradient(130deg, var(--pro) 0%, #f0ece6 38%, var(--per) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Role tagline in mono below the name */
+.name-role {
+  margin: 0.6rem 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
 }
 
 .contact-line {
-  margin: 0.7rem 0 0;
+  position: relative;
+  z-index: 1;
+  margin: 1.25rem 0 0;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.7rem;
   letter-spacing: 0.05em;
@@ -88,74 +132,173 @@ a:hover { opacity: 0.6; }
   align-items: center;
   gap: 1.6rem;
   flex-wrap: wrap;
-  color: color-mix(in srgb, var(--left-fg) 52%, transparent);
+  color: rgba(255,255,255,0.35);
 }
 
-.contact-line a:hover {
-  color: var(--left-fg);
-  opacity: 1;
+.contact-line a:hover { color: var(--text); opacity: 1; }
+
+/* ── Eyebrow wrap — popover anchor ──────────────────────────────── */
+.eyebrow-wrap {
+  position: relative;
+  display: inline-block;
+  z-index: 10;
+  margin-bottom: 0.55rem;
 }
 
-/* ── Info Icon ──────────────────────────────────────────────────── */
-.info-icon-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--left-fg) 18%, transparent);
-  background: transparent;
-  color: color-mix(in srgb, var(--left-fg) 35%, transparent);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
-  font-style: italic;
+/* ── Name Eyebrow — clickable trigger ───────────────────────────── */
+.name-eyebrow {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
   cursor: pointer;
-  display: grid;
-  place-items: center;
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.73rem;
+  letter-spacing: 0.14em;
+  color: var(--pro);
+  transition: opacity 160ms ease;
+}
+
+.name-eyebrow::after {
+  content: ' ↓';
+  font-size: 0.58rem;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.name-eyebrow:hover { opacity: 0.75; }
+.name-eyebrow:hover::after { opacity: 0.5; }
+.name-eyebrow[aria-expanded="true"]::after { content: ' ↑'; opacity: 0.5; }
+
+/* ── Name Story — popover dropdown ─────────────────────────────── */
+.name-story {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  width: max-content;
+  max-width: min(330px, 88vw);
+  padding: 0.7rem 0.85rem 0.75rem;
+  background: rgba(18, 16, 28, 0.92);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 20;
+}
+
+/* Caret pointing up */
+.name-story::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(18, 16, 28, 0.92);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.name-story.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Calculator wireframe — compact, no big border */
+.calc-wireframe {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  margin-bottom: 0.55rem;
+}
+
+.calc-key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+/* Yellow secondary row label */
+.calc-alt {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.03em;
+  color: rgba(245, 147, 50, 0.5);
   line-height: 1;
-  transition:
-    border-color var(--transition),
-    color var(--transition),
-    background var(--transition);
 }
 
-.info-icon-btn:hover {
-  border-color: color-mix(in srgb, var(--left-fg) 45%, transparent);
-  color: var(--left-fg);
-  background: color-mix(in srgb, var(--left-fg) 7%, transparent);
+.calc-alt-used {
+  color: var(--pro);
+  font-weight: 700;
 }
 
-/* ── Name Info Panel ────────────────────────────────────────────── */
-.name-info {
-  margin-top: 1rem;
-  max-width: 540px;
-  width: 100%;
-  border: 1px solid color-mix(in srgb, var(--left-fg) 12%, transparent);
-  border-radius: var(--radius);
-  padding: 0.85rem 1.1rem;
-  font-size: 0.79rem;
+/* Key button shape */
+.calc-btn {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.66rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-bottom: 2px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 0.2rem 0;
+  width: 2.4rem;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  line-height: 1;
+}
+
+/* Story text */
+.name-story-text {
+  margin: 0;
+  font-size: 0.62rem;
   line-height: 1.6;
-  background: color-mix(in srgb, var(--left-fg) 5%, transparent);
-  color: color-mix(in srgb, var(--left-fg) 70%, transparent);
+  color: rgba(255,255,255,0.42);
+  text-align: center;
+}
+
+.name-story-credit {
+  margin: 0.45rem 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+}
+
+.name-story-text code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.07);
+  padding: 0.02rem 0.25rem;
+  border-radius: 3px;
 }
 
 /* ── Timeline Shell ─────────────────────────────────────────────── */
 .timeline-shell {
-  --split-pos: 50%;
-  --left-fr: 50fr;
-  --right-fr: 50fr;
+  --split-pos: 0.5;
+  --left-fr:   50fr;
+  --right-fr:  50fr;
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
-  /* Gradient with soft blend zone around split — animates via @property */
+  /* Very subtle tint overlay — body aurora carries main color identity */
   background: linear-gradient(
     90deg,
-    var(--left-bg) 0%,
-    var(--left-bg) calc(var(--split-pos) * 100% - 8%),
-    #131118 calc(var(--split-pos) * 100%),
-    var(--right-bg) calc(var(--split-pos) * 100% + 8%),
-    var(--right-bg) 100%
+    rgba(245,147, 50,0.04) 0%,
+    rgba(245,147, 50,0.04) calc(var(--split-pos) * 100% - 8%),
+    transparent             calc(var(--split-pos) * 100%),
+    rgba( 56,189,248,0.04) calc(var(--split-pos) * 100% + 8%),
+    rgba( 56,189,248,0.04) 100%
   );
   transition: --split-pos var(--transition);
 }
@@ -171,8 +314,8 @@ a:hover { opacity: 0.6; }
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem 1.1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 22%, transparent);
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .controls-label {
@@ -180,75 +323,76 @@ a:hover { opacity: 0.6; }
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.63rem;
+  font-size: 0.6rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--line) 90%, transparent);
 }
 
-.label-pro { flex: 1; text-align: right; padding-right: 0.4em; }
-.label-sep { flex: 0 0 auto; }
-.label-per { flex: 1; text-align: left;  padding-left: 0.4em; }
+.label-pro { flex: 1; text-align: right; padding-right: 0.45em; color: var(--pro); opacity: 0.7; }
+.label-sep { flex: 0 0 auto; color: rgba(255,255,255,0.18); }
+.label-per { flex: 1; text-align: left;  padding-left:  0.45em; color: var(--per); opacity: 0.7; }
 
-/* ── Nav Buttons (pill) ─────────────────────────────────────────── */
+/* ── Nav Buttons — colored pills ────────────────────────────────── */
 .nav-button {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.8rem;
-  border: 1px solid;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
   background: transparent;
-  padding: 0.32rem 0.9rem;
+  padding: 0.35rem 0.9rem;
   cursor: pointer;
   line-height: 1;
   border-radius: 9999px;
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition);
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition), box-shadow var(--transition);
 }
 
 [data-nav="left"] {
   justify-self: start;
-  color: var(--left-fg);
-  border-color: color-mix(in srgb, var(--left-fg) 20%, transparent);
+  color: var(--pro);
+  border-color: rgba(245,147,50,0.3);
+  background: rgba(245,147,50,0.07);
 }
-
 [data-nav="left"]:hover {
-  background: color-mix(in srgb, var(--left-fg) 10%, transparent);
-  border-color: color-mix(in srgb, var(--left-fg) 42%, transparent);
+  background: rgba(245,147,50,0.15);
+  border-color: rgba(245,147,50,0.55);
+  box-shadow: 0 0 14px rgba(245,147,50,0.2);
 }
 
 [data-nav="right"] {
   justify-self: end;
-  color: var(--right-fg);
-  border-color: color-mix(in srgb, var(--right-fg) 20%, transparent);
+  color: var(--per);
+  border-color: rgba(56,189,248,0.3);
+  background: rgba(56,189,248,0.07);
 }
-
 [data-nav="right"]:hover {
-  background: color-mix(in srgb, var(--right-fg) 10%, transparent);
-  border-color: color-mix(in srgb, var(--right-fg) 42%, transparent);
+  background: rgba(56,189,248,0.15);
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 0 14px rgba(56,189,248,0.2);
 }
 
 /* ── Timeline Interactive ───────────────────────────────────────── */
 .timeline-interactive {
   position: relative;
   outline: none;
+  overflow: hidden;    /* clip glow at the section boundary */
+  isolation: isolate;  /* own stacking context so z-index: -1 works */
 }
 
 .timeline-interactive:focus-visible {
-  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--line) 45%, transparent);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.12);
 }
 
 .timeline-list {
   position: relative;
   list-style: none;
   margin: 0;
-  padding: 1rem 0 2.5rem;
+  padding: 1.5rem 0 3rem;
 }
 
-/* Axis line — centered on the axis column for all split positions.
-   Derivation: axis column center = split * W - split * axis-width + axis-width/2
-   But left: split * W, so transform = -split * axis-width + axis-width/2 - 0.5px */
+/* Axis spine — neutral glowing line */
 .timeline-list::before {
   content: "";
   position: absolute;
@@ -259,8 +403,9 @@ a:hover { opacity: 0.6; }
   background: linear-gradient(
     to bottom,
     transparent,
-    color-mix(in srgb, var(--line) 50%, transparent) 8%,
-    color-mix(in srgb, var(--line) 50%, transparent) 92%,
+    rgba(255,255,255,0.28) 8%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0.28) 92%,
     transparent
   );
   transform: translateX(calc(
@@ -280,64 +425,77 @@ a:hover { opacity: 0.6; }
 }
 
 /* ── Sub-level items (certs, awards, education) ─────────────────── */
-.timeline-item.is-sub {
-  min-height: 72px;
-}
+.timeline-item.is-sub { min-height: 66px; }
 
 .timeline-item.is-sub .event-card {
-  padding: 0.5rem 0.8rem;
-  border-style: dashed;
-  border-color: color-mix(in srgb, currentColor 10%, transparent) !important;
+  padding: 0.5rem 0.85rem;
+  border-style: dashed !important;
   background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
-  max-width: 400px;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Restore colored accent on dashed sub-items */
+.timeline-item.is-sub.side-professional .event-card {
+  border-right-color: rgba(245,147,50,0.38) !important;
+}
+.timeline-item.is-sub.side-personal .event-card {
+  border-left-color: rgba(56,189,248,0.38) !important;
 }
 
 .timeline-item.is-sub .event-summary {
-  font-size: 0.76rem;
-  color: color-mix(in srgb, currentColor 70%, transparent);
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.6;
 }
 
-.timeline-item.is-sub .node-dot {
-  width: 5px;
-  height: 5px;
-  background: transparent;
-  border: 1px solid var(--line);
-}
-
-/* ── Event Card ─────────────────────────────────────────────────── */
+/* ── Event Card — glassmorphism base ────────────────────────────── */
 .event-card {
   width: min(94%, 520px);
-  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1.1rem;
   border-radius: var(--radius);
+  /* Base glass: all four sides 1px */
+  border: 1px solid var(--glass-b);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  color: var(--text);
   transition:
     transform var(--transition),
     opacity var(--transition),
+    background var(--transition),
+    box-shadow var(--transition),
     max-width var(--transition);
 }
 
+/* Professional — accent border on RIGHT edge (facing axis) */
 .side-professional .event-card {
   grid-column: 1;
   justify-self: end;
-  color: var(--left-fg);
-  background: color-mix(in srgb, var(--left-fg) 9%, var(--left-bg));
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 0 0.5px color-mix(in srgb, var(--left-fg) 8%, transparent);
+  border-right: 2px solid var(--pro);
+  box-shadow:
+    0 4px 28px rgba(0,0,0,0.45),
+    6px 0 24px -8px rgba(245,147,50,0.2);
 }
 
+/* Personal — accent border on LEFT edge (facing axis) */
 .side-personal .event-card {
   grid-column: 3;
   justify-self: start;
-  color: var(--right-fg);
-  background: color-mix(in srgb, var(--right-fg) 9%, var(--right-bg));
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 0 0.5px color-mix(in srgb, var(--right-fg) 8%, transparent);
+  border-left: 2px solid var(--per);
+  box-shadow:
+    0 4px 28px rgba(0,0,0,0.45),
+    -6px 0 24px -8px rgba(56,189,248,0.2);
 }
 
+/* ── Card Typography ────────────────────────────────────────────── */
 .event-summary {
   margin: 0;
-  font-size: 0.83rem;
-  line-height: 1.5;
-  font-weight: 500;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  font-weight: 600;
 }
 
 .event-date-range {
@@ -346,9 +504,9 @@ a:hover { opacity: 0.6; }
   opacity: 0;
   overflow: hidden;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.64rem;
+  font-size: 0.63rem;
   letter-spacing: 0.06em;
-  color: color-mix(in srgb, currentColor 42%, transparent);
+  color: rgba(255,255,255,0.42);
   transition:
     max-height var(--transition),
     opacity var(--transition),
@@ -360,9 +518,9 @@ a:hover { opacity: 0.6; }
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  font-size: 0.77rem;
-  line-height: 1.58;
-  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.62;
+  color: rgba(255,255,255,0.68);
   transition:
     max-height var(--transition),
     opacity var(--transition),
@@ -374,89 +532,173 @@ a:hover { opacity: 0.6; }
   grid-column: 2;
   justify-self: center;
   display: grid;
-  gap: 0.32rem;
+  gap: 0.35rem;
   justify-items: center;
 }
 
+/* Diamond node — colored per track, glowing */
 .node-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--line);
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: box-shadow var(--transition);
 }
 
-.node-date {
+.side-professional .node-dot {
+  background: var(--pro);
+  box-shadow: 0 0 9px rgba(245,147,50,0.8);
+}
+
+.side-personal .node-dot {
+  background: var(--per);
+  box-shadow: 0 0 9px rgba(56,189,248,0.8);
+}
+
+/* Sub-item nodes — hollow diamonds */
+.timeline-item.is-sub .node-dot {
+  background: transparent;
+  box-shadow: none;
+  width: 5px;
+  height: 5px;
+}
+.timeline-item.is-sub.side-professional .node-dot {
+  border: 1.5px solid var(--pro);
+  opacity: 0.45;
+}
+.timeline-item.is-sub.side-personal .node-dot {
+  border: 1.5px solid var(--per);
+  opacity: 0.45;
+}
+
+/* Month label — compact, below dot */
+.node-month {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
+  font-size: 0.46rem;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--line) 100%, transparent);
+  color: rgba(255,255,255,0.28);
+}
+
+/* Year divider — sits on the axis at year boundaries */
+.year-divider {
+  display: grid;
+  grid-template-columns: var(--left-fr) var(--axis-width) var(--right-fr);
+  transition: grid-template-columns var(--transition);
+  list-style: none;
+}
+
+.year-label {
+  grid-column: 2;
+  justify-self: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 4px;
+  padding: 0.12rem 0.5rem;
+  margin: 0.75rem 0 0.25rem;
+}
+
+/* Scroll-driven glow blob on the axis */
+.axis-glow {
+  position: absolute;
+  pointer-events: none;
+  width: 48px;
+  height: 260px;
+  top: 0;
+  left: calc(var(--split-pos) * 100%);
+  transform:
+    translateX(calc(
+      var(--split-pos) * var(--axis-width) * -1
+      + var(--axis-width) / 2
+      - 24px
+    ))
+    translateY(var(--glow-y, 0px));
+  background: radial-gradient(ellipse at center,
+    rgba(255,255,255,0.13) 0%,
+    rgba(255,255,255,0.04) 45%,
+    transparent 72%);
+  z-index: -1;  /* behind all cards and text */
 }
 
 /* ── Focus States ───────────────────────────────────────────────── */
-.timeline-shell[data-focus="left"] .event-card[data-side="professional"],
+/* Focused side — brighter glass */
+.timeline-shell[data-focus="left"]  .event-card[data-side="professional"],
 .timeline-shell[data-focus="right"] .event-card[data-side="personal"] {
+  background: rgba(255,255,255,0.08);
   transform: scale(1);
   opacity: 1;
-  max-width: 560px;
+  max-width: 580px;
 }
 
-.timeline-shell[data-focus="left"] .event-card[data-side="personal"],
+/* Unfocused side — ghost out strongly */
+.timeline-shell[data-focus="left"]  .event-card[data-side="personal"],
 .timeline-shell[data-focus="right"] .event-card[data-side="professional"] {
-  transform: scale(0.95);
-  opacity: 0.32;
-  max-width: 320px;
+  transform: scale(0.94);
+  opacity: 0.18;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  max-width: 260px;
 }
 
-.timeline-shell[data-focus="left"] .event-card[data-side="professional"] .event-date-range,
-.timeline-shell[data-focus="right"] .event-card[data-side="personal"] .event-date-range {
+/* Reveal date range on focus */
+.timeline-shell[data-focus="left"]  .event-card[data-side="professional"] .event-date-range,
+.timeline-shell[data-focus="right"] .event-card[data-side="personal"]     .event-date-range {
   margin-top: 0.3rem;
   max-height: 2rem;
   opacity: 1;
 }
 
-.timeline-shell[data-focus="left"] .event-card[data-side="professional"] .event-details,
-.timeline-shell[data-focus="right"] .event-card[data-side="personal"] .event-details {
-  margin-top: 0.45rem;
-  max-height: 8rem;
+/* Reveal details on focus */
+.timeline-shell[data-focus="left"]  .event-card[data-side="professional"] .event-details,
+.timeline-shell[data-focus="right"] .event-card[data-side="personal"]     .event-details {
+  margin-top: 0.5rem;
+  max-height: 10rem;
   opacity: 1;
 }
 
-.timeline-shell[data-focus="left"] .event-card[data-side="personal"] .event-summary,
-.timeline-shell[data-focus="right"] .event-card[data-side="professional"] .event-summary {
+/* Clamp unfocused summaries to 1 line */
+.timeline-shell[data-focus="left"]  .event-card[data-side="personal"]      .event-summary,
+.timeline-shell[data-focus="right"] .event-card[data-side="professional"]   .event-summary {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Center state: compact, one-line summaries, no details */
+/* Center: 2-line clamp */
 .timeline-shell[data-focus="center"] .event-summary {
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  :root { --axis-width: 76px; }
+  :root { --axis-width: 72px; }
   .event-card { width: min(97%, 420px); }
 }
 
 @media (max-width: 660px) {
-  :root { --axis-width: 58px; }
-  .site-header { padding: 1.8rem 1rem 1.4rem; }
-  .name-box h1 { font-size: 1.25rem; }
-  .contact-line { font-size: 0.66rem; gap: 1rem; }
-  .timeline-controls { padding: 0.65rem 0.75rem; }
-  .controls-label { font-size: 0.58rem; }
-  .timeline-item { min-height: 88px; }
-  .event-card { width: min(99%, 250px); padding: 0.6rem 0.75rem; }
-  .event-summary { font-size: 0.77rem; }
-  .event-details { font-size: 0.71rem; }
-  .timeline-shell[data-focus="left"] .event-card[data-side="personal"],
-  .timeline-shell[data-focus="right"] .event-card[data-side="professional"] {
-    max-width: 180px;
-  }
+  :root { --axis-width: 54px; }
+  .site-header { padding: 2.6rem 1.2rem 2rem; }
+  .name-box h1 { font-size: 2rem; }
+  .name-role { font-size: 0.68rem; }
+  .contact-line { font-size: 0.65rem; gap: 1rem; }
+  .timeline-controls { padding: 0.7rem 0.85rem; }
+  .controls-label { font-size: 0.56rem; }
+  .timeline-item { min-height: 84px; }
+  .event-card { width: min(99%, 220px); padding: 0.65rem 0.8rem; }
+  .event-summary { font-size: 0.78rem; }
+  .event-details { font-size: 0.72rem; }
+  .timeline-shell[data-focus="left"]  .event-card[data-side="personal"],
+  .timeline-shell[data-focus="right"] .event-card[data-side="professional"] { max-width: 150px; }
+  body { background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; }
 }

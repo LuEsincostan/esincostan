@@ -157,12 +157,48 @@ const events: TimelineEvent[] = [
   // ── Personal ──────────────────────────────────────────────────────
 
   {
+    sortKey: "2026-03",
+    dateLabel: "2026",
+    side: "personal",
+    sub: true,
+    summary: "Halvvasan · 45 km",
+    dateRange: "Mar 2026 · Sweden",
+    details: "Completed Halvvasan — the 45 km sibling race of Vasaloppet, through the same Swedish forest tracks between Sälen and Mora."
+  },
+  {
     sortKey: "2026-01",
     dateLabel: "2026",
     side: "personal",
     summary: "Cross-Country Ski Instructor · Swissski",
     dateRange: "Jan 2026 · Switzerland",
     details: "Qualified Nordic ski instructor through the Swiss Federal Office of Sport J+S program — coaching youth in technique, race preparation, and endurance training."
+  },
+  {
+    sortKey: "2025-08",
+    dateLabel: "2025",
+    side: "personal",
+    sub: true,
+    summary: "Zürich → Paris · Bikepacking",
+    dateRange: "Aug 2025",
+    details: "Cycled from Zürich to Paris in three days — self-supported across the Swiss Plateau and through France."
+  },
+  {
+    sortKey: "2025-03",
+    dateLabel: "2025",
+    side: "personal",
+    sub: true,
+    summary: "Vasaloppet · 90 km",
+    dateRange: "Mar 2025 · Sweden",
+    details: "Completed the world's oldest and longest cross-country ski race — 90 km from Sälen to Mora through the Swedish forests."
+  },
+  {
+    sortKey: "2025-01",
+    dateLabel: "2025",
+    side: "personal",
+    sub: true,
+    summary: "La Diagonela · Switzerland",
+    dateRange: "Jan 2025 · Switzerland",
+    details: "Completed La Diagonela — a demanding winter endurance event through Swiss alpine terrain."
   },
   {
     sortKey: "2024-01",
@@ -191,18 +227,38 @@ const events: TimelineEvent[] = [
   {
     sortKey: "2013-06",
     dateLabel: "2013",
-    side: "personal",
-    summary: "Study Abroad · Luleå, Sweden",
-    dateRange: "2012 – 2013 · Arctic Circle",
+    side: "professional",
+    sub: true,
+    summary: "Study Abroad · Luleå University of Technology",
+    dateRange: "2012 – 2013 · Arctic Circle, Sweden",
     details: "Exchange year at Luleå University of Technology — Arctic hydrology research, geomachine fieldwork, and a first serious encounter with long-distance Nordic skiing."
   },
   {
     sortKey: "2008-09",
     dateLabel: "2008",
-    side: "personal",
-    summary: "Alternative Service · Dr. Pienitz School",
+    side: "professional",
+    sub: true,
+    summary: "Alternative Service · Dr. Pienitz School, Pirna",
     dateRange: "Sep 2007 – May 2008 · Pirna",
     details: "Supported teaching staff working with mentally disabled children — a formative experience that shapes a long-term commitment to coaching and community involvement."
+  },
+  {
+    sortKey: "2013-07",
+    dateLabel: "2013",
+    side: "personal",
+    sub: true,
+    summary: "Luleå → Å, Lofoten · Cycling",
+    dateRange: "2013 · Arctic Scandinavia",
+    details: "Long-distance cycle from Luleå, Sweden to Å on the Lofoten Islands — the westernmost point of the archipelago, through Arctic landscape."
+  },
+  {
+    sortKey: "2013-03",
+    dateLabel: "2013",
+    side: "personal",
+    sub: true,
+    summary: "Vasaloppet · 90 km",
+    dateRange: "Mar 2013 · Sweden",
+    details: "First Vasaloppet during the Luleå exchange year — 90 km through Swedish backcountry snow, the start of a long relationship with long-distance Nordic skiing."
   },
   {
     sortKey: "2003-01",
@@ -214,30 +270,66 @@ const events: TimelineEvent[] = [
   }
 
 ].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const eventsWithMeta = events.map((event, i) => {
+  const prevYear = i > 0 ? events[i - 1].sortKey.slice(0, 4) : null;
+  const currYear = event.sortKey.slice(0, 4);
+  const monthNum = parseInt(event.sortKey.slice(5, 7));
+  return {
+    ...event,
+    isNewYear: currYear !== prevYear,
+    yearLabel: currYear,
+    monthLabel: MONTHS[monthNum - 1] ?? '',
+  };
+});
 ---
 
 <BaseLayout title="Ludwig Ehlert | Timeline" description="Professional and personal timeline of Ludwig Ehlert.">
   <main class="split-page">
     <header class="site-header">
       <div class="name-box">
+        <div class="eyebrow-wrap">
+          <button id="name-toggle" class="name-eyebrow" type="button" aria-expanded="false" aria-controls="name-story" aria-label="About the name esincostan">// esincostan</button>
+          <div id="name-story" class="name-story" aria-hidden="true">
+            <div class="calc-wireframe">
+              <div class="calc-key">
+                <span class="calc-alt calc-alt-used">eˣ</span>
+                <span class="calc-btn">ln</span>
+              </div>
+              <div class="calc-key">
+                <span class="calc-alt">sin⁻¹</span>
+                <span class="calc-btn">sin</span>
+              </div>
+              <div class="calc-key">
+                <span class="calc-alt">cos⁻¹</span>
+                <span class="calc-btn">cos</span>
+              </div>
+              <div class="calc-key">
+                <span class="calc-alt">tan⁻¹</span>
+                <span class="calc-btn">tan</span>
+              </div>
+            </div>
+            <p class="name-story-text">2007 — when usernames felt permanent. <code>ln</code> starts with a consonant, can't pronounce it. The yellow secondary row had <code>e</code>. Drop the inverses. Concatenate.</p>
+            <p class="name-story-credit">Casio CFX-9850GB Plus</p>
+          </div>
+        </div>
         <h1>Ludwig Ehlert</h1>
+        <p class="name-role">Ecosystem Architect · Data &amp; AI · Zürich</p>
         <p class="contact-line">
           <a href="mailto:hello@esincostan.com">hello@esincostan.com</a>
           <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com/in/ludwigehlert/" target="_blank" rel="noreferrer">LinkedIn</a>
         </p>
       </div>
-      <button id="info-toggle" class="info-icon-btn" type="button" aria-expanded="false" aria-controls="name-info" aria-label="About this site">i</button>
-      <div id="name-info" class="name-info" hidden>
-        Placeholder section for the future explanation of the name <strong>esincostan</strong>.
-      </div>
     </header>
 
     <section id="timeline-shell" class="timeline-shell" data-focus="center" aria-label="Professional and personal timeline">
       <div class="timeline-controls">
-        <button class="nav-button" type="button" data-nav="left" aria-label="Focus professional side">←</button>
-        <p class="controls-label"><span class="label-pro">Professional</span><span class="label-sep">·</span><span class="label-per">Personal</span></p>
-        <button class="nav-button" type="button" data-nav="right" aria-label="Focus personal side">→</button>
+        <button class="nav-button" type="button" data-nav="left" aria-label="Focus professional side">← work</button>
+        <p class="controls-label"><span class="label-pro">professional</span><span class="label-sep">·</span><span class="label-per">personal</span></p>
+        <button class="nav-button" type="button" data-nav="right" aria-label="Focus personal side">life →</button>
       </div>
 
       <div
@@ -247,24 +339,32 @@ const events: TimelineEvent[] = [
         role="region"
         aria-label="Swipe, drag, click, or use arrow keys to change focus"
       >
+        <div class="axis-glow" aria-hidden="true"></div>
         <ol class="timeline-list">
           {
-            events.map((event) => (
-              <li class={`timeline-item side-${event.side}${event.sub ? " is-sub" : ""}`}>
-                <article class="event-card" data-side={event.side}>
-                  <p class="event-summary">{event.summary}</p>
-                  {event.dateRange && (
-                    <p class="event-date-range">{event.dateRange}</p>
-                  )}
-                  <p class="event-details" data-side-detail={event.side} aria-expanded="false">
-                    {event.details}
-                  </p>
-                </article>
-                <div class="axis-node" aria-hidden="true">
-                  <span class="node-dot"></span>
-                  <span class="node-date">{event.dateLabel}</span>
-                </div>
-              </li>
+            eventsWithMeta.map((event) => (
+              <>
+                {event.isNewYear && (
+                  <li class="year-divider" aria-hidden="true">
+                    <span class="year-label">{event.yearLabel}</span>
+                  </li>
+                )}
+                <li class={`timeline-item side-${event.side}${event.sub ? " is-sub" : ""}`}>
+                  <article class="event-card" data-side={event.side}>
+                    <p class="event-summary">{event.summary}</p>
+                    {event.dateRange && (
+                      <p class="event-date-range">{event.dateRange}</p>
+                    )}
+                    <p class="event-details" data-side-detail={event.side} aria-expanded="false">
+                      {event.details}
+                    </p>
+                  </article>
+                  <div class="axis-node" aria-hidden="true">
+                    <span class="node-dot"></span>
+                    <span class="node-month">{event.monthLabel}</span>
+                  </div>
+                </li>
+              </>
             ))
           }
         </ol>
@@ -276,12 +376,12 @@ const events: TimelineEvent[] = [
     (() => {
       const shell = document.getElementById("timeline-shell");
       const interactive = document.getElementById("timeline-interactive");
-      const infoToggle = document.getElementById("info-toggle");
-      const infoPanel = document.getElementById("name-info");
+      const nameToggle = document.getElementById("name-toggle");
+      const nameStory = document.getElementById("name-story");
       const navButtons = Array.from(document.querySelectorAll("[data-nav]"));
       const details = Array.from(document.querySelectorAll("[data-side-detail]"));
 
-      if (!shell || !interactive || !infoToggle || !infoPanel) return;
+      if (!shell || !interactive || !nameToggle || !nameStory) return;
 
       const states = ["left", "center", "right"];
       let index = 1;
@@ -369,13 +469,29 @@ const events: TimelineEvent[] = [
         }
       });
 
-      infoToggle.addEventListener("click", () => {
-        const expanded = infoToggle.getAttribute("aria-expanded") === "true";
-        infoToggle.setAttribute("aria-expanded", String(!expanded));
-        infoPanel.hidden = expanded;
+      nameToggle.addEventListener("click", () => {
+        const expanded = nameToggle.getAttribute("aria-expanded") === "true";
+        nameToggle.setAttribute("aria-expanded", String(!expanded));
+        nameStory.classList.toggle("is-open", !expanded);
+        nameStory.setAttribute("aria-hidden", String(expanded));
       });
 
       applyFocus();
+
+      // ── Scroll-driven axis glow ────────────────────────────────────
+      const axisGlow = document.querySelector(".axis-glow") as HTMLElement | null;
+      const GLOW_HALF = 130; // half of 260px glow height
+
+      const updateGlow = () => {
+        if (!axisGlow || !interactive) return;
+        const rect = interactive.getBoundingClientRect();
+        // Target: center the glow at ~45% down the viewport
+        const centerY = window.innerHeight * 0.45 - rect.top - GLOW_HALF;
+        axisGlow.style.setProperty("--glow-y", `${centerY}px`);
+      };
+
+      window.addEventListener("scroll", updateGlow, { passive: true });
+      updateGlow();
     })();
   </script>
 </BaseLayout>
