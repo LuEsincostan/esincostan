@@ -7,67 +7,212 @@ interface TimelineEvent {
   sortKey: string;
   dateLabel: string;
   side: TimelineSide;
-  summary: string;
-  details: string;
+  sub?: boolean;      // true = certification / award / education (visually subordinate)
+  summary: string;    // shown always — "Role · Company" or equivalent
+  dateRange?: string; // shown only when focused — e.g. "Mar 2025 – Mar 2026"
+  details: string;    // shown only when focused — description
 }
 
 const events: TimelineEvent[] = [
+
+  // ── Professional ─────────────────────────────────────────────────
+
   {
-    sortKey: "2026-08",
+    sortKey: "2026-03",
     dateLabel: "2026",
     side: "professional",
-    summary: "Shared Dataiku 575 Lab announcement on open-source AI governance.",
-    details:
-      "Highlighted explainability and privacy-focused tooling for agentic workflows in production."
+    summary: "Senior Ecosystem Architect · Dataiku",
+    dateRange: "Mar 2026 – present · Zürich",
+    details: "Leading ecosystem strategy and technical partnerships in Switzerland. Bridging Dataiku's AI platform capabilities with partner and enterprise customer architectures."
+  },
+  {
+    sortKey: "2025-11",
+    dateLabel: "2025",
+    side: "professional",
+    sub: true,
+    summary: "Dataiku MLOps Practitioner & Developer",
+    dateRange: "Nov 2025",
+    details: "Certified in model lifecycle management, deployment pipelines, and production AI operations — deepening platform engineering depth."
+  },
+  {
+    sortKey: "2025-04",
+    dateLabel: "2025",
+    side: "professional",
+    sub: true,
+    summary: "Dataiku GenAI & Advanced Designer",
+    dateRange: "Apr 2025",
+    details: "Certified in GenAI workflows, LLM orchestration, and advanced project design patterns within the Dataiku platform."
   },
   {
     sortKey: "2025-03",
     dateLabel: "2025",
     side: "professional",
-    summary: "Issued Dataiku Core Designer certification.",
-    details:
-      "Expanded practical enablement work with AI workshops and customer sessions in Switzerland."
+    summary: "Senior Sales Engineer · Dataiku",
+    dateRange: "Mar 2025 – Mar 2026 · Zürich",
+    details: "Drove technical pre-sales across DACH enterprise accounts — delivering AI platform evaluations, architecture workshops, and proof-of-concept projects."
   },
   {
     sortKey: "2024-08",
     dateLabel: "2024",
     side: "professional",
-    summary: "Earned Microsoft Fabric Analytics Engineer Associate.",
-    details:
-      "Strengthened engineering depth across analytics architecture and modern cloud data platforms."
+    sub: true,
+    summary: "Microsoft Fabric Analytics Engineer Associate",
+    dateRange: "Aug 2024",
+    details: "Microsoft certified in Fabric's unified analytics architecture — covering lakehouses, data pipelines, semantic modeling, and the full analytics lifecycle."
   },
   {
-    sortKey: "2024-01",
-    dateLabel: "2024",
-    side: "personal",
-    summary: "Built a sustainable weekly routine around consistency and reflection.",
-    details:
-      "Focused on balancing training, recovery, and long-term growth habits without short-term spikes."
+    sortKey: "2023-12",
+    dateLabel: "2023",
+    side: "professional",
+    summary: "Lead Solution Engineer · Tableau / Salesforce",
+    dateRange: "Dec 2023 – Mar 2025 · Frankfurt",
+    details: "Directed solution engineering for strategic DACH accounts post-Salesforce integration, combining CRM analytics with enterprise data platform narratives."
+  },
+  {
+    sortKey: "2023-10",
+    dateLabel: "2023",
+    side: "professional",
+    sub: true,
+    summary: "Databricks Lakehouse Fundamentals",
+    dateRange: "Oct 2023",
+    details: "Certified in Databricks Lakehouse architecture, Delta Lake, and unified data and AI platform fundamentals."
+  },
+  {
+    sortKey: "2021-08",
+    dateLabel: "2021",
+    side: "professional",
+    summary: "Lead Solutions Engineer · Tableau",
+    dateRange: "Aug 2021 – Jun 2023 · Germany",
+    details: "Led DACH solution engineering practice — mentoring engineers, shaping go-to-market strategy, and owning complex enterprise data analytics deals."
+  },
+  {
+    sortKey: "2020-12",
+    dateLabel: "2020",
+    side: "professional",
+    sub: true,
+    summary: "EMEA Tableau Rockstar Award",
+    dateRange: "Dec 2020",
+    details: "Recognized for outstanding contribution to the EMEA Solution Engineering team — technical excellence and cross-regional collaboration."
+  },
+  {
+    sortKey: "2020-05",
+    dateLabel: "2020",
+    side: "professional",
+    summary: "Senior Solutions Engineer · Tableau",
+    dateRange: "May 2020 – Aug 2021 · Germany",
+    details: "Specialized in enterprise data architecture across financial services and manufacturing — leading technical discovery, platform demos, and customer enablement workshops."
   },
   {
     sortKey: "2018-07",
     dateLabel: "2018",
-    side: "personal",
-    summary: "Committed to endurance sports as a long-term discipline.",
-    details:
-      "Shifted from occasional efforts to structured progression with measurable personal benchmarks."
+    side: "professional",
+    summary: "Solution Architect · Tableau EMEA",
+    dateRange: "Jul 2018 – May 2020 · EMEA",
+    details: "Expanded scope to EMEA-wide architecture engagements — shaping Tableau's platform positioning in large enterprise deals across industries and geographies."
+  },
+  {
+    sortKey: "2018-03",
+    dateLabel: "2018",
+    side: "professional",
+    sub: true,
+    summary: "B.Sc. Computer Science · Uni Hagen",
+    dateRange: "2015 – 2018",
+    details: "Part-time degree in Computer Science completed while working full-time at Tableau — strengthening software engineering, algorithms, and formal methods."
   },
   {
     sortKey: "2018-01",
     dateLabel: "2018",
     side: "professional",
-    summary: "Completed Tableau Server Certified Professional.",
-    details:
-      "Formalized technical specialization in enterprise analytics delivery and platform operations."
+    sub: true,
+    summary: "Tableau Desktop & Server Certified Professional",
+    dateRange: "Jan 2018",
+    details: "Achieved both Tableau Desktop and Server Certified Professional status — cementing technical authority across the full Tableau platform."
   },
   {
-    sortKey: "2016-11",
+    sortKey: "2016-05",
     dateLabel: "2016",
     side: "professional",
-    summary: "Earned Tableau Desktop 10 Qualified Associate.",
-    details:
-      "Built core foundations in visual analytics and stakeholder-ready data storytelling."
+    summary: "Product Consultant · Tableau Software",
+    dateRange: "May 2016 – Jan 2018 · Frankfurt",
+    details: "Joined Tableau's Frankfurt team as Product Consultant, progressing through Business Consultant and Associate Solution Architect roles — building deep expertise in visual analytics and pre-sales."
+  },
+  {
+    sortKey: "2014-10",
+    dateLabel: "2014",
+    side: "professional",
+    summary: "Software Solution Consultant · DHI",
+    dateRange: "Oct 2014 – Apr 2016 · Köln",
+    details: "Technical consulting and customer support for MIKE URBAN hydrological modeling software across Germany and Switzerland. Certified MIKE URBAN Trainer."
+  },
+  {
+    sortKey: "2014-01",
+    dateLabel: "2014",
+    side: "professional",
+    sub: true,
+    summary: "M.Sc. Environmental Engineering · TU Dresden",
+    dateRange: "2011 – 2014 · Dresden",
+    details: "Master's thesis on direct push field methods for high-resolution subsurface exploration. Focused on numerical groundwater modeling and water systems simulation."
+  },
+
+  // ── Personal ──────────────────────────────────────────────────────
+
+  {
+    sortKey: "2026-01",
+    dateLabel: "2026",
+    side: "personal",
+    summary: "Cross-Country Ski Instructor · Swissski",
+    dateRange: "Jan 2026 · Switzerland",
+    details: "Qualified Nordic ski instructor through the Swiss Federal Office of Sport J+S program — coaching youth in technique, race preparation, and endurance training."
+  },
+  {
+    sortKey: "2024-01",
+    dateLabel: "2024",
+    side: "personal",
+    summary: "Structured Endurance Training",
+    dateRange: "2024 – present",
+    details: "Committed to consistent progression across cycling, Nordic skiing, and running — building measurable long-term benchmarks over short-term peaks."
+  },
+  {
+    sortKey: "2022-07",
+    dateLabel: "2022",
+    side: "personal",
+    summary: "Chairman · Wheels over Frankfurt",
+    dateRange: "Jul 2022 – Mar 2024 · Frankfurt",
+    details: "Founded and chaired a mountain bike association in Frankfurt, pushing the local scene forward with community rides, trail advocacy, and youth development programs."
+  },
+  {
+    sortKey: "2014-09",
+    dateLabel: "2014",
+    side: "personal",
+    summary: "Mountain Rescue · Bergwacht Sachsen",
+    dateRange: "Sep 2014",
+    details: "Volunteered with Bergwacht Sachsen in search and rescue operations in the Saxon highlands."
+  },
+  {
+    sortKey: "2013-06",
+    dateLabel: "2013",
+    side: "personal",
+    summary: "Study Abroad · Luleå, Sweden",
+    dateRange: "2012 – 2013 · Arctic Circle",
+    details: "Exchange year at Luleå University of Technology — Arctic hydrology research, geomachine fieldwork, and a first serious encounter with long-distance Nordic skiing."
+  },
+  {
+    sortKey: "2008-09",
+    dateLabel: "2008",
+    side: "personal",
+    summary: "Alternative Service · Dr. Pienitz School",
+    dateRange: "Sep 2007 – May 2008 · Pirna",
+    details: "Supported teaching staff working with mentally disabled children — a formative experience that shapes a long-term commitment to coaching and community involvement."
+  },
+  {
+    sortKey: "2003-01",
+    dateLabel: "2003",
+    side: "personal",
+    summary: "Life Guard · DLRG",
+    dateRange: "2003 – 2006",
+    details: "Active lifeguard from age 13 — water rescue training, public pool supervision, and first response certification across three years of service."
   }
+
 ].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
 ---
 
@@ -105,9 +250,12 @@ const events: TimelineEvent[] = [
         <ol class="timeline-list">
           {
             events.map((event) => (
-              <li class={`timeline-item side-${event.side}`}>
+              <li class={`timeline-item side-${event.side}${event.sub ? " is-sub" : ""}`}>
                 <article class="event-card" data-side={event.side}>
                   <p class="event-summary">{event.summary}</p>
+                  {event.dateRange && (
+                    <p class="event-date-range">{event.dateRange}</p>
+                  )}
                   <p class="event-details" data-side-detail={event.side} aria-expanded="false">
                     {event.details}
                   </p>

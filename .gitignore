@@ -3,3 +3,7 @@ dist
 .astro
 .npm-cache
 .DS_Store
+
+# LinkedIn data exports
+linkedin_full/
+Basic_LinkedInDataExport*

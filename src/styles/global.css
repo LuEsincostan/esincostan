@@ -1,17 +1,17 @@
 /* ── Registered property: enables gradient animation on split ───── */
 @property --split-pos {
-  syntax: '<percentage>';
+  syntax: '<number>';
   inherits: true;
-  initial-value: 50%;
+  initial-value: 0.5;
 }
 
 /* ── Variables ─────────────────────────────────────────────────── */
 :root {
-  --left-bg: #100d0b;       /* warm dark charcoal */
-  --left-fg: #ede8de;       /* warm cream */
-  --right-bg: #0c0d15;      /* cool dark slate-indigo */
-  --right-fg: #dce2f0;      /* cool off-white */
-  --line: #5e5c68;          /* neutral muted purple-gray */
+  --left-bg: #16120e;       /* warm amber-charcoal */
+  --left-fg: #f5ebda;       /* bright warm cream */
+  --right-bg: #0d1020;      /* deep cool navy-indigo */
+  --right-fg: #c8d6f8;      /* vibrant cool blue-white */
+  --line: #7e7a8c;          /* brighter neutral purple-gray */
   --axis-width: 92px;
   --transition: 260ms cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 12px;
@@ -25,11 +25,14 @@ html, body { margin: 0; min-height: 100%; }
 body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
-  /* Organic diagonal gradient + subtle radial glows on each side */
+  /* Organic diagonal gradient — vivid radial glows on each side */
   background:
-    radial-gradient(ellipse 55% 65% at 12% 35%, rgba(190, 115, 38, 0.055) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 65% at 88% 35%, rgba(58, 88, 215, 0.06) 0%, transparent 65%),
-    linear-gradient(105deg, #100d0b 0%, #100d0b 30%, #0e0c11 46%, #0c0d15 58%, #0c0d15 100%);
+    radial-gradient(ellipse 65% 55% at 8% 22%,  rgba(235, 130, 25,  0.18) 0%, transparent 62%),
+    radial-gradient(ellipse 65% 55% at 92% 22%,  rgba(60,  90,  255, 0.18) 0%, transparent 62%),
+    radial-gradient(ellipse 40% 65% at 50% 60%,  rgba(130, 70,  220, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%,  rgba(200, 100, 30,  0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%,  rgba(40,  60,  200, 0.08) 0%, transparent 60%),
+    linear-gradient(108deg, #16120e 0%, #16120e 28%, #12111c 46%, #0d1020 58%, #0d1020 100%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,7 +60,7 @@ a:hover { opacity: 0.6; }
   flex-direction: column;
   align-items: center;
   /* Header gradient bridges both bg tones */
-  background: linear-gradient(105deg, var(--left-bg) 0%, #0e0c11 50%, var(--right-bg) 100%);
+  background: linear-gradient(105deg, var(--left-bg) 0%, #131118 50%, var(--right-bg) 100%);
   padding: 2.4rem 1.5rem 2rem;
   border-bottom: 1px solid color-mix(in srgb, var(--line) 18%, transparent);
 }
@@ -85,7 +88,7 @@ a:hover { opacity: 0.6; }
   align-items: center;
   gap: 1.6rem;
   flex-wrap: wrap;
-  color: color-mix(in srgb, var(--left-fg) 36%, transparent);
+  color: color-mix(in srgb, var(--left-fg) 52%, transparent);
 }
 
 .contact-line a:hover {
@@ -149,17 +152,17 @@ a:hover { opacity: 0.6; }
   background: linear-gradient(
     90deg,
     var(--left-bg) 0%,
-    var(--left-bg) calc(var(--split-pos) - 8%),
-    #0e0d10 var(--split-pos),
-    var(--right-bg) calc(var(--split-pos) + 8%),
+    var(--left-bg) calc(var(--split-pos) * 100% - 8%),
+    #131118 calc(var(--split-pos) * 100%),
+    var(--right-bg) calc(var(--split-pos) * 100% + 8%),
     var(--right-bg) 100%
   );
   transition: --split-pos var(--transition);
 }
 
-.timeline-shell[data-focus="left"]   { --split-pos: 65%; --left-fr: 65fr; --right-fr: 35fr; }
-.timeline-shell[data-focus="center"] { --split-pos: 50%; --left-fr: 50fr; --right-fr: 50fr; }
-.timeline-shell[data-focus="right"]  { --split-pos: 35%; --left-fr: 35fr; --right-fr: 65fr; }
+.timeline-shell[data-focus="left"]   { --split-pos: 0.65; --left-fr: 65fr; --right-fr: 35fr; }
+.timeline-shell[data-focus="center"] { --split-pos: 0.5;  --left-fr: 50fr; --right-fr: 50fr; }
+.timeline-shell[data-focus="right"]  { --split-pos: 0.35; --left-fr: 35fr; --right-fr: 65fr; }
 
 /* ── Timeline Controls ──────────────────────────────────────────── */
 .timeline-controls {
@@ -243,13 +246,15 @@ a:hover { opacity: 0.6; }
   padding: 1rem 0 2.5rem;
 }
 
-/* Axis line */
+/* Axis line — centered on the axis column for all split positions.
+   Derivation: axis column center = split * W - split * axis-width + axis-width/2
+   But left: split * W, so transform = -split * axis-width + axis-width/2 - 0.5px */
 .timeline-list::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--split-pos);
+  left: calc(var(--split-pos) * 100%);
   width: 1px;
   background: linear-gradient(
     to bottom,
@@ -258,8 +263,11 @@ a:hover { opacity: 0.6; }
     color-mix(in srgb, var(--line) 50%, transparent) 92%,
     transparent
   );
-  transform: translateX(calc((var(--axis-width) / 2) * -1 + 0.5px));
-  transition: left var(--transition);
+  transform: translateX(calc(
+    var(--split-pos) * var(--axis-width) * -1
+    + var(--axis-width) / 2
+    - 0.5px
+  ));
 }
 
 /* ── Timeline Item ──────────────────────────────────────────────── */
@@ -271,10 +279,36 @@ a:hover { opacity: 0.6; }
   transition: grid-template-columns var(--transition);
 }
 
+/* ── Sub-level items (certs, awards, education) ─────────────────── */
+.timeline-item.is-sub {
+  min-height: 72px;
+}
+
+.timeline-item.is-sub .event-card {
+  padding: 0.5rem 0.8rem;
+  border-style: dashed;
+  border-color: color-mix(in srgb, currentColor 10%, transparent) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  max-width: 400px;
+}
+
+.timeline-item.is-sub .event-summary {
+  font-size: 0.76rem;
+  color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
+.timeline-item.is-sub .node-dot {
+  width: 5px;
+  height: 5px;
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
 /* ── Event Card ─────────────────────────────────────────────────── */
 .event-card {
   width: min(94%, 520px);
-  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
   padding: 0.85rem 1rem;
   border-radius: var(--radius);
   transition:
@@ -287,23 +321,38 @@ a:hover { opacity: 0.6; }
   grid-column: 1;
   justify-self: end;
   color: var(--left-fg);
-  background: color-mix(in srgb, var(--left-fg) 6%, var(--left-bg));
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  background: color-mix(in srgb, var(--left-fg) 9%, var(--left-bg));
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 0 0.5px color-mix(in srgb, var(--left-fg) 8%, transparent);
 }
 
 .side-personal .event-card {
   grid-column: 3;
   justify-self: start;
   color: var(--right-fg);
-  background: color-mix(in srgb, var(--right-fg) 6%, var(--right-bg));
-  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  background: color-mix(in srgb, var(--right-fg) 9%, var(--right-bg));
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 0 0.5px color-mix(in srgb, var(--right-fg) 8%, transparent);
 }
 
 .event-summary {
   margin: 0;
   font-size: 0.83rem;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+.event-date-range {
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, currentColor 42%, transparent);
+  transition:
+    max-height var(--transition),
+    opacity var(--transition),
+    margin-top var(--transition);
 }
 
 .event-details {
@@ -313,7 +362,7 @@ a:hover { opacity: 0.6; }
   overflow: hidden;
   font-size: 0.77rem;
   line-height: 1.58;
-  color: color-mix(in srgb, currentColor 60%, transparent);
+  color: color-mix(in srgb, currentColor 72%, transparent);
   transition:
     max-height var(--transition),
     opacity var(--transition),
@@ -341,7 +390,7 @@ a:hover { opacity: 0.6; }
   font-size: 0.58rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--line) 80%, transparent);
+  color: color-mix(in srgb, var(--line) 100%, transparent);
 }
 
 /* ── Focus States ───────────────────────────────────────────────── */
@@ -359,9 +408,16 @@ a:hover { opacity: 0.6; }
   max-width: 320px;
 }
 
+.timeline-shell[data-focus="left"] .event-card[data-side="professional"] .event-date-range,
+.timeline-shell[data-focus="right"] .event-card[data-side="personal"] .event-date-range {
+  margin-top: 0.3rem;
+  max-height: 2rem;
+  opacity: 1;
+}
+
 .timeline-shell[data-focus="left"] .event-card[data-side="professional"] .event-details,
 .timeline-shell[data-focus="right"] .event-card[data-side="personal"] .event-details {
-  margin-top: 0.5rem;
+  margin-top: 0.45rem;
   max-height: 8rem;
   opacity: 1;
 }
