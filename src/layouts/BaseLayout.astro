@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Esin Costan",
-  description = "Personal website of Esin Costan"
+  title = "40 Swiss Lakes by 2030",
+  description = "Swimming bucket list tracker — swim in 40 Swiss lakes by June 18, 2030"
 } = Astro.props;
 ---
 
@@ -20,13 +20,17 @@ const {
     <meta name="description" content={description} />
     <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/app-icon.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@400;500;600;800&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
     />
 
     <title>{title}</title>
