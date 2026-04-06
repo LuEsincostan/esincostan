@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import type { Lake, UserState } from "../data/types";
 import { UnifiedMap } from "./track/UnifiedMap";
 import { UnifiedList } from "./UnifiedList";
@@ -17,36 +17,27 @@ export function TabContainer({ lakes, initialUserState }: Props) {
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          const parsed = JSON.parse(stored) as UserState;
-          // Use localStorage only if it has more data than the committed JSON
-          // (i.e., the user made local changes that haven't been exported yet).
-          // Otherwise, prefer the committed JSON as the source of truth.
-          const localHasData =
-            parsed.selectedLakeIds.length > 0 || parsed.completedSwims.length > 0;
-          const commitHasData =
-            initialUserState.selectedLakeIds.length > 0 || initialUserState.completedSwims.length > 0;
-          // If committed JSON has data, it's the source of truth (was explicitly saved)
-          if (commitHasData) return initialUserState;
-          // If only localStorage has data, keep it (unsaved local edits)
-          if (localHasData) return parsed;
+          const parsed = JSON.parse(stored);
+          if (
+            Array.isArray(parsed?.selectedLakeIds) &&
+            Array.isArray(parsed?.completedSwims) &&
+            typeof parsed?.goalCount === "number"
+          ) {
+            return parsed as UserState;
+          }
+          localStorage.removeItem(STORAGE_KEY);
         }
-      } catch {}
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+      }
     }
     return initialUserState;
   });
-
-  // Track if state has diverged from the committed JSON
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
     } catch {}
-    // Check if state differs from committed JSON
-    const changed =
-      JSON.stringify(userState.selectedLakeIds) !== JSON.stringify(initialUserState.selectedLakeIds) ||
-      JSON.stringify(userState.completedSwims) !== JSON.stringify(initialUserState.completedSwims);
-    setHasUnsavedChanges(changed);
   }, [userState]);
 
   const completed = userState.completedSwims.length;
@@ -138,7 +129,7 @@ export function TabContainer({ lakes, initialUserState }: Props) {
           onToggleComplete={toggleComplete}
         />
 
-        <StateManager userState={userState} onImport={setUserState} hasUnsavedChanges={hasUnsavedChanges} />
+        <StateManager userState={userState} onImport={setUserState} />
 
         <UnifiedList
           lakes={lakes}

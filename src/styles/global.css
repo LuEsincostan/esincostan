@@ -574,28 +574,48 @@ body {
   padding: 0.5rem 0;
 }
 
-.unsaved-notice {
+.sync-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0 0.4rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--warning);
-  background: rgba(230, 126, 34, 0.08);
-  border: 1px solid rgba(230, 126, 34, 0.25);
-  border-radius: 6px;
-  padding: 0.5rem 0.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
 }
 
-.unsaved-notice code {
-  font-size: 0.68rem;
-  background: rgba(230, 126, 34, 0.12);
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px;
+.sync-user {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.sync-indicator {
+  color: var(--text-dim);
+}
+
+.sync-ok {
+  color: var(--completed);
+}
+
+.sync-err {
+  color: var(--warning);
 }
 
 .state-manager {
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
+}
+
+.btn-google {
+  background: #4285f4;
+  color: #fff;
+  border-color: #4285f4;
+}
+
+.btn-google:hover {
+  background: #3367d6;
+  border-color: #3367d6;
+  color: #fff;
 }
 
 .btn-sm {
@@ -613,18 +633,6 @@ body {
 .btn-sm:hover {
   border-color: var(--earth-light);
   color: var(--text);
-}
-
-.btn-sm-highlight {
-  background: var(--warning);
-  color: #fff;
-  border-color: var(--warning);
-}
-
-.btn-sm-highlight:hover {
-  background: #d35400;
-  border-color: #d35400;
-  color: #fff;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────── */
