@@ -134,6 +134,8 @@ export function TabContainer({ lakes, initialUserState }: Props) {
           lakes={lakes}
           selectedIds={userState.selectedLakeIds}
           completedSwims={userState.completedSwims}
+          onToggleLake={toggleLake}
+          onToggleComplete={toggleComplete}
         />
 
         <StateManager userState={userState} onImport={setUserState} hasUnsavedChanges={hasUnsavedChanges} />
