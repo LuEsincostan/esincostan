@@ -3,9 +3,10 @@ import type { UserState } from "../../data/types";
 interface Props {
   userState: UserState;
   onImport: (state: UserState) => void;
+  hasUnsavedChanges: boolean;
 }
 
-export function StateManager({ userState, onImport }: Props) {
+export function StateManager({ userState, onImport, hasUnsavedChanges }: Props) {
   const handleExport = () => {
     const json = JSON.stringify(userState, null, 2);
     const blob = new Blob([json], { type: "application/json" });
@@ -41,13 +42,20 @@ export function StateManager({ userState, onImport }: Props) {
   };
 
   return (
-    <div class="state-manager">
-      <button class="btn-sm" onClick={handleExport}>
-        Export State
-      </button>
-      <button class="btn-sm" onClick={handleImport}>
-        Import State
-      </button>
+    <div class="state-manager-wrap">
+      {hasUnsavedChanges && (
+        <div class="unsaved-notice">
+          Unsaved changes — export and replace <code>src/data/user-state.json</code> in the repo to persist.
+        </div>
+      )}
+      <div class="state-manager">
+        <button class={`btn-sm ${hasUnsavedChanges ? "btn-sm-highlight" : ""}`} onClick={handleExport}>
+          {hasUnsavedChanges ? "Save State" : "Export State"}
+        </button>
+        <button class="btn-sm" onClick={handleImport}>
+          Import State
+        </button>
+      </div>
     </div>
   );
 }

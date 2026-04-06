@@ -1,12 +1,113 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { TabContainer } from "../components/TabContainer";
-import lakesRaw from "../data/lakes-wikidata.json";
-import userState from "../data/user-state.json";
+
+const projects = [
+  {
+    title: "40 Lakes",
+    description: "Swim in 40 Swiss lakes by June 18, 2030",
+    href: "/lakes",
+    status: "In progress",
+  },
+];
 ---
 
-<BaseLayout>
-  <main>
-    <TabContainer client:load lakes={lakesRaw} initialUserState={userState} />
+<BaseLayout title="esincostan" description="Projects by Ludwig Ehlert">
+  <main class="landing">
+    <header class="landing-header">
+      <h1>esincostan</h1>
+      <p class="landing-subtitle">Projects by Ludwig Ehlert</p>
+    </header>
+
+    <section class="projects">
+      {projects.map((project) => (
+        <a href={project.href} class="project-card">
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <span class="project-status">{project.status}</span>
+        </a>
+      ))}
+    </section>
   </main>
 </BaseLayout>
+
+<style>
+  .landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .landing-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .landing-header h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--forest);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+
+  .landing-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.03em;
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+  }
+
+  .project-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: box-shadow 220ms ease, transform 220ms ease;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+
+  .project-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 0.4rem;
+  }
+
+  .project-card p {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-status {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--lake-light);
+    background: var(--lake-pale);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+</style>

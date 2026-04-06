@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { TabContainer } from "../../components/TabContainer";
+import lakesRaw from "../../data/lakes-wikidata.json";
+import userState from "../../data/user-state.json";
+---
+
+<BaseLayout title="40 Swiss Lakes by 2030" description="Swimming bucket list tracker — swim in 40 Swiss lakes by June 18, 2030">
+  <main>
+    <TabContainer client:load lakes={lakesRaw} initialUserState={userState} />
+  </main>
+</BaseLayout>

@@ -16,16 +16,37 @@ export function TabContainer({ lakes, initialUserState }: Props) {
     if (typeof window !== "undefined") {
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) return JSON.parse(stored);
+        if (stored) {
+          const parsed = JSON.parse(stored) as UserState;
+          // Use localStorage only if it has more data than the committed JSON
+          // (i.e., the user made local changes that haven't been exported yet).
+          // Otherwise, prefer the committed JSON as the source of truth.
+          const localHasData =
+            parsed.selectedLakeIds.length > 0 || parsed.completedSwims.length > 0;
+          const commitHasData =
+            initialUserState.selectedLakeIds.length > 0 || initialUserState.completedSwims.length > 0;
+          // If committed JSON has data, it's the source of truth (was explicitly saved)
+          if (commitHasData) return initialUserState;
+          // If only localStorage has data, keep it (unsaved local edits)
+          if (localHasData) return parsed;
+        }
       } catch {}
     }
     return initialUserState;
   });
 
+  // Track if state has diverged from the committed JSON
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
     } catch {}
+    // Check if state differs from committed JSON
+    const changed =
+      JSON.stringify(userState.selectedLakeIds) !== JSON.stringify(initialUserState.selectedLakeIds) ||
+      JSON.stringify(userState.completedSwims) !== JSON.stringify(initialUserState.completedSwims);
+    setHasUnsavedChanges(changed);
   }, [userState]);
 
   const completed = userState.completedSwims.length;
@@ -115,7 +136,7 @@ export function TabContainer({ lakes, initialUserState }: Props) {
           completedSwims={userState.completedSwims}
         />
 
-        <StateManager userState={userState} onImport={setUserState} />
+        <StateManager userState={userState} onImport={setUserState} hasUnsavedChanges={hasUnsavedChanges} />
 
         <UnifiedList
           lakes={lakes}
