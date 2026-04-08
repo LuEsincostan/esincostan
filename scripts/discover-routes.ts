@@ -106,8 +106,8 @@ export function discoverCorridors(
   config = {
     targetLengths: [5000, 8000, 12000, 18000, 25000],
     bearings: [0, 45, 90, 135, 180, 225, 270, 315],
-    minScore: 0.45,
-    maxDownhillEitherDir: 8, // max downhill % in the steeper direction
+    minScore: 0.35,
+    maxDownhillEitherDir: 10, // max downhill % in the steeper direction
     minLengthKm: 3,
   }
 ): DiscoveredRoute[] {
@@ -247,9 +247,9 @@ export function discoverLoops(
   config = {
     targetLengths: [12000, 18000, 25000, 35000],
     bearings: [0, 60, 120, 180, 240, 300],
-    minScore: 0.45,
-    maxDownhillPct: 10,
-    minLengthKm: 8,
+    minScore: 0.35,
+    maxDownhillPct: 12,
+    minLengthKm: 6,
   }
 ): DiscoveredRoute[] {
   console.log(`  Searching for loops from ${seedNodes.length} seed points...`);

@@ -255,27 +255,28 @@ export function buildGraph(
     }
   }
 
-  // Post-processing: apply crossing/urbanization penalty
-  // Nodes with many edges = busy intersections = bad for rollerski
+  // Post-processing: penalize edges in dense urban grids
+  // Only target truly problematic patterns, not normal road junctions
   for (const [nodeId, edges] of adjacency) {
-    const degree = edges.length;
-    // Penalty for traversing busy intersections (4+ roads meeting)
-    // Also penalize very short edges (urban grid pattern)
     for (const edge of edges) {
-      const isFrom = edge.from === nodeId;
-      // Apply penalty to edges arriving at high-degree intersections
-      const otherNodeId = isFrom ? edge.to : edge.from;
-      const otherDegree = (adjacency.get(otherNodeId) || []).length;
+      // Skip cycleways -- they're always good regardless of surroundings
+      if (edge.highway === "cycleway") continue;
 
-      // Crossing penalty: degree 2 = no penalty, 3 = small, 4+ = significant
-      const crossingPenalty = Math.max(0, (otherDegree - 2) * 0.06);
+      const fromDegree = (adjacency.get(edge.from) || []).length;
+      const toDegree = (adjacency.get(edge.to) || []).length;
+      const maxDegree = Math.max(fromDegree, toDegree);
 
-      // Short edge penalty: edges < 50m indicate dense urban grid
-      const shortPenalty = edge.lengthM < 50 ? 0.15 : edge.lengthM < 100 ? 0.05 : 0;
+      // Only penalize very busy intersections (5+ roads meeting)
+      const crossingPenalty = maxDegree >= 6 ? 0.1 : maxDegree >= 5 ? 0.05 : 0;
 
-      const totalPenalty = Math.min(crossingPenalty + shortPenalty, 0.4);
-      edge.forwardScore = Math.max(0.05, edge.forwardScore - totalPenalty);
-      edge.reverseScore = Math.max(0.05, edge.reverseScore - totalPenalty);
+      // Short edges in non-cycleway context = urban grid
+      const shortPenalty = edge.lengthM < 30 ? 0.1 : 0;
+
+      const totalPenalty = crossingPenalty + shortPenalty;
+      if (totalPenalty > 0) {
+        edge.forwardScore = Math.max(0.05, edge.forwardScore - totalPenalty);
+        edge.reverseScore = Math.max(0.05, edge.reverseScore - totalPenalty);
+      }
     }
   }
 
