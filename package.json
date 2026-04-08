@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "fetch-lakes": "tsx scripts/fetch-lakes.ts",
+    "fetch-rollerski": "tsx scripts/fetch-rollerski.ts",
     "preview": "astro preview"
   },
   "dependencies": {

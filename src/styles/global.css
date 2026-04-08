@@ -499,6 +499,8 @@ body {
 
 /* ── Map ────────────────────────────────────────────────────────── */
 .map-container {
+  position: relative;
+  z-index: 0;
   height: 450px;
   border-radius: var(--radius);
   border: 1px solid var(--sand);
@@ -655,4 +657,332 @@ body {
   .toggle-btn { flex: 1; text-align: center; }
   .state-manager { justify-content: center; }
   .filter-panel { padding: 0.8rem; }
+  .rs-filter-row { flex-direction: column; }
+  .rs-route-grid { grid-template-columns: 1fr; }
+  .rs-detail-stats { flex-wrap: wrap; }
+}
+
+/* ── Rollerski Routes ──────────────────────────────────────────── */
+
+.rs-app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rs-header .header-content {
+  padding: 1.5rem 1.2rem;
+}
+
+.rs-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 0.2rem;
+}
+
+.rs-header .header-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+.rs-stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--sand);
+}
+
+/* Route map legend */
+.rs-map-legend {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
+.rs-legend-title {
+  font-weight: 600;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+
+.rs-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rs-legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Route markers */
+.rs-marker {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Detail panel */
+.rs-detail-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+  margin: 1rem;
+  padding: 1.2rem;
+}
+
+.rs-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rs-detail-header h2 {
+  font-size: 1.3rem;
+  color: var(--forest);
+}
+
+.rs-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 0 0.3rem;
+  line-height: 1;
+}
+
+.rs-close-btn:hover {
+  color: var(--text);
+}
+
+.rs-detail-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.rs-detail-stats {
+  display: flex;
+  gap: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+  color: var(--forest);
+}
+
+/* Elevation chart */
+.rs-elevation-chart {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--sand);
+}
+
+/* Filter panel */
+.rs-filter-panel {
+  margin: 1rem;
+  padding: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+}
+
+.rs-filter-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.rs-filter-row:last-child {
+  margin-bottom: 0;
+}
+
+.rs-filter-label {
+  flex: 1;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rs-filter-input,
+.rs-filter-select {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--sand);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.rs-filter-input:focus,
+.rs-filter-select:focus {
+  outline: none;
+  border-color: var(--lake-light);
+}
+
+/* Route grid */
+.rs-route-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem 2rem;
+}
+
+/* Route card */
+.rs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+
+.rs-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.rs-card-selected {
+  border-color: var(--forest);
+  box-shadow: 0 0 0 2px var(--forest);
+}
+
+.rs-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+  gap: 0.5rem;
+}
+
+.rs-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.rs-type-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--lake-pale);
+  color: var(--lake-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rs-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.45;
+  margin-bottom: 0.8rem;
+}
+
+.rs-card-metrics {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.rs-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.rs-metric-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--forest);
+}
+
+.rs-metric-label {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.rs-card-footer {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.rs-surface-tag,
+.rs-transport-tag,
+.rs-warning-tag {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+}
+
+.rs-surface-tag {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.rs-transport-tag {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.rs-warning-tag {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.rs-card-endpoints {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rs-arrow {
+  color: var(--earth-light);
+}
+
+.rs-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
 }

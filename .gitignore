@@ -4,6 +4,10 @@ dist
 .npm-cache
 .DS_Store
 
+# Build-time data caches
+data/srtm/
+data/graph-cache.json
+
 # LinkedIn data exports
 linkedin_full/
 Basic_LinkedInDataExport*

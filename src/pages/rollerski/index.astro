@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { RollerskiApp } from "../../components/rollerski/RollerskiApp";
+import routes from "../../data/rollerski-routes.json";
+---
+
+<BaseLayout title="Rollerski Routes" description="Find the best rollerski routes around Wädenswil and the Zurich region">
+  <main>
+    <RollerskiApp client:load routes={routes} />
+  </main>
+</BaseLayout>
