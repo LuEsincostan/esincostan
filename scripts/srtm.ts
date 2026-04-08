@@ -7,6 +7,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { inflateRawSync } from "zlib";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRTM_DIR = join(__dirname, "..", "data", "srtm");
@@ -15,6 +16,7 @@ const VOID = -32768;
 
 // ESA Copernicus SRTM mirror (free, no auth)
 const HGT_URLS: Record<string, string> = {
+  "N46E008": "https://step.esa.int/auxdata/dem/SRTMGL1/N46E008.SRTMGL1.hgt.zip",
   "N47E008": "https://step.esa.int/auxdata/dem/SRTMGL1/N47E008.SRTMGL1.hgt.zip",
   "N47E009": "https://step.esa.int/auxdata/dem/SRTMGL1/N47E009.SRTMGL1.hgt.zip",
 };
@@ -77,11 +79,6 @@ async function downloadTile(key: string): Promise<void> {
 }
 
 function extractHgtFromZip(zip: Buffer, key: string): Buffer | null {
-  // Minimal ZIP parser: find the file and extract if stored (no compression)
-  // SRTM zips typically use DEFLATE, so we need to handle that too
-  // For simplicity, use Node.js zlib for DEFLATE
-  const { inflateRawSync } = require("zlib") as typeof import("zlib");
-
   let offset = 0;
   while (offset < zip.length - 4) {
     // Look for local file header signature PK\x03\x04

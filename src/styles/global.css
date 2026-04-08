@@ -34,6 +34,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Back Link ──────────────────────────────────────────────────── */
+.back-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
 /* ── Site Header ────────────────────────────────────────────────── */
 .site-header {
   background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 40%, var(--lake) 100%);

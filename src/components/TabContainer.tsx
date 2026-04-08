@@ -88,6 +88,7 @@ export function TabContainer({ lakes, initialUserState }: Props) {
   return (
     <div>
       <header class="site-header">
+        <a href="/" class="back-link">&larr; esincostan</a>
         <h1>40 Lakes</h1>
         <p class="subtitle">Swim in 40 Swiss lakes by June 18, 2030</p>
         <div class="progress-summary">

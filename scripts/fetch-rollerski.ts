@@ -1,135 +1,112 @@
 /**
  * Rollerski Route Discovery Pipeline
  *
+ * Primary approach: use SchweizMobil route infrastructure (skating + cycling paths)
+ * from OSM as the backbone, score them for rollerski suitability.
+ *
  * 1. Download SRTM elevation tiles
- * 2. Fetch road network from OSM via Overpass
- * 3. Build scored road graph with real elevation data
- * 4. Discover routes algorithmically (loops, climbs, out-and-back)
+ * 2. Fetch SchweizMobil route relations from OSM (skating + cycling)
+ * 3. Parse and assemble route geometries with elevation
+ * 4. Score each route for rollerski suitability
  * 5. Validate against ground truth
- * 6. Write output JSON
+ * 6. Write output
  */
 
-import { writeFileSync } from "fs";
+import { writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { ensureSrtmTiles } from "./srtm.js";
-import { fetchTile, fetchSeedPoints, ALL_TILES, CORE_TILE, FLUMSERBERG_TILE } from "./overpass.js";
-import type { OsmNode, OsmWay } from "./overpass.js";
-import { buildGraph, findClosestNode } from "./graph.js";
-import type { RoadGraph } from "./graph.js";
-import { discoverCorridors, discoverLoops, discoverClimbs, deduplicateRoutes, autoNameRoutes } from "./discover-routes.js";
-import type { DiscoveredRoute } from "./discover-routes.js";
+import { fetchRouteRelations, parseRouteRelations, scoreRoute, splitAtSteepSections } from "./route-relations.js";
+import type { ScoredRoute } from "./route-relations.js";
 import { loadGroundTruth } from "./ground-truth.js";
 import { validateRoutes, printValidationReport } from "./validate.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const CACHE_PATH = join(__dirname, "..", "data", "osm-routes-raw.json");
 
 async function main() {
   console.log("=== Rollerski Route Discovery Pipeline ===\n");
 
   // --- Step 1: Ensure SRTM elevation data ---
   console.log("Step 1: Elevation data");
-  await ensureSrtmTiles(["N47E008", "N47E009"]);
+  await ensureSrtmTiles(["N46E008", "N47E008", "N47E009"]);
 
-  // --- Step 2: Fetch road network ---
-  console.log("\nStep 2: Fetch road network");
-  const allNodes = new Map<number, OsmNode>();
-  const allWays: OsmWay[] = [];
-
-  for (const tile of ALL_TILES) {
+  // --- Step 2: Fetch SchweizMobil route relations ---
+  console.log("\nStep 2: Fetch SchweizMobil routes from OSM");
+  if (!existsSync(CACHE_PATH)) {
     try {
-      const { nodes, ways } = await fetchTile(tile);
-      for (const [id, node] of nodes) allNodes.set(id, node);
-      for (const way of ways) allWays.push(way);
+      await fetchRouteRelations(46.8, 8.0, 47.6, 9.5);
     } catch (err) {
-      console.warn(`  Failed to fetch tile "${tile.name}", skipping: ${err}`);
+      console.error(`  Failed to fetch routes: ${err}`);
+      console.log("  Use cached data if available, or retry later.");
+      if (!existsSync(CACHE_PATH)) process.exit(1);
     }
-    await new Promise((r) => setTimeout(r, 5000));
+  } else {
+    console.log("  Using cached route relations data");
   }
 
-  console.log(`  Total: ${allWays.length} ways, ${allNodes.size} nodes`);
+  // --- Step 3: Parse route relations ---
+  console.log("\nStep 3: Parse and assemble routes");
+  const parsedRoutes = parseRouteRelations();
+  console.log(`  Parsed ${parsedRoutes.length} routes`);
 
-  // --- Step 3: Build scored graph ---
-  console.log("\nStep 3: Build scored road graph");
-  const graph = buildGraph(allNodes, allWays);
-  console.log(`  Graph: ${graph.nodes.size} nodes, ${graph.edgeCount} edges`);
-
-  // --- Step 4: Fetch seed points ---
-  console.log("\nStep 4: Collect seed points");
-  let coreSeedData = { trainStations: [] as OsmNode[], towns: [] as OsmNode[], gondolaStations: [] as OsmNode[] };
-  try {
-    coreSeedData = await fetchSeedPoints(CORE_TILE);
-    await new Promise((r) => setTimeout(r, 3000));
-  } catch (err) {
-    console.warn(`  Failed to fetch seed points, using graph-based seeds: ${err}`);
+  for (const r of parsedRoutes) {
+    const typeIcon = r.routeType === "inline_skates" ? "⛸ " : "🚲";
+    console.log(`    ${typeIcon} #${r.ref.padEnd(4)} ${r.name.slice(0, 55).padEnd(55)} ${(r.lengthM / 1000).toFixed(1)}km  ${r.coords.length} pts`);
   }
 
-  // Convert seed points to graph node IDs
-  const seedNodeIds: number[] = [];
+  // --- Step 4: Split at steep sections and score ---
+  console.log("\nStep 4: Split steep sections and score for rollerski");
 
-  if (coreSeedData.trainStations.length + coreSeedData.towns.length > 0) {
-    for (const seed of [...coreSeedData.trainStations, ...coreSeedData.towns]) {
-      const nodeId = findClosestNode(graph, seed.lat, seed.lon);
-      if (nodeId !== null && !seedNodeIds.includes(nodeId)) {
-        seedNodeIds.push(nodeId);
-      }
-    }
+  // First, split routes at sections too steep for rollerski
+  const safeSegments = [];
+  for (const route of parsedRoutes) {
+    const segments = splitAtSteepSections(route, 8, 2000);
+    safeSegments.push(...segments);
+  }
+  console.log(`  Split ${parsedRoutes.length} routes into ${safeSegments.length} safe segments`);
+
+  const scoredRoutes: ScoredRoute[] = [];
+  for (const route of safeSegments) {
+    const scored = scoreRoute(route);
+
+    // Filter: skip very short routes and those with terrible scores
+    if (scored.lengthKm < 2) continue;
+    if (scored.avgScore < 0.3) continue;
+
+    scoredRoutes.push(scored);
   }
 
-  // Fallback: sample graph nodes on a grid as seeds
-  if (seedNodeIds.length < 50) {
-    console.log("  Adding grid-sampled seed points as fallback...");
-    const gridStep = 0.03; // ~3km grid
-    for (let lat = CORE_TILE.south; lat <= CORE_TILE.north; lat += gridStep) {
-      for (let lon = CORE_TILE.west; lon <= CORE_TILE.east; lon += gridStep) {
-        const nodeId = findClosestNode(graph, lat, lon);
-        if (nodeId !== null && !seedNodeIds.includes(nodeId)) {
-          seedNodeIds.push(nodeId);
-        }
-      }
-    }
+  // Sort by score descending
+  scoredRoutes.sort((a, b) => b.avgScore - a.avgScore);
+
+  console.log(`  ${scoredRoutes.length} routes scored and filtered`);
+  console.log();
+  for (const r of scoredRoutes) {
+    const bidir = r.bidirectional ? "↔" : "→";
+    console.log(`    ${r.avgScore.toFixed(2)} ${bidir} ${r.type.padEnd(14)} ${r.lengthKm.toString().padStart(5)}km  +${String(r.elevationGainM).padStart(4)}m  ${r.name.slice(0, 50)}`);
   }
 
-  console.log(`  ${seedNodeIds.length} seed points ready`);
-
-  // --- Step 5: Discover routes ---
-  console.log("\nStep 5: Discover routes");
-
-  const corridors = discoverCorridors(graph, seedNodeIds);
-  const loops = discoverLoops(graph, seedNodeIds);
-  const climbs = discoverClimbs(graph, coreSeedData.gondolaStations);
-
-  // Combine and deduplicate
-  let allRoutes = [...corridors, ...loops, ...climbs];
-  console.log(`  Raw candidates: ${allRoutes.length}`);
-
-  allRoutes = deduplicateRoutes(allRoutes);
-  console.log(`  After dedup: ${allRoutes.length}`);
-
-  // Reassign IDs after dedup
-  allRoutes.forEach((r, i) => {
-    const prefix = r.type === "loop" ? "loop" : r.type === "point-to-point" ? "climb" : "route";
-    r.id = `${prefix}-${String(i).padStart(3, "0")}`;
-  });
-
-  // Auto-name
-  autoNameRoutes(allRoutes, graph, coreSeedData);
-
-  // --- Step 6: Validate ---
-  console.log("\nStep 6: Validate against ground truth");
+  // --- Step 5: Validate ---
+  console.log("\nStep 5: Validate against ground truth");
   const groundTruth = loadGroundTruth();
-  const validationResults = validateRoutes(allRoutes, groundTruth);
+  // Adapt scored routes for validation (match the DiscoveredRoute interface)
+  const forValidation = scoredRoutes.map((r) => ({
+    ...r,
+    edges: [] as any[],
+    path: [] as number[],
+  }));
+  const validationResults = validateRoutes(forValidation, groundTruth);
   printValidationReport(validationResults);
 
-  // --- Step 7: Write output ---
-  console.log("Step 7: Write output");
-
-  // Strip internal fields before writing
-  const outputRoutes = allRoutes.map((r) => ({
+  // --- Step 6: Write output ---
+  console.log("Step 6: Write output");
+  const outputRoutes = scoredRoutes.map((r) => ({
     id: r.id,
     name: r.name,
     description: r.description,
     type: r.type,
+    source: r.source,
     coords: r.coords,
     elevations: r.elevations,
     lengthKm: r.lengthKm,
@@ -137,22 +114,22 @@ async function main() {
     elevationLossM: r.elevationLossM,
     maxDownhillPct: r.maxDownhillPct,
     avgScore: r.avgScore,
+    bidirectional: r.bidirectional,
     surfaceBreakdown: r.surfaceBreakdown,
     start: r.start,
     end: r.end,
-    transport: r.transport,
   }));
 
   const routesPath = join(__dirname, "..", "src", "data", "rollerski-routes.json");
   writeFileSync(routesPath, JSON.stringify(outputRoutes, null, 2));
-  console.log(`  Wrote ${outputRoutes.length} routes to ${routesPath}`);
+  console.log(`  Wrote ${outputRoutes.length} routes to rollerski-routes.json`);
 
-  // Summary
-  console.log("\n=== Pipeline Complete ===");
-  console.log(`  Corridors (out-and-back): ${allRoutes.filter((r) => r.type === "out-and-back").length}`);
-  console.log(`  Loops: ${allRoutes.filter((r) => r.type === "loop").length}`);
-  console.log(`  Climbs: ${allRoutes.filter((r) => r.type === "point-to-point").length}`);
-  console.log(`  Total routes: ${allRoutes.length}`);
+  const skateCount = scoredRoutes.filter((r) => r.source === "Skatingland Schweiz").length;
+  const veloCount = scoredRoutes.filter((r) => r.source === "Veloland Schweiz").length;
+  console.log(`\n=== Pipeline Complete ===`);
+  console.log(`  Skating routes: ${skateCount}`);
+  console.log(`  Cycling routes: ${veloCount}`);
+  console.log(`  Total: ${scoredRoutes.length}`);
 }
 
 main().catch((err) => {
