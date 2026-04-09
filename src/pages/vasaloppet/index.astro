@@ -36,13 +36,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div class="race-calendar">
           <div class="race-card diagonela">
             <div class="race-num">Race 01</div>
-            <div class="race-name">Engadin<br>La Diagonela</div>
-            <div class="race-date">~17 Jan 2027 · Pontresina &rarr; Zuoz</div>
-            <div class="race-meta">
-              55 km · Classic technique<br>
-              1 800 m altitude · Engadin Valley, CH<br>
-              Ski Classics Pro Tour
-            </div>
+            <div class="race-name">La Diagonela</div>
+            <div class="race-date">~17 Jan 2027</div>
+            <div class="race-meta">55 km · 1 800 m altitude</div>
             <span class="race-badge badge-tunea">Tune-up race</span>
             <div class="race-gap"><strong>49 days</strong> before Vasaloppet</div>
           </div>
@@ -50,12 +46,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <div class="race-card marcialonga dimmed">
             <div class="race-num">Race 02 — optional</div>
             <div class="race-name">Marcialonga</div>
-            <div class="race-date">31 Jan 2027 · Moena &rarr; Cavalese</div>
-            <div class="race-meta">
-              70 km · Classic technique<br>
-              870 m elevation gain · Dolomites, IT<br>
-              Ski Classics Grand Classics
-            </div>
+            <div class="race-date">31 Jan 2027</div>
+            <div class="race-meta">70 km · 870 m elevation gain</div>
             <span class="race-badge badge-opt">Decide after Diagonela</span>
             <div class="race-gap"><strong>35 days</strong> before Vasaloppet</div>
           </div>
@@ -63,12 +55,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           <div class="race-card vasaloppet">
             <div class="race-num">Race 03 — main goal</div>
             <div class="race-name">Vasaloppet</div>
-            <div class="race-date">7 Mar 2027 · Sälen &rarr; Mora</div>
-            <div class="race-meta">
-              90 km · Classic technique<br>
-              World's largest XC ski race, SE<br>
-              Worldloppet / Ski Classics
-            </div>
+            <div class="race-date">7 Mar 2027</div>
+            <div class="race-meta">90 km · 800 m elevation gain</div>
             <span class="race-badge badge-target">Target race</span>
           </div>
         </div>
@@ -77,55 +65,39 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         </div>
       </section>
 
-      <!-- Phase Timeline -->
+      <!-- Season Overview — unified timeline + volume -->
       <section>
-        <p class="section-label">Season structure — click a phase to expand</p>
-        <div class="timeline">
-          <div class="phase-block base active" data-phase="base" data-start="2026-04-20" data-end="2026-06-28">
-            <div class="phase-num">01</div>
-            <div class="phase-name">Aerobic Base</div>
-            <div class="phase-dates">20 Apr – 28 Jun 2026</div>
-            <div class="phase-vol">6 – 8 hrs / wk</div>
-          </div>
-          <div class="phase-block build" data-phase="build" data-start="2026-06-29" data-end="2026-09-27">
-            <div class="phase-num">02</div>
-            <div class="phase-name">Strength &amp; Volume</div>
-            <div class="phase-dates">29 Jun – 27 Sep 2026</div>
-            <div class="phase-vol">7 – 9 hrs / wk</div>
-          </div>
-          <div class="phase-block snow" data-phase="snow" data-start="2026-09-28" data-end="2026-12-27">
-            <div class="phase-num">03</div>
-            <div class="phase-name">On-Snow Transition</div>
-            <div class="phase-dates">28 Sep – 27 Dec 2026</div>
-            <div class="phase-vol">7 – 9 hrs / wk</div>
-          </div>
-          <div class="phase-block peak" data-phase="peak" data-start="2026-12-28" data-end="2027-02-20">
-            <div class="phase-num">04</div>
-            <div class="phase-name">Race Sharpening</div>
-            <div class="phase-dates">28 Dec – 20 Feb 2027</div>
-            <div class="phase-vol">7 – 8 hrs / wk</div>
-            <div class="phase-flags">
-              <span class="flag dia">Diagonela ~Jan 17</span>
-              <span class="flag mar">Marcialonga Jan 31*</span>
+        <p class="section-label">Season overview — click a phase to expand</p>
+        <div class="season-vis" id="seasonVis">
+          <div class="phase-row">
+            <div class="phase-bar base active" data-phase="base" data-start="2026-04-20" data-end="2026-06-28" style="flex:10">
+              <span class="phase-bar-name">Base</span>
+              <span class="phase-bar-sub">10 wks</span>
+            </div>
+            <div class="phase-bar build" data-phase="build" data-start="2026-06-29" data-end="2026-09-27" style="flex:13">
+              <span class="phase-bar-name">Strength &amp; Volume</span>
+              <span class="phase-bar-sub">13 wks</span>
+            </div>
+            <div class="phase-bar snow" data-phase="snow" data-start="2026-09-28" data-end="2026-12-27" style="flex:13">
+              <span class="phase-bar-name">On-Snow</span>
+              <span class="phase-bar-sub">13 wks</span>
+            </div>
+            <div class="phase-bar peak" data-phase="peak" data-start="2026-12-28" data-end="2027-02-20" style="flex:8">
+              <span class="phase-bar-name">Peak</span>
+              <span class="phase-bar-sub">8 wks</span>
+            </div>
+            <div class="phase-bar taper" data-phase="taper" data-start="2027-02-21" data-end="2027-03-07" style="flex:2">
+              <span class="phase-bar-name">T</span>
             </div>
           </div>
-          <div class="phase-block taper" data-phase="taper" data-start="2027-02-21" data-end="2027-03-07">
-            <div class="phase-num">05</div>
-            <div class="phase-name">Taper</div>
-            <div class="phase-dates">21 Feb – 7 Mar</div>
-            <div class="phase-vol">4 – 5 hrs / wk</div>
-            <div class="phase-flags">
-              <span class="flag vas">Vasaloppet Mar 7</span>
-            </div>
+          <div class="vol-bars" id="volBars"></div>
+          <div class="season-axis">
+            <span>Apr</span><span>Jun</span><span>Aug</span><span>Oct</span><span>Dec</span><span>Feb</span><span>Mar</span>
           </div>
-        </div>
-
-        <!-- Progress bar -->
-        <div class="progress-track" id="progressTrack">
-          <div class="progress-fill" id="progressFill"></div>
-          <div class="progress-needle" id="progressNeedle">
-            <div class="needle-line"></div>
-            <div class="needle-label" id="needleLabel"></div>
+          <!-- Today needle (spans full vis) -->
+          <div class="today-needle" id="todayNeedle">
+            <div class="today-line"></div>
+            <div class="today-label" id="todayLabel"></div>
           </div>
         </div>
 
@@ -156,6 +128,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <li>80% of all minutes below 75% HRmax</li>
             </ul>
           </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Long Z1 · 2 hrs</div><div class="wt">Cycling / hiking</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Strength · 1 hr</div><div class="wt">Posterior chain + core</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Running</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Strength · 1 hr</div><div class="wt">Lat pull + trunk</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long Z1 · 2–3 hrs</div><div class="wt">Cycling / hiking</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Running / walking</div></td></tr>
+            </table>
+          </div>
         </div>
 
         <div class="phase-detail" id="detail-build">
@@ -185,6 +169,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <li>2 strength sessions/week, trunk endurance priority</li>
             </ul>
           </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Long Z1 · 2–3 hrs</div><div class="wt">Roller ski / cycling</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Strength + Z1 · 1.5 hrs</div><div class="wt">Bodyweight + ski erg</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Threshold · 1.5 hrs</div><div class="wt">Roller ski · 5&times;8 min Z3</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Running / hiking</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long Z1 · 2.5–3 hrs</div><div class="wt">Roller ski / cycling</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Medium Z1 · 1.5–2 hrs</div><div class="wt">Roller ski / ski erg</div></td></tr>
+            </table>
+          </div>
         </div>
 
         <div class="phase-detail" id="detail-snow">
@@ -213,6 +209,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <li>Reduce cycling and running — leg freshness matters more now</li>
               <li>Strength drops to 1 session/week</li>
             </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Long Z1 · 2–3 hrs</div><div class="wt">XC ski / ski erg</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Strength + Z1 · 1.5 hrs</div><div class="wt">Core + easy ski</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Intervals · 1.5 hrs</div><div class="wt">XC ski · Z2/Z3 efforts</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Ski erg / walking</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long Z1 · 2.5–3 hrs</div><div class="wt">XC ski / roller ski</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">DP technique · 1.5 hrs</div><div class="wt">XC ski / ski erg</div></td></tr>
+            </table>
           </div>
         </div>
 
@@ -247,6 +255,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <li>TSB must trend positive by Feb 21</li>
             </ul>
           </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Race pace · 1.5 hrs</div><div class="wt">XC ski · 3&times;20 min</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Ski erg / walking</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Threshold · 1.5 hrs</div><div class="wt">XC ski · Z3 efforts</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Easy Z1 · 45 min</div><div class="wt">Ski erg</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long Z1 · 2–2.5 hrs</div><div class="wt">XC ski</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">XC ski / running</div></td></tr>
+            </table>
+          </div>
         </div>
 
         <div class="phase-detail" id="detail-taper">
@@ -276,42 +296,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
               <li>Wax testing in February — non-negotiable</li>
             </ul>
           </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Easy Z1 · 45 min</div><div class="wt">XC ski · race-pace bursts</div></td></tr>
+              <tr class="rest-row"><td class="wd">Wed</td><td><div class="ws">Rest / walk</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Easy Z1 · 40 min</div><div class="wt">XC ski · a few openers</div></td></tr>
+              <tr class="rest-row"><td class="wd">Fri</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Shakeout · 30 min</div><div class="wt">Easy ski · course preview</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws" style="font-weight:700;color:var(--vl-ink)">Race day</div></td></tr>
+            </table>
+          </div>
         </div>
       </section>
 
-      <!-- Weekly Rhythm -->
-      <section>
-        <p class="section-label">Weekly rhythm — build phase template</p>
-        <div class="week-grid">
-          <div class="day rest"><div class="dname">Mon</div><div class="ddot dd-r"></div><div class="dtype">Rest</div><div class="ddur">&mdash;</div><div class="dsport">Recovery</div></div>
-          <div class="day"><div class="dname">Tue</div><div class="ddot dd-z1"></div><div class="dtype">Long Z1</div><div class="ddur">2 – 3 hrs</div><div class="dsport">Roller ski / cycling</div></div>
-          <div class="day"><div class="dname">Wed</div><div class="ddot dd-z1"></div><div class="dtype">Strength + Z1</div><div class="ddur">1 – 1.5 hrs</div><div class="dsport">Bodyweight + ski erg</div></div>
-          <div class="day"><div class="dname">Thu</div><div class="ddot dd-z3"></div><div class="dtype">Threshold</div><div class="ddur">1.5 hrs</div><div class="dsport">Roller ski / ski erg<br>5 &times; 8 min Z3</div></div>
-          <div class="day rest"><div class="dname">Fri</div><div class="ddot dd-z1"></div><div class="dtype">Easy Z1</div><div class="ddur">1 hr</div><div class="dsport">Running / hiking</div></div>
-          <div class="day"><div class="dname">Sat</div><div class="ddot dd-z1"></div><div class="dtype">Long Z1</div><div class="ddur">2.5 – 3 hrs</div><div class="dsport">Roller ski / cycling</div></div>
-          <div class="day"><div class="dname">Sun</div><div class="ddot dd-z1"></div><div class="dtype">Medium Z1 + technique</div><div class="ddur">1.5 – 2 hrs</div><div class="dsport">Roller ski / ski erg</div></div>
-        </div>
-      </section>
 
-      <!-- Volume Chart -->
-      <section>
-        <p class="section-label">Annual volume — 46 weeks with race markers</p>
-        <div class="vol-bars" id="volBars"></div>
-        <div class="vol-phase-row">
-          <div class="vpl" style="color:var(--vl-phase-base)">Base · 10 wks</div>
-          <div class="vpl" style="color:var(--vl-phase-build)">Build · 13 wks</div>
-          <div class="vpl" style="color:var(--vl-phase-snow)">Transition · 13 wks</div>
-          <div class="vpl" style="color:var(--vl-phase-peak)">Sharpening · 8 wks</div>
-          <div class="vpl" style="color:var(--vl-phase-taper)">Taper</div>
-        </div>
-        <div class="vol-axis"><span>Apr 20</span><span>Jun</span><span>Aug</span><span>Oct</span><span>Dec</span><span>Feb</span><span>Mar 7</span></div>
-        <div class="chart-legend">
-          <div class="leg-item"><div class="leg-dot" style="background:var(--vl-race-a)"></div>La Diagonela ~Jan 17</div>
-          <div class="leg-item"><div class="leg-dot" style="background:var(--vl-race-b)"></div>Marcialonga Jan 31 (optional)</div>
-          <div class="leg-item"><div class="leg-dot" style="background:var(--vl-race-c)"></div>Vasaloppet Mar 7</div>
-          <div class="leg-item"><div class="leg-dot" style="background:var(--vl-rule);border:1px solid var(--vl-ink-3)"></div>Recovery week</div>
-        </div>
-      </section>
 
       <!-- Principles -->
       <section>
@@ -434,115 +434,122 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
   .race-note strong { color: var(--vl-ink); font-weight: 600; }
 
-  /* PHASE TIMELINE */
-  .timeline { display: grid; grid-template-columns: 10fr 13fr 13fr 8fr 2fr; gap: 1px; background: var(--vl-rule); border-radius: 8px 8px 0 0; overflow: visible; box-shadow: var(--vl-shadow); }
-  .phase-block { background: var(--vl-card); padding: 1.4rem 1rem; cursor: pointer; transition: background .15s; border-bottom: 3px solid transparent; }
-  .phase-block:hover { background: var(--vl-card-alt); }
-  .phase-block.active { background: var(--vl-card-alt); }
-  .phase-block.base.active,.phase-block.base:hover { border-bottom-color: var(--vl-phase-base); }
-  .phase-block.build.active,.phase-block.build:hover { border-bottom-color: var(--vl-phase-build); }
-  .phase-block.snow.active,.phase-block.snow:hover { border-bottom-color: var(--vl-phase-snow); }
-  .phase-block.peak.active,.phase-block.peak:hover { border-bottom-color: var(--vl-phase-peak); }
-  .phase-block.taper.active,.phase-block.taper:hover { border-bottom-color: var(--vl-phase-taper); }
-  .phase-num { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--vl-ink-3); margin-bottom: .3rem; font-weight: 500; }
-  .phase-name { font-family: var(--vl-font); font-size: 1rem; font-weight: 600; line-height: 1.2; margin-bottom: .35rem; color: var(--vl-ink); }
-  .phase-dates { font-size: 11px; color: var(--vl-ink-3); margin-bottom: .35rem; }
-  .phase-vol { font-size: 12px; color: var(--vl-ink-2); }
-  .phase-flags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: .5rem; }
-  .flag { font-size: 9px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; font-weight: 500; }
-  .flag.dia { background: #fef3ec; color: var(--vl-race-a); }
-  .flag.mar { background: #f4eef5; color: var(--vl-race-b); }
-  .flag.vas { background: #ebebea; color: var(--vl-race-c); }
-
-  /* PROGRESS TRACK */
-  .progress-track {
+  /* SEASON VISUALIZATION */
+  .season-vis {
     position: relative;
-    height: 6px;
     background: var(--vl-card);
-    border: 1px solid var(--vl-rule);
-    border-top: none;
+    border-radius: 8px;
+    box-shadow: var(--vl-shadow);
+    padding: 1.4rem 1.4rem 1rem;
     overflow: visible;
   }
-  .progress-fill {
-    height: 100%;
-    background: var(--vl-ink-3);
-    transition: width .4s ease;
-  }
-  .progress-needle {
-    position: absolute;
-    top: -2px;
-    transform: translateX(-50%);
+
+  /* Phase bar row */
+  .phase-row { display: flex; gap: 3px; margin-bottom: 1rem; }
+  .phase-bar {
+    height: 36px;
+    border-radius: 4px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    pointer-events: none;
-    z-index: 1;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: opacity .15s, filter .15s;
+    overflow: hidden;
+    color: #fff;
+    position: relative;
   }
-  .needle-line {
+  .phase-row.has-active .phase-bar { opacity: .35; transition: opacity .2s, filter .15s; }
+  .phase-row.has-active .phase-bar.active { opacity: 1; }
+  .phase-row.has-active .phase-bar:hover { opacity: .7; }
+  .phase-bar:hover { filter: brightness(1.1); }
+  .phase-bar.active { box-shadow: 0 0 0 2px var(--vl-ink); z-index: 1; }
+  .phase-bar.active::before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--vl-ink);
+    z-index: 2;
+  }
+  .phase-bar.base { background: var(--vl-phase-base); }
+  .phase-bar.build { background: var(--vl-phase-build); }
+  .phase-bar.snow { background: var(--vl-phase-snow); }
+  .phase-bar.peak { background: var(--vl-phase-peak); }
+  .phase-bar.taper { background: var(--vl-phase-taper); }
+  .phase-bar-name { font-size: 11px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+  .phase-bar-sub { font-size: 10px; font-weight: 400; opacity: .75; white-space: nowrap; }
+  .phase-bar.current::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  /* Volume bars */
+  :global(.vol-bars) { display: flex; align-items: flex-end; gap: 2px; height: 100px; position: relative; }
+  :global(.vb) { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative; }
+  :global(.vbar) { width: 100%; border-radius: 2px 2px 0 0; }
+  :global(.vbar:hover) { opacity: .7; cursor: default; }
+  :global(.vbar.dl) { opacity: .3; }
+  :global(.race-marker) { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  :global(.rm-dot) { width: 7px; height: 7px; border-radius: 50%; margin-top: 1px; flex-shrink: 0; }
+  :global(.rm-line) { width: 1px; flex: 1; opacity: .25; }
+
+  /* Shared axis */
+  .season-axis { display: flex; justify-content: space-between; font-size: 10px; color: var(--vl-ink-3); margin-top: .5rem; font-weight: 500; }
+
+  /* Today needle (spans full vis) */
+  .today-needle {
+    position: absolute;
+    top: 1.4rem;
+    bottom: 2rem;
+    width: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
     width: 2px;
-    height: 10px;
     background: var(--vl-ink);
     border-radius: 1px;
+    opacity: .35;
+    transform: translateX(-50%);
   }
-  .needle-label {
-    margin-top: 4px;
-    font-size: 10px;
-    letter-spacing: .08em;
+  .today-label {
+    position: absolute;
+    bottom: -1.4rem;
+    left: 0;
+    transform: translateX(-50%);
+    font-size: 9px;
+    letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--vl-ink);
     font-weight: 600;
     white-space: nowrap;
-    background: var(--vl-card);
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--vl-rule);
-    box-shadow: var(--vl-shadow);
-  }
-  .progress-track.before-plan .progress-fill,
-  .progress-track.after-plan .progress-fill { width: 0 !important; }
-  .progress-track.after-plan .progress-fill { width: 100% !important; }
-
-  /* CURRENT PHASE HIGHLIGHT */
-  .phase-block.current { position: relative; }
-  .phase-block.current::after {
-    content: 'NOW';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 8px;
-    letter-spacing: .12em;
-    font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 3px;
-    background: var(--vl-ink);
-    color: #fff;
-  }
-
-  /* VOLUME CHART TODAY MARKER */
-  :global(.vol-today) {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--vl-ink, #111110);
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 2;
-  }
-  :global(.vol-today-dot) {
-    position: absolute;
-    top: -3px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--vl-ink, #111110);
   }
 
   /* PHASE DETAIL */
-  .phase-detail { display: none; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--vl-rule); border: 1px solid var(--vl-rule); border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; animation: fadeIn .25s ease; margin-top: -1px; box-shadow: var(--vl-shadow); }
+  .phase-detail { display: none; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1px; background: var(--vl-rule); border: 1px solid var(--vl-rule); border-top: 3px solid var(--vl-rule); border-radius: 8px; overflow: hidden; animation: fadeIn .25s ease; margin-top: .75rem; box-shadow: var(--vl-shadow); }
   .phase-detail.visible { display: grid; }
+  #detail-base.visible { border-top-color: var(--vl-phase-base); }
+  #detail-build.visible { border-top-color: var(--vl-phase-build); }
+  #detail-snow.visible { border-top-color: var(--vl-phase-snow); }
+  #detail-peak.visible { border-top-color: var(--vl-phase-peak); }
+  #detail-taper.visible { border-top-color: var(--vl-phase-taper); }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
   .dc { background: var(--vl-card); padding: 1.8rem 1.6rem; }
   .dl { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--vl-ink-3); margin-bottom: .9rem; font-weight: 500; }
@@ -560,16 +567,17 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .kp li::before { content:'–'; position:absolute; left:0; color:var(--vl-ink-3); }
   .bignum { font-family: var(--vl-font); font-size: 2.4rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; margin-bottom: .2rem; }
 
-  /* WEEK GRID */
-  .week-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 1px; background: var(--vl-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--vl-shadow); }
-  .day { background: var(--vl-card); padding: 1.2rem .9rem; }
-  .day.rest { background: var(--vl-card-alt); }
-  .dname { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--vl-ink-3); margin-bottom: .6rem; font-weight: 500; }
-  .ddot { width: 7px; height: 7px; border-radius: 50%; margin-bottom: .5rem; }
-  .dd-z1{background:var(--vl-z1)} .dd-z3{background:var(--vl-z3)} .dd-r{background:var(--vl-rule)}
-  .dtype { font-size: 12.5px; font-weight: 600; color: var(--vl-ink); margin-bottom: .25rem; line-height: 1.3; }
-  .ddur { font-size: 11px; color: var(--vl-ink-3); margin-bottom: .35rem; font-weight: 500; }
-  .dsport { font-size: 11.5px; color: var(--vl-ink-2); line-height: 1.45; }
+  /* WEEKLY RHYTHM TABLE (inside phase detail) */
+  .week-table { width: 100%; border-collapse: collapse; }
+  .week-table tr { border-bottom: 1px solid var(--vl-rule); }
+  .week-table tr:last-child { border-bottom: none; }
+  .week-table td { padding: .4rem 0; vertical-align: top; font-size: 12px; }
+  .week-table .wd { width: 2.2rem; font-weight: 600; color: var(--vl-ink-3); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; padding-top: .5rem; }
+  .week-table .ws { color: var(--vl-ink); font-weight: 500; }
+  .week-table .wt { color: var(--vl-ink-3); font-size: 11px; margin-top: 1px; }
+  .week-table tr.rest-row td { color: var(--vl-ink-3); }
+  .week-table tr.rest-row .ws { font-weight: 400; }
+
 
   /* VOLUME CHART */
   :global(.vol-bars) { display: flex; align-items: flex-end; gap: 2px; height: 130px; padding-bottom: 18px; }
@@ -580,12 +588,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   :global(.race-marker) { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
   :global(.rm-dot) { width: 7px; height: 7px; border-radius: 50%; margin-top: 1px; flex-shrink: 0; }
   :global(.rm-line) { width: 1px; flex: 1; opacity: .25; }
-  .vol-phase-row { display: grid; grid-template-columns: 10fr 13fr 13fr 8fr 2fr; gap: 1px; margin-top: 6px; }
-  .vpl { font-size: 10px; color: var(--vl-ink-3); padding: .3rem .2rem; text-align: center; font-weight: 500; }
-  .vol-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--vl-ink-3); margin-top: .5rem; font-weight: 500; }
-  .chart-legend { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
-  .leg-item { display: flex; align-items: center; gap: .4rem; font-size: 11px; color: var(--vl-ink-2); }
-  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
   /* PRINCIPLES */
   .principles { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--vl-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--vl-shadow); }
@@ -601,10 +603,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     .vl header, .vl main, .vl footer { padding-left: 1.5rem; padding-right: 1.5rem; }
     .vl header { grid-template-columns: 1fr; }
     .header-right { text-align: left; }
-    .stat-row, .race-calendar, .timeline { grid-template-columns: 1fr 1fr; }
+    .stat-row, .race-calendar { grid-template-columns: 1fr 1fr; }
     .phase-detail, .principles { grid-template-columns: 1fr; }
-    .week-grid { grid-template-columns: repeat(4,1fr); }
-    .vol-phase-row { display: none; }
+    .phase-bar-sub { display: none; }
+    .phase-bar-name { font-size: 9px; }
   }
 </style>
 
@@ -620,81 +622,86 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   const weekNum = Math.max(0, Math.floor(elapsedMs / (7 * 86400000)) + 1);
 
   // ── Current phase detection & auto-open ──
-  const blocks = document.querySelectorAll<HTMLElement>('.phase-block');
+  const bars = document.querySelectorAll<HTMLElement>('.phase-bar');
   let currentPhaseId: string | null = null;
 
-  blocks.forEach(block => {
-    const start = new Date(block.dataset.start!);
-    const end = new Date(block.dataset.end!);
+  bars.forEach(bar => {
+    const start = new Date(bar.dataset.start!);
+    const end = new Date(bar.dataset.end!);
     if (today >= start && today <= end) {
-      block.classList.add('current');
-      currentPhaseId = block.dataset.phase!;
+      bar.classList.add('current');
+      currentPhaseId = bar.dataset.phase!;
     }
   });
 
+  // Phase week ranges for volume bar highlighting
+  const phaseWeekRanges: Record<string, [number, number]> = {
+    base: [0, 9], build: [10, 22], snow: [23, 35], peak: [36, 43], taper: [44, 45]
+  };
+  const phaseRow = document.querySelector('.phase-row')!;
+  phaseRow.classList.add('has-active');
+
   function openPhase(id: string) {
-    blocks.forEach(b => b.classList.remove('active'));
+    bars.forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.phase-detail').forEach(d => d.classList.remove('visible'));
-    const target = document.querySelector<HTMLElement>(`.phase-block[data-phase="${id}"]`);
+    const target = document.querySelector<HTMLElement>(`.phase-bar[data-phase="${id}"]`);
     target?.classList.add('active');
     document.getElementById('detail-' + id)?.classList.add('visible');
+
+    // Dim volume bars outside the active phase
+    const [start, end] = phaseWeekRanges[id] || [0, 45];
+    document.querySelectorAll<HTMLElement>('.vb').forEach((vb, i) => {
+      vb.style.opacity = (i >= start && i <= end) ? '1' : '.25';
+      vb.style.transition = 'opacity .2s';
+    });
   }
 
   // Auto-open current phase (or default to base)
-  if (currentPhaseId) {
-    openPhase(currentPhaseId);
-  }
+  openPhase(currentPhaseId || 'base');
 
   // Click handlers
-  blocks.forEach(block => {
-    block.addEventListener('click', () => {
-      openPhase(block.dataset.phase!);
+  bars.forEach(bar => {
+    bar.addEventListener('click', () => {
+      openPhase(bar.dataset.phase!);
     });
   });
 
-  // ── Progress bar ──
-  const track = document.getElementById('progressTrack')!;
-  const fill = document.getElementById('progressFill')!;
-  const needle = document.getElementById('progressNeedle')!;
-  const label = document.getElementById('needleLabel')!;
-
+  // ── Today needle ──
+  const needle = document.getElementById('todayNeedle')!;
+  const label = document.getElementById('todayLabel')!;
+  const vis = document.getElementById('seasonVis')!;
   const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const dateStr = `${today.getDate()} ${monthNames[today.getMonth()]} ${today.getFullYear()}`;
+  const dateStr = `${today.getDate()} ${monthNames[today.getMonth()]}`;
 
-  if (today < PLAN_START) {
-    track.classList.add('before-plan');
-    needle.style.left = '0%';
-    label.textContent = `${dateStr} · starts in ${Math.ceil((PLAN_START.getTime() - today.getTime()) / 86400000)}d`;
-  } else if (today > PLAN_END) {
-    track.classList.add('after-plan');
-    fill.style.width = '100%';
-    needle.style.left = '100%';
-    label.textContent = `${dateStr} · plan complete`;
+  if (today < PLAN_START || today > PLAN_END) {
+    needle.style.display = 'none';
   } else {
-    fill.style.width = `${pct}%`;
-    needle.style.left = `${pct}%`;
-    label.textContent = `Today · ${dateStr} · Week ${weekNum} of 46`;
+    needle.style.left = `calc(1.4rem + (100% - 2.8rem) * ${pct / 100})`;
+    label.textContent = `${dateStr} · Wk ${weekNum}`;
   }
 
   // ── Volume chart ──
   (function() {
     const phases = [
-      {weeks:10, color:'#3a7abf', avg:7.0, sp:.8},
-      {weeks:13, color:'#2d8a55', avg:8.4, sp:.9},
-      {weeks:13, color:'#6355c7', avg:8.6, sp:.7},
-      {weeks:8,  color:'#c06030', avg:7.6, sp:.5},
-      {weeks:2,  color:'#8b3a62', avg:4.2, sp:.6},
+      {weeks:10, color:'#2b6cb0', avg:7.0, sp:.8, name:'Base'},
+      {weeks:13, color:'#22804a', avg:8.4, sp:.9, name:'Build'},
+      {weeks:13, color:'#5a4ec9', avg:8.6, sp:.7, name:'On-Snow'},
+      {weeks:8,  color:'#c05525', avg:7.6, sp:.5, name:'Peak'},
+      {weeks:2,  color:'#943064', avg:4.2, sp:.6, name:'Taper'},
     ];
     const races: Record<number, {color: string; label: string}> = {
-      39: {color:'#c06030', label:'La Diagonela'},
-      41: {color:'#8b3a62', label:'Marcialonga'},
-      45: {color:'#1a1a18', label:'Vasaloppet'},
+      39: {color:'#c05525', label:'La Diagonela'},
+      41: {color:'#943064', label:'Marcialonga'},
+      45: {color:'#111110', label:'Vasaloppet'},
     };
-    const maxH = 112, maxV = 10.5, totalWeeks = 46;
+    const maxH = 80, maxV = 10.5;
     const container = document.getElementById('volBars');
     if (!container) return;
-    container.style.position = 'relative';
     let wi = 0;
+
+    function fmtDate(d: Date) {
+      return `${d.getDate()} ${monthNames[d.getMonth()]}`;
+    }
 
     phases.forEach(ph => {
       for (let i = 0; i < ph.weeks; i++) {
@@ -703,9 +710,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         const vol = Math.max(3, Math.min(11, raw));
         const h = Math.round((vol/maxV)*maxH);
 
+        const wkStart = new Date(PLAN_START.getTime() + wi * 7 * 86400000);
+        const wkEnd = new Date(wkStart.getTime() + 6 * 86400000);
+
         const wrap = document.createElement('div');
         wrap.className = 'vb';
-        wrap.title = `Wk ${wi+1}: ~${vol.toFixed(1)} hrs${isDeload?' (recovery)':''}`;
+        wrap.title = `Wk ${wi+1} · ${fmtDate(wkStart)}–${fmtDate(wkEnd)}\n~${vol.toFixed(1)} hrs · ${ph.name}${isDeload ? ' (recovery)' : ''}`;
 
         const bar = document.createElement('div');
         bar.className = 'vbar' + (isDeload ? ' dl' : '');
@@ -732,19 +742,5 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         wi++;
       }
     });
-
-    // Today marker on volume chart
-    if (today >= PLAN_START && today <= PLAN_END) {
-      const todayWeek = elapsedMs / (7 * 86400000); // fractional week
-      const pctVol = (todayWeek / totalWeeks) * 100;
-      const marker = document.createElement('div');
-      marker.className = 'vol-today';
-      marker.style.left = `${pctVol}%`;
-      marker.title = `Today · Week ${weekNum}`;
-      const dot = document.createElement('div');
-      dot.className = 'vol-today-dot';
-      marker.appendChild(dot);
-      container.appendChild(marker);
-    }
   })();
 </script>
