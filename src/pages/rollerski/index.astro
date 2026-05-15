@@ -6,6 +6,9 @@ import routes from "../../data/rollerski-routes.json";
 
 <BaseLayout title="Rollerski Routes" description="Find the best rollerski routes around Wädenswil and the Zurich region">
   <main>
+    <div class="project-back-bar">
+      <a href="/ludwig">&larr; Ludwig</a>
+    </div>
     <RollerskiApp client:load routes={routes} />
   </main>
 </BaseLayout>

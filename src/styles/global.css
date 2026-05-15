@@ -1,23 +1,23 @@
 /* ── Variables ─────────────────────────────────────────────────── */
 :root {
-  --bg:          #f5f3ee;
+  --bg:          #f8f8f8;
   --bg-card:     #ffffff;
-  --forest:      #1a3a2a;
-  --forest-light:#2d5a3d;
-  --lake:        #1e6091;
-  --lake-light:  #2980b9;
-  --lake-pale:   #d4eaf7;
-  --earth:       #8B7355;
-  --earth-light: #a6916e;
-  --sand:        #e8e0d0;
-  --text:        #1a2e1a;
-  --text-dim:    rgba(26, 46, 26, 0.55);
-  --completed:   #27ae60;
-  --pending:     #2980b9;
-  --warning:     #e67e22;
-  --radius:      10px;
-  --transition:  220ms ease;
-  --font-sans:   "Inter", system-ui, -apple-system, sans-serif;
+  --forest:      #111111;
+  --forest-light:#2a2a2a;
+  --lake:        #2563eb;
+  --lake-light:  #3b82f6;
+  --lake-pale:   #dbeafe;
+  --earth:       #666666;
+  --earth-light: #999999;
+  --sand:        #e0e0e0;
+  --text:        #111111;
+  --text-dim:    rgba(17, 17, 17, 0.45);
+  --completed:   #16a34a;
+  --pending:     #3b82f6;
+  --warning:     #ea580c;
+  --radius:      8px;
+  --transition:  180ms ease;
+  --font-sans:   "DM Sans", system-ui, -apple-system, sans-serif;
   --font-mono:   "IBM Plex Mono", monospace;
 }
 
@@ -62,7 +62,7 @@ body {
 
 .site-header h1 {
   font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
 }
@@ -503,7 +503,7 @@ body {
 
 .stat-value {
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--forest);
 }
 
@@ -679,6 +679,138 @@ body {
   .rs-route-grid { grid-template-columns: 1fr; }
   .rs-detail-stats { flex-wrap: wrap; }
 }
+
+/* ── Person Landing (Andra / Ludwig project pages) ─────────────── */
+.person-landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem 4rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.person-header {
+  margin-bottom: 2.5rem;
+}
+
+.person-back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.2rem;
+  transition: color 150ms;
+}
+
+.person-back:hover { color: var(--forest); }
+
+.person-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.person-heading {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--forest);
+  letter-spacing: -0.03em;
+}
+
+.person-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--sand);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.person-tab {
+  padding: 0.4rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-dim);
+  background: var(--bg);
+  transition: all var(--transition);
+  letter-spacing: 0.03em;
+}
+
+.person-tab:not(:last-child) { border-right: 1px solid var(--sand); }
+.person-tab--active { background: var(--forest); color: #fff; }
+.person-tab:not(.person-tab--active):hover { background: var(--sand); color: var(--text); }
+
+/* Project cards (shared between landing + person pages) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+  gap: 1.2rem;
+  justify-content: start;
+}
+
+.project-card {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.project-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 0.4rem;
+}
+
+.project-card p {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.project-status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lake-light);
+  background: var(--lake-pale);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Project page back-nav bar (above interactive apps) */
+.project-back-bar {
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid var(--sand);
+  background: var(--bg-card);
+}
+
+.project-back-bar a {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 150ms;
+}
+
+.project-back-bar a:hover { color: var(--forest); }
 
 /* ── Rollerski Routes ──────────────────────────────────────────── */
 

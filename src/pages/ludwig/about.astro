@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CVPage from "../../components/CVPage.astro";
+import cv from "../../data/cv/ludwig.json";
+---
+
+<BaseLayout title="Ludwig — About" description="About Ludwig Ehlert">
+  <main>
+    <CVPage cv={cv} backHref="/ludwig" backLabel="Ludwig" />
+  </main>
+</BaseLayout>

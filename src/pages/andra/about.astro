@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CVPage from "../../components/CVPage.astro";
+import cv from "../../data/cv/andra.json";
+---
+
+<BaseLayout title="Andra — About" description="About Andra">
+  <main>
+    <CVPage cv={cv} backHref="/andra" backLabel="Andra" />
+  </main>
+</BaseLayout>

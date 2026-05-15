@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    title: "40 Lakes",
+    description: "Swim in 40 Swiss lakes by June 18, 2030",
+    href: "/lakes",
+    status: "In progress",
+  },
+];
+---
+
+<BaseLayout title="Andra — Projects" description="Projects by Andra">
+  <main class="person-landing">
+    <header class="person-header">
+      <a href="/" class="person-back">&larr; esincostan</a>
+      <div class="person-header-row">
+        <h1 class="person-heading">Andra</h1>
+        <nav class="person-tabs">
+          <a href="/andra" class="person-tab person-tab--active">Projects</a>
+          <a href="/andra/about" class="person-tab">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="projects-grid">
+      {projects.map((project) => (
+        <a href={project.href} class="project-card">
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <span class="project-status">{project.status}</span>
+        </a>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

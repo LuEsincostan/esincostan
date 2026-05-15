@@ -1,0 +1,403 @@
+---
+interface Role {
+  title: string;
+  period: string;
+}
+
+interface Experience {
+  company: string;
+  roles: Role[];
+  location?: string;
+  bullets?: string[];
+}
+
+interface Education {
+  school: string;
+  degree: string;
+  period: string;
+  note?: string;
+}
+
+interface CVData {
+  name: string;
+  title: string;
+  location: string;
+  summary?: string;
+  links?: { linkedin?: string; github?: string };
+  experience?: Experience[];
+  education?: Education[];
+  certifications?: string[];
+  skills?: string[];
+  languages?: Array<{ lang: string; level: string }>;
+}
+
+interface Props {
+  cv: CVData;
+  backHref: string;
+  backLabel: string;
+}
+
+const { cv, backHref, backLabel } = Astro.props;
+
+const hasExperience = cv.experience && cv.experience.length > 0;
+const hasEducation = cv.education && cv.education.length > 0;
+const hasCerts = cv.certifications && cv.certifications.length > 0;
+const hasSkills = cv.skills && cv.skills.length > 0;
+const hasLanguages = cv.languages && cv.languages.length > 0;
+const hasBottom = hasCerts || hasSkills || hasLanguages;
+---
+
+<div class="cv-page">
+  <div class="cv-wrap">
+    <a href={backHref} class="cv-back">&larr; {backLabel}</a>
+
+    <header class="cv-header">
+      <div class="cv-identity">
+        <h1 class="cv-name">{cv.name}</h1>
+        <p class="cv-meta">
+          {cv.title && <span class="cv-title">{cv.title}</span>}
+          {cv.title && cv.location && <span class="cv-sep">·</span>}
+          {cv.location && <span class="cv-location">{cv.location}</span>}
+        </p>
+      </div>
+      {(cv.links?.linkedin || cv.links?.github) && (
+        <div class="cv-links">
+          {cv.links.linkedin && (
+            <a href={cv.links.linkedin} class="cv-link" target="_blank" rel="noopener">LinkedIn</a>
+          )}
+          {cv.links.github && (
+            <a href={cv.links.github} class="cv-link" target="_blank" rel="noopener">GitHub</a>
+          )}
+        </div>
+      )}
+    </header>
+
+    {cv.summary && (
+      <section class="cv-section">
+        <h2 class="cv-section-title">Summary</h2>
+        <p class="cv-summary">{cv.summary}</p>
+      </section>
+    )}
+
+    {hasExperience && (
+      <section class="cv-section">
+        <h2 class="cv-section-title">Experience</h2>
+        <div class="cv-entries">
+          {cv.experience!.map((exp) => (
+            <div class="cv-entry">
+              <div class="cv-entry-top">
+                <span class="cv-company">{exp.company}</span>
+                {exp.location && <span class="cv-entry-loc">{exp.location}</span>}
+              </div>
+              <div class="cv-roles">
+                {exp.roles.map((r) => (
+                  <div class="cv-role-row">
+                    <span class="cv-role-title">{r.title}</span>
+                    <span class="cv-period">{r.period}</span>
+                  </div>
+                ))}
+              </div>
+              {exp.bullets && exp.bullets.length > 0 && (
+                <ul class="cv-bullets">
+                  {exp.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {hasEducation && (
+      <section class="cv-section">
+        <h2 class="cv-section-title">Education</h2>
+        <div class="cv-entries">
+          {cv.education!.map((edu) => (
+            <div class="cv-entry">
+              <div class="cv-entry-top">
+                <span class="cv-company">{edu.school}</span>
+              </div>
+              <div class="cv-roles">
+                <div class="cv-role-row">
+                  <span class="cv-role-title">{edu.degree}</span>
+                  <span class="cv-period">{edu.period}</span>
+                </div>
+              </div>
+              {edu.note && <p class="cv-entry-note">{edu.note}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {hasBottom && (
+      <div class="cv-bottom">
+        {hasCerts && (
+          <section class="cv-section">
+            <h2 class="cv-section-title">Certifications</h2>
+            <div class="cv-tags">
+              {cv.certifications!.map((c) => <span class="cv-tag">{c}</span>)}
+            </div>
+          </section>
+        )}
+        {hasSkills && (
+          <section class="cv-section">
+            <h2 class="cv-section-title">Skills</h2>
+            <div class="cv-tags">
+              {cv.skills!.map((s) => <span class="cv-tag">{s}</span>)}
+            </div>
+          </section>
+        )}
+        {hasLanguages && (
+          <section class="cv-section">
+            <h2 class="cv-section-title">Languages</h2>
+            <div class="cv-langs">
+              {cv.languages!.map((l) => (
+                <span class="cv-lang">
+                  <span class="cv-lang-name">{l.lang}</span>
+                  <span class="cv-lang-level">{l.level}</span>
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .cv-page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .cv-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cv-back {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+    display: inline-block;
+    transition: color 150ms;
+  }
+
+  .cv-back:hover { color: var(--forest); }
+
+  /* Header */
+  .cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--forest);
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-name {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .cv-meta {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-title { color: var(--text); font-weight: 500; }
+  .cv-sep { opacity: 0.4; }
+
+  .cv-links {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding-top: 0.3rem;
+  }
+
+  .cv-link {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--lake-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--lake-pale);
+    transition: color 150ms, border-color 150ms;
+  }
+
+  .cv-link:hover { color: var(--lake); border-color: var(--lake); }
+
+  /* Sections */
+  .cv-section {
+    margin-bottom: 2rem;
+  }
+
+  .cv-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .cv-summary {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* Entries */
+  .cv-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .cv-entry-top {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-company {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--forest);
+  }
+
+  .cv-entry-loc {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-dim);
+  }
+
+  /* Roles list under each company */
+  .cv-roles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.18rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cv-role-title {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+  }
+
+  .cv-period {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    opacity: 0.7;
+  }
+
+  /* Bullets */
+  .cv-bullets {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.25rem;
+  }
+
+  .cv-bullets li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text);
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .cv-bullets li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  .cv-entry-note {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Bottom: certs / skills / languages */
+  .cv-bottom {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0 2.5rem;
+  }
+
+  .cv-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .cv-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 4px;
+    background: var(--sand);
+    color: var(--text);
+  }
+
+  .cv-langs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .cv-lang {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+  }
+
+  .cv-lang-name { color: var(--text); font-weight: 500; }
+
+  .cv-lang-level {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 580px) {
+    .cv-page { padding: 1.5rem 1rem 3rem; }
+    .cv-bottom { grid-template-columns: 1fr; }
+    .cv-role-row { flex-direction: column; gap: 0.05rem; }
+    .cv-period { align-self: flex-start; }
+  }
+</style>

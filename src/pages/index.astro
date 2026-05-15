@@ -1,44 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const projects = [
-  {
-    title: "40 Lakes",
-    description: "Swim in 40 Swiss lakes by June 18, 2030",
-    href: "/lakes",
-    status: "In progress",
-  },
-  {
-    title: "Rollerski Routes",
-    description: "Find the best rollerski routes around Wadenswil & Zurich",
-    href: "/rollerski",
-    status: "In progress",
-  },
-  {
-    title: "Doublepole Vasaloppet",
-    description: "46-week training plan for Vasaloppet 2027, La Diagonela & Marcialonga",
-    href: "/vasaloppet",
-    status: "In progress",
-  },
-];
 ---
 
-<BaseLayout title="esincostan" description="Projects by Ludwig Ehlert">
+<BaseLayout title="esincostan" description="Projects by Andra & Ludwig">
   <main class="landing">
     <header class="landing-header">
       <h1>esincostan</h1>
-      <p class="landing-subtitle">Projects by Ludwig Ehlert</p>
     </header>
 
-    <section class="projects">
-      {projects.map((project) => (
-        <a href={project.href} class="project-card">
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <span class="project-status">{project.status}</span>
-        </a>
-      ))}
-    </section>
+    <div class="persons">
+      <div class="person-column person-column--left">
+        <p class="person-name">Andra</p>
+        <nav class="person-nav">
+          <a href="/andra" class="person-nav-link">
+            <span class="nav-dot"></span>Projects
+          </a>
+          <a href="/andra/about" class="person-nav-link">
+            <span class="nav-dot"></span>About
+          </a>
+        </nav>
+      </div>
+
+      <div class="person-divider" aria-hidden="true"></div>
+
+      <div class="person-column person-column--right">
+        <p class="person-name">Ludwig</p>
+        <nav class="person-nav">
+          <a href="/ludwig" class="person-nav-link">
+            <span class="nav-dot"></span>Projects
+          </a>
+          <a href="/ludwig/about" class="person-nav-link">
+            <span class="nav-dot"></span>About
+          </a>
+        </nav>
+      </div>
+    </div>
   </main>
 </BaseLayout>
 
@@ -54,72 +50,97 @@ const projects = [
 
   .landing-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
   .landing-header h1 {
     font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    color: var(--forest);
-    letter-spacing: -0.03em;
-    margin-bottom: 0.3rem;
-  }
-
-  .landing-subtitle {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    letter-spacing: 0.03em;
-  }
-
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
-    gap: 1.2rem;
-    width: 100%;
-    max-width: 800px;
-    justify-content: center;
-  }
-
-  .project-card {
-    display: block;
-    background: var(--bg-card);
-    border: 1px solid var(--sand);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    text-decoration: none;
-    color: var(--text);
-    transition: box-shadow 220ms ease, transform 220ms ease;
-  }
-
-  .project-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transform: translateY(-2px);
-    opacity: 1;
-  }
-
-  .project-card h2 {
-    font-size: 1.3rem;
     font-weight: 700;
     color: var(--forest);
-    margin-bottom: 0.4rem;
+    letter-spacing: -0.03em;
   }
 
-  .project-card p {
-    font-size: 0.88rem;
-    color: var(--text-dim);
-    line-height: 1.5;
-    margin-bottom: 0.8rem;
+  .persons {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    max-width: 560px;
+    width: 100%;
   }
 
-  .project-status {
+  .person-divider {
+    background: var(--sand);
+    align-self: stretch;
+    min-height: 100px;
+  }
+
+  .person-column {
+    padding: 0.5rem 3rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .person-column--left { align-items: flex-end; }
+  .person-column--right { align-items: flex-start; }
+
+  .person-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .person-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .person-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--lake-light);
-    background: var(--lake-pale);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .person-nav-link:hover {
+    color: var(--forest);
+  }
+
+  .person-nav-link:hover .nav-dot {
+    background: var(--forest);
+  }
+
+  .nav-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--lake-light);
+    flex-shrink: 0;
+    transition: background 150ms ease;
+  }
+
+  @media (max-width: 480px) {
+    .persons {
+      grid-template-columns: 1fr;
+      max-width: 240px;
+    }
+
+    .person-divider {
+      height: 1px;
+      min-height: 0;
+      width: 100%;
+      margin: 1.8rem 0;
+    }
+
+    .person-column--left,
+    .person-column--right {
+      align-items: flex-start;
+      padding: 0 0.5rem;
+    }
   }
 </style>

@@ -1,0 +1,109 @@
+{
+  "name": "Ludwig Ehlert",
+  "title": "Senior Ecosystem Architect",
+  "location": "Zürich, Switzerland",
+  "summary": "",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/ludwigehlert",
+    "github": ""
+  },
+  "experience": [
+    {
+      "company": "Dataiku",
+      "location": "Zürich, Switzerland",
+      "roles": [
+        { "title": "Senior Ecosystem Architect", "period": "Mar 2026 – Present" },
+        { "title": "Senior Sales Engineer", "period": "Mar 2025 – Mar 2026" }
+      ]
+    },
+    {
+      "company": "Tableau",
+      "location": "Frankfurt, Germany",
+      "roles": [
+        { "title": "Lead Solution Engineer", "period": "Dec 2023 – Mar 2025" }
+      ]
+    },
+    {
+      "company": "One Data",
+      "location": "Frankfurt, Germany",
+      "roles": [
+        { "title": "Director Solution Engineering", "period": "Jun 2023 – Dec 2023" }
+      ]
+    },
+    {
+      "company": "Tableau",
+      "location": "Germany / EMEA",
+      "roles": [
+        { "title": "Lead Solutions Engineer", "period": "Aug 2021 – Jun 2023" },
+        { "title": "Senior Solutions Engineer", "period": "May 2020 – Aug 2021" },
+        { "title": "Solution Architect", "period": "Jul 2018 – May 2020" },
+        { "title": "Associate Solution Architect", "period": "Jan 2018 – Jul 2018" },
+        { "title": "Business Consultant", "period": "Jul 2017 – Jan 2018" },
+        { "title": "Product Consultant", "period": "May 2016 – Jun 2017" }
+      ]
+    },
+    {
+      "company": "DHI",
+      "location": "Köln, Germany",
+      "roles": [
+        { "title": "Software Solution Consultant", "period": "Oct 2014 – Apr 2016" }
+      ],
+      "bullets": [
+        "Technical and thematic software support in MIKE URBAN for customers in Germany and Switzerland"
+      ]
+    },
+    {
+      "company": "Wheels over Frankfurt e.V.",
+      "location": "Frankfurt, Germany",
+      "roles": [
+        { "title": "Chairman", "period": "Jul 2022 – Mar 2024" }
+      ],
+      "bullets": [
+        "Advancing mountainbike culture and community around Frankfurt am Main"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "TU Dresden",
+      "degree": "M.Sc. Water Management",
+      "period": "2011 – 2014"
+    },
+    {
+      "school": "University of Hagen",
+      "degree": "B.Sc. Computer Science",
+      "period": "2015 – 2018"
+    },
+    {
+      "school": "TU Dresden",
+      "degree": "B.Sc. Hydrology and Water Resources Science",
+      "period": "2008 – 2011"
+    },
+    {
+      "school": "Luleå University of Technology",
+      "degree": "Exchange — Environmental Engineering Technology",
+      "period": "2012 – 2013"
+    }
+  ],
+  "certifications": [
+    "Dataiku ML Practitioner",
+    "Cross Country Ski Instructor (Swissski J+S)",
+    "Tableau Server Certified Professional",
+    "Tableau Desktop Certified Professional"
+  ],
+  "skills": [
+    "Solution Engineering",
+    "Data Analytics",
+    "Machine Learning",
+    "Tableau",
+    "Sports Coaching",
+    "Youth Development"
+  ],
+  "languages": [
+    { "lang": "German", "level": "Native" },
+    { "lang": "English", "level": "Full Professional" },
+    { "lang": "Romanian", "level": "Elementary" },
+    { "lang": "Russian", "level": "Elementary" },
+    { "lang": "Swedish", "level": "Elementary" }
+  ]
+}

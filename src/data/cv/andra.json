@@ -1,0 +1,83 @@
+{
+  "name": "Andra Ehlert",
+  "title": "VP Cloud Apps & Data Modernization — Europe",
+  "location": "Zürich, Switzerland",
+  "summary": "Over a decade at NTT holding diverse leadership positions in Services, Pre-Sales, and Technical Development at local, regional, and global levels. Conference speaker and 5× award winner — established DevOps teams in Germany, built Automation Practices across Europe, and led cloud-native transformations for enterprise clients. Expertise spans agile programming, Site Reliability Engineering, network automation, and cloud strategy.",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/andraehlert",
+    "github": ""
+  },
+  "experience": [
+    {
+      "company": "NTT DATA",
+      "location": "Zürich, Switzerland",
+      "roles": [
+        { "title": "VP Cloud Apps & Data Modernization — Europe", "period": "Aug 2024 – Present" },
+        { "title": "Global VP Technical Transformation", "period": "Nov 2020 – Aug 2024" },
+        { "title": "Global Head of Technical Development", "period": "Oct 2019 – Nov 2020" }
+      ]
+    },
+    {
+      "company": "Dimension Data",
+      "location": "Frankfurt, Germany",
+      "roles": [
+        { "title": "Automation & DevOps European Practice Lead", "period": "Apr 2019 – Oct 2019" },
+        { "title": "Technical Team Lead — Automation & AppDev", "period": "Nov 2017 – Mar 2019" },
+        { "title": "NetDevOps Design Engineer", "period": "Jan 2017 – Nov 2017" },
+        { "title": "System Engineer", "period": "Oct 2015 – Dec 2016" },
+        { "title": "Technology Associate", "period": "Oct 2014 – Sep 2015" }
+      ]
+    },
+    {
+      "company": "CREATIS & McGill University",
+      "location": "France / Canada",
+      "roles": [
+        { "title": "R&D Cloud Engineer — Master Thesis", "period": "Feb 2014 – Jun 2014" }
+      ]
+    },
+    {
+      "company": "CNS Communications",
+      "roles": [
+        { "title": "Junior Network Consultant — Cloud Analysis", "period": "Jul 2013 – Dec 2013" }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "INSA Lyon",
+      "degree": "M.Sc. Telecommunications, Services & Computer Science",
+      "period": "2009 – 2014"
+    },
+    {
+      "school": "IE Business School",
+      "degree": "MBA — Business Administration",
+      "period": "2017 – 2018"
+    },
+    {
+      "school": "Luleå University of Technology",
+      "degree": "Exchange — Computer Science",
+      "period": "2012 – 2013"
+    }
+  ],
+  "certifications": [
+    "VMware Certified Professional — Datacenter Virtualization",
+    "VMware Certified Professional 6 — Network Virtualization"
+  ],
+  "skills": [
+    "Cloud Strategy",
+    "DevOps",
+    "Site Reliability Engineering",
+    "Network Automation",
+    "Agile Programming",
+    "Change Management",
+    "Business Process Improvement"
+  ],
+  "languages": [
+    { "lang": "German", "level": "Native" },
+    { "lang": "English", "level": "Native" },
+    { "lang": "French", "level": "Native" },
+    { "lang": "Romanian", "level": "Native" },
+    { "lang": "Spanish", "level": "Full Professional" },
+    { "lang": "Swedish", "level": "Elementary" }
+  ]
+}
