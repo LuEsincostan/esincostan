@@ -118,7 +118,7 @@ export function TabContainer({ lakes, initialUserState }: Props) {
 
         <div class="legend-bar">
           <span class="legend-item"><span class="legend-dot" style={{ background: "#ccc" }} /> Available</span>
-          <span class="legend-item"><span class="legend-dot" style={{ background: "#2980b9" }} /> Selected</span>
+          <span class="legend-item"><span class="legend-dot" style={{ background: "#ec4899" }} /> Selected</span>
           <span class="legend-item"><span class="legend-dot" style={{ background: "#27ae60" }} /> Completed</span>
         </div>
 
