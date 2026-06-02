@@ -11,7 +11,7 @@ interface Props {
 
 const COLORS = {
   available: { fill: "#b0b0b0", border: "#999" },
-  selected: { fill: "#2980b9", border: "#fff" },
+  selected: { fill: "#ec4899", border: "#fff" },
   completed: { fill: "#27ae60", border: "#fff" },
 };
 
@@ -192,7 +192,7 @@ export function UnifiedMap({ lakes, selectedIds, completedSwims, onToggleLake, o
         actions = `<button style="${btnStyle}background:#1a3a2a;color:#fff;" onclick="__lakeAction('add','${lake.id}')">Add to list</button>`;
       } else if (status === "selected") {
         actions = `
-          <button style="${btnStyle}background:#2980b9;color:#fff;" onclick="__lakeAction('complete','${lake.id}')">Mark as swum</button>
+          <button style="${btnStyle}background:#ec4899;color:#fff;" onclick="__lakeAction('complete','${lake.id}')">Mark as swum</button>
           <button style="${btnStyle}background:transparent;color:#e67e22;border:1px solid #e67e22;" onclick="__lakeAction('remove','${lake.id}')">Remove</button>
         `;
       } else {

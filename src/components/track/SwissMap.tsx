@@ -57,7 +57,7 @@ export function SwissMap({ lakes, selectedIds, completedSwims }: Props) {
     selectedLakes.forEach((lake) => {
       const isCompleted = completedIds.has(lake.id);
       const swim = completedSwims.find((s) => s.lakeId === lake.id);
-      const color = isCompleted ? "#27ae60" : "#2980b9";
+      const color = isCompleted ? "#27ae60" : "#ec4899";
       const name = lake.nameDe || lake.name;
 
       const icon = L.divIcon({
