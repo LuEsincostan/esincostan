@@ -1,0 +1,818 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Sport & Fitness — 2026/27 Ski + Triathlon Season" description="A dual-season endurance plan: La Diagonela & Vasaloppet on snow, then Ironman 70.3 Rapperswil and the full distance in Port Macquarie — built around a return from injury.">
+  <div class="sf">
+    <header>
+      <div>
+        <a href="/ludwig" class="back-link">&larr; Ludwig</a>
+        <p class="eyebrow">2026/27 season · Ski + Triathlon · Return from injury</p>
+        <h1>Sport &amp; Fitness</h1>
+      </div>
+      <div class="header-right">
+        <strong>17 Oct 2027</strong>
+        Ironman Port Macquarie · Australia<br>
+        Season A-race · 226 km<br>
+        Plan: 3 Aug 2026 – 63 weeks · 5 races
+      </div>
+    </header>
+
+    <main>
+      <!-- Stats -->
+      <section>
+        <p class="section-label">Season at a glance</p>
+        <div class="stat-row">
+          <div class="stat-cell"><div class="stat-value">63</div><div class="stat-label">Weeks of preparation</div></div>
+          <div class="stat-cell"><div class="stat-value">5</div><div class="stat-label">Race events</div></div>
+          <div class="stat-cell"><div class="stat-value">510</div><div class="stat-label">Race kilometres total</div></div>
+          <div class="stat-cell"><div class="stat-value">2</div><div class="stat-label">Peaks · winter ski + tri</div></div>
+        </div>
+      </section>
+
+      <!-- Race Calendar -->
+      <section>
+        <p class="section-label">Race calendar</p>
+        <div class="race-calendar">
+          <div class="race-card r-sprint">
+            <div class="race-num">Race 01 · tri</div>
+            <div class="race-name">Sprint Triathlon</div>
+            <div class="race-date">23 Aug 2026</div>
+            <div class="race-meta">25.75 km · 0.75 / 20 / 5</div>
+            <span class="race-badge badge-open">First race back</span>
+          </div>
+
+          <div class="race-card r-diag">
+            <div class="race-num">Race 02 · ski</div>
+            <div class="race-name">La Diagonela</div>
+            <div class="race-date">17 Jan 2027</div>
+            <div class="race-meta">55 km · 1 800 m altitude</div>
+            <span class="race-badge badge-ski">Controlled effort</span>
+          </div>
+
+          <div class="race-card r-vasa">
+            <div class="race-num">Race 03 · ski</div>
+            <div class="race-name">Vasaloppet</div>
+            <div class="race-date">7 Mar 2027</div>
+            <div class="race-meta">90 km · 800 m elevation</div>
+            <span class="race-badge badge-winter">Winter peak</span>
+          </div>
+
+          <div class="race-card r-703">
+            <div class="race-num">Race 04 · tri</div>
+            <div class="race-name">Ironman 70.3 Rapperswil</div>
+            <div class="race-date">6 Jun 2027</div>
+            <div class="race-meta">113 km · 1.9 / 90 / 21.1</div>
+            <span class="race-badge badge-tri">Fitness test</span>
+          </div>
+
+          <div class="race-card r-full">
+            <div class="race-num">Race 05 · tri — main goal</div>
+            <div class="race-name">Ironman Port Macquarie</div>
+            <div class="race-date">17 Oct 2027</div>
+            <div class="race-meta">226 km · 3.8 / 180 / 42.2</div>
+            <span class="race-badge badge-target">Target race</span>
+          </div>
+        </div>
+        <div class="race-note">
+          <strong>One year, two seasons.</strong> It opens with a no-pressure <strong>sprint triathlon (Aug 23)</strong> — a first race back to blow off the cobwebs and test the return, nothing more. The winter races stay on: <strong>La Diagonela (Jan 17)</strong> is a controlled tune-up, <strong>Vasaloppet (Mar 7)</strong> the winter peak. XC skiing is low-impact aerobic gold — it builds the engine that carries into the Ironman while sparing the legs a return-from-injury needs. <strong>Marcialonga is skipped</strong> this year to protect a clean transition. After Vasaloppet you convert to triathlon: <strong>Rapperswil 70.3 (Jun 6)</strong> is a fitness test and race-day rehearsal, and <strong>Port Macquarie (Oct 17)</strong> is the season's only A-race. It is 10+ time zones away, so the taper doubles as a travel plan — arrive early, rehearse the heat, race fresh.
+        </div>
+      </section>
+
+      <!-- Season Overview — unified timeline + volume -->
+      <section>
+        <p class="section-label">Season overview — click a phase to expand</p>
+        <div class="season-vis" id="seasonVis">
+          <div class="phase-row">
+            <div class="phase-bar rehab active" data-phase="rehab" data-start="2026-08-03" data-end="2026-10-11" style="flex:10">
+              <span class="phase-bar-name">Rehab &amp; Rebuild</span>
+              <span class="phase-bar-sub">10 wks</span>
+            </div>
+            <div class="phase-bar skibase" data-phase="skibase" data-start="2026-10-12" data-end="2026-12-27" style="flex:11">
+              <span class="phase-bar-name">Ski Base</span>
+              <span class="phase-bar-sub">11 wks</span>
+            </div>
+            <div class="phase-bar winter" data-phase="winter" data-start="2026-12-28" data-end="2027-03-07" style="flex:10">
+              <span class="phase-bar-name">Winter Races</span>
+              <span class="phase-bar-sub">10 wks</span>
+            </div>
+            <div class="phase-bar tri703" data-phase="tri703" data-start="2027-03-08" data-end="2027-06-06" style="flex:13">
+              <span class="phase-bar-name">70.3 Build</span>
+              <span class="phase-bar-sub">13 wks</span>
+            </div>
+            <div class="phase-bar imspec" data-phase="imspec" data-start="2027-06-07" data-end="2027-09-26" style="flex:16">
+              <span class="phase-bar-name">IM Specific</span>
+              <span class="phase-bar-sub">16 wks</span>
+            </div>
+            <div class="phase-bar taper" data-phase="taper" data-start="2027-09-27" data-end="2027-10-17" style="flex:3">
+              <span class="phase-bar-name">Taper</span>
+              <span class="phase-bar-sub">3 wks</span>
+            </div>
+          </div>
+          <div class="vol-bars" id="volBars"></div>
+          <div class="season-axis">
+            <span>Aug</span><span>Oct</span><span>Dec</span><span>Feb</span><span>Apr</span><span>Jun</span><span>Aug</span><span>Oct</span>
+          </div>
+          <!-- Today needle (spans full vis) -->
+          <div class="today-needle" id="todayNeedle">
+            <div class="today-line"></div>
+            <div class="today-label" id="todayLabel"></div>
+          </div>
+        </div>
+
+        <div class="phase-detail visible" id="detail-rehab">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:90%"></div></div><span class="zpct">90%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:8%"></div></div><span class="zpct">8%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:2%"></div></div><span class="zpct">2%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">Swim</span><span class="pill p">Bike</span><span class="pill p">Roller ski</span><span class="pill">Walk-run</span><span class="pill">Strength</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Weekly volume</div>
+            <div class="bignum" style="color:var(--sf-phase-rehab)">5–8</div>
+            <div style="font-size:12px;color:var(--sf-ink-3);margin-bottom:1.2rem">hours / week</div>
+            <div class="dl">Run reintroduction</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.7">Walk-run only, pain-free is the gate<br>Increase run minutes ≤ 10% / wk<br>Load through swim, bike &amp; roller ski</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>Fix the cause of the injury — rehab work daily, not only when it hurts</li>
+              <li>Rebuild the aerobic engine with low-impact swim, bike &amp; roller ski</li>
+              <li>Reintroduce running as structured walk-run, strictly pain-free</li>
+              <li>Aug 23 sprint tri is a low-key opener — race what you have, keep the run controlled</li>
+              <li>Seed winter skills early — easy roller ski &amp; double-pole patterns</li>
+              <li>2× strength + mobility per week — hips, posterior chain, single-leg</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest / mobility</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Swim · 45 min</div><div class="wt">Technique + easy aerobic</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Bike Z1 · 1 hr</div><div class="wt">Easy spin + strength 30 min</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Roller ski Z1 · 1 hr</div><div class="wt">Easy double pole</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Walk-run · 30 min</div><div class="wt">Run/walk intervals · pain-free</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Bike Z1 · 1.5–2 hrs</div><div class="wt">Long easy ride</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Aqua-jog / mobility</div><div class="wt">Low-impact + strength 2</div></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="phase-detail" id="detail-skibase">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:80%"></div></div><span class="zpct">80%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:15%"></div></div><span class="zpct">15%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:5%"></div></div><span class="zpct">5%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">Roller / XC ski</span><span class="pill p">Ski erg</span><span class="pill">Bike</span><span class="pill">Swim</span><span class="pill">Strength</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Weekly volume</div>
+            <div class="bignum" style="color:var(--sf-phase-skibase)">8–11</div>
+            <div style="font-size:12px;color:var(--sf-ink-3);margin-bottom:1.2rem">hours / week</div>
+            <div class="dl">Microcycle</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.7">3 build + 1 recovery (~65% vol)<br>On-snow from November onward<br>Run kept minimal — protect the return</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>Ski-specific aerobic base — this engine carries into the Ironman too</li>
+              <li>Double-pole technique &amp; volume grow week over week</li>
+              <li>Ski erg bridges the gap until real snow arrives</li>
+              <li>Maintain swim &amp; bike lightly; keep running low and pain-free</li>
+              <li>Strength for skiing — trunk endurance, lats, posterior chain</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Roller / XC ski Z1 · 2 hr</div><div class="wt">Aerobic double pole</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Ski erg + strength · 1.5 hr</div><div class="wt">Trunk + lats</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Bike Z1 · 1 hr</div><div class="wt">+ optional short run 20 min</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Swim · 45 min</div><div class="wt">Maintain feel</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long ski Z1 · 2.5–3 hr</div><div class="wt">Steady aerobic</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Ski technique · 1.5–2 hr</div><div class="wt">DP refinement</div></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="phase-detail" id="detail-winter">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:70%"></div></div><span class="zpct">70%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:20%"></div></div><span class="zpct">20%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:10%"></div></div><span class="zpct">10%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">XC ski</span><span class="pill p">Ski erg</span><span class="pill">Easy bike</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Races this phase</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.9;margin-bottom:1.1rem">
+              <span style="color:var(--sf-race-a);font-weight:600">La Diagonela · Jan 17</span> — controlled effort<br>
+              <span style="color:var(--sf-race-b);font-weight:600">Vasaloppet · Mar 7</span> — winter peak<br>
+              <span style="font-size:11px;color:var(--sf-ink-3)">Marcialonga (Jan 31) skipped this year</span>
+            </div>
+            <div class="dl">Race-pace work</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.7">2–3 × 20 min at goal pace weekly<br>Short taper before Vasaloppet</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>Diagonela is race feel, not a result — 49 days out from Vasaloppet</li>
+              <li>Vasaloppet is the winter goal — a clean 2-week taper into it</li>
+              <li>Recover cleanly afterward — the whole tri season depends on it</li>
+              <li>Double-pole race endurance &amp; pacing confidence</li>
+              <li>Wax testing &amp; race logistics dialled before travel</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Race pace · 1.5 hr</div><div class="wt">XC ski · 3×20 min</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">Ski erg / walking</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Threshold · 1.5 hr</div><div class="wt">XC ski · Z3 efforts</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Easy Z1 · 45 min</div><div class="wt">Ski erg</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long Z1 · 2–2.5 hr</div><div class="wt">XC ski</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Easy Z1 · 1 hr</div><div class="wt">XC ski / running</div></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="phase-detail" id="detail-tri703">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:75%"></div></div><span class="zpct">75%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:15%"></div></div><span class="zpct">15%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:10%"></div></div><span class="zpct">10%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">Bike</span><span class="pill p">Run</span><span class="pill p">Swim (OWS)</span><span class="pill">Bricks</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Weekly volume</div>
+            <div class="bignum" style="color:var(--sf-phase-tri703)">9–11</div>
+            <div style="font-size:12px;color:var(--sf-ink-3);margin-bottom:1.2rem">hours / week</div>
+            <div class="dl">The transition</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.7">Ski left a big aerobic engine — not run legs<br>Rebuild swim feel + run volume from low<br>Careful run ramp given the injury history</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>One week fully recovered from Vasaloppet before building</li>
+              <li>Reintroduce swim &amp; run progressively — bike holds the volume</li>
+              <li>Weekly brick: bike → run to train off-the-bike legs</li>
+              <li>Open-water swimming as the season warms — sighting, starts</li>
+              <li>Rapperswil is a dress rehearsal — pacing &amp; nutrition tested</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Bike threshold · 1.5 hr</div><div class="wt">4×8 min Z3</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Swim · 1 hr</div><div class="wt">CSS sets + strength</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Run tempo · 45–60 min</div><div class="wt">Building, Z3 blocks</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Swim + easy spin</div><div class="wt">Recovery day</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long bike · 3 hr</div><div class="wt">With 70.3-pace efforts</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Brick · bike 1.5 hr + run 30 min</div><div class="wt">Run off the bike</div></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="phase-detail" id="detail-imspec">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:80%"></div></div><span class="zpct">80%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:15%"></div></div><span class="zpct">15%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:5%"></div></div><span class="zpct">5%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">Bike (long)</span><span class="pill p">Run (long)</span><span class="pill p">Swim</span><span class="pill">Nutrition</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Weekly volume</div>
+            <div class="bignum" style="color:var(--sf-phase-imspec)">12–15</div>
+            <div style="font-size:12px;color:var(--sf-ink-3);margin-bottom:1.2rem">hours / week · peak of the year</div>
+            <div class="dl">Anchor sessions</div>
+            <div style="font-size:12px;color:var(--sf-ink-2);line-height:1.7">Long ride 4.5–6 hr + long run to 2 hr<br>IM effort, not threshold<br>Fuel every long session — no exceptions</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>Biggest aerobic volume of the year — durability is the goal</li>
+              <li>Race-day nutrition &amp; pacing fully dialled in the long sessions</li>
+              <li>Ride at IM watts, run at IM effort — rehearse the actual race</li>
+              <li>Begin heat preparation for Australia — sauna or overdressed sessions</li>
+              <li>Strength drops to maintenance; sleep &amp; recovery become training</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Recovery swim / rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Bike Z2 tempo · 2 hr</div><div class="wt">Sustained aerobic</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Swim 1.25 hr + run 45 min</div><div class="wt">Endurance + easy run</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Run · 1.25–1.5 hr</div><div class="wt">Z1/Z2 durability</div></td></tr>
+              <tr><td class="wd">Fri</td><td><div class="ws">Swim 1 hr + strength</div><div class="wt">Maintenance</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Long ride · 4.5–6 hr</div><div class="wt">IM watts + nutrition rehearsal</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws">Long run · 1.5–2 hr</div><div class="wt">Some off long-ride bricks</div></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="phase-detail" id="detail-taper">
+          <div class="dc">
+            <div class="dl">Intensity split</div>
+            <div class="zone-row"><span class="zlbl">Z1</span><div class="ztrack"><div class="zfill z1f" style="width:80%"></div></div><span class="zpct">80%</span></div>
+            <div class="zone-row"><span class="zlbl">Z2</span><div class="ztrack"><div class="zfill z2f" style="width:15%"></div></div><span class="zpct">15%</span></div>
+            <div class="zone-row"><span class="zlbl">Z3</span><div class="ztrack"><div class="zfill z3f" style="width:5%"></div></div><span class="zpct">5%</span></div>
+            <div style="margin-top:1.2rem"><div class="dl">Primary disciplines</div>
+              <div class="pills"><span class="pill p">Swim</span><span class="pill p">Bike</span><span class="pill p">Run</span><span class="pill">Travel</span></div>
+            </div>
+          </div>
+          <div class="dc">
+            <div class="dl">Volume cut</div>
+            <div class="bignum" style="color:var(--sf-phase-taper)">&minus;45%</div>
+            <div style="font-size:12px;color:var(--sf-ink-3);margin-bottom:1.2rem">from peak week</div>
+            <div class="dl">TSB target race morning</div>
+            <div class="bignum" style="font-size:1.8rem">+5 to +20</div>
+          </div>
+          <div class="dc">
+            <div class="dl">Key focus points</div>
+            <ul class="kp">
+              <li>Volume down sharply, frequency stays — short race-pace bursts keep sharpness</li>
+              <li>Fly to Australia 10–14 days early — beat the 10+ hour time change</li>
+              <li>Finish heat acclimation before race week, not during it</li>
+              <li>Lock logistics: bike build, nutrition supply, race-morning timeline</li>
+              <li>Race: swim controlled, bike to power &amp; nutrition plan, run within yourself</li>
+            </ul>
+          </div>
+          <div class="dc">
+            <div class="dl">Typical week</div>
+            <table class="week-table">
+              <tr class="rest-row"><td class="wd">Mon</td><td><div class="ws">Rest</div></td></tr>
+              <tr><td class="wd">Tue</td><td><div class="ws">Bike · 1.5 hr</div><div class="wt">Short race-pace bursts</div></td></tr>
+              <tr><td class="wd">Wed</td><td><div class="ws">Swim 45 min + run 30 min</div><div class="wt">Sharpeners</div></td></tr>
+              <tr><td class="wd">Thu</td><td><div class="ws">Bike 1 hr + run 20 min</div><div class="wt">Easy brick / travel</div></td></tr>
+              <tr class="rest-row"><td class="wd">Fri</td><td><div class="ws">Easy swim / travel day</div></td></tr>
+              <tr><td class="wd">Sat</td><td><div class="ws">Shakeout · swim-bike-run</div><div class="wt">Short openers</div></td></tr>
+              <tr><td class="wd">Sun</td><td><div class="ws" style="font-weight:700;color:var(--sf-ink)">Race day</div></td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- Principles -->
+      <section>
+        <p class="section-label">Core principles</p>
+        <div class="principles">
+          <div class="principle"><div class="pnum">01</div><div class="ptitle">Aerobic base first</div><div class="pbody">~80% of all time below the first threshold. Z2 is the danger zone — the most common mistake is drifting there on easy days. Easy stays genuinely easy; both a Vasaloppet and an Ironman are won aerobically.</div></div>
+          <div class="principle"><div class="pnum">02</div><div class="ptitle">Consistency over heroics</div><div class="pbody">Coming back from injury, the plan only works if you stay healthy. Ramp run volume ≤10%/week, keep rehab work daily, never chase a missed session. Twelve boring weeks beat one brilliant one.</div></div>
+          <div class="principle"><div class="pnum">03</div><div class="ptitle">Skiing is low-impact base</div><div class="pbody">The winter block isn't a detour — XC skiing builds a huge aerobic engine while sparing the legs. That base converts directly into the spring triathlon build, and the races keep training fun.</div></div>
+          <div class="principle"><div class="pnum">04</div><div class="ptitle">3 + 1 microcycle</div><div class="pbody">Three build weeks, one recovery week (~65% volume). Adaptation happens during recovery — the build only creates the stimulus. Non-negotiable while returning from injury.</div></div>
+          <div class="principle"><div class="pnum">05</div><div class="ptitle">Race the calendar in order</div><div class="pbody">Diagonela controlled, Vasaloppet the winter peak, Rapperswil a rehearsal, Port Macquarie the A-race. Each serves the next — never let an earlier race compromise a later one. Marcialonga is dropped to keep the transition clean.</div></div>
+          <div class="principle"><div class="pnum">06</div><div class="ptitle">Race the travel</div><div class="pbody">Port Macquarie is 10+ time zones away. The taper is also a travel plan: arrive 10–14 days early, adapt to the reversed day, and rehearse heat &amp; nutrition long before race week.</div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Sport &amp; Fitness · 2026/27 ski + tri season · v2.1</span>
+      <span>3 Aug 2026 – 17 Oct 2027 · 5 races · intervals.icu compatible</span>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .sf {
+    --sf-ink:   #111110;
+    --sf-ink-2: #46453f;
+    --sf-ink-3: #7a7972;
+    --sf-bg:    #e8e6e1;
+    --sf-card:  #ffffff;
+    --sf-card-alt: #f8f7f5;
+    --sf-rule:  #d5d3cc;
+    --sf-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --sf-shadow-lg: 0 4px 12px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
+    --sf-phase-rehab:  #4c8c7d;
+    --sf-phase-skibase:#2b6cb0;
+    --sf-phase-winter: #5a4ec9;
+    --sf-phase-tri703: #22804a;
+    --sf-phase-imspec: #c05525;
+    --sf-phase-taper:  #943064;
+    --sf-race-a: #5a4ec9;
+    --sf-race-b: #2b6cb0;
+    --sf-race-c: #22804a;
+    --sf-race-d: #111110;
+    --sf-race-e: #4c8c7d;
+    --sf-z1: #2b6cb0;
+    --sf-z2: #d47e2e;
+    --sf-z3: #c03828;
+    --sf-font: 'Inter', system-ui, -apple-system, sans-serif;
+
+    font-family: var(--sf-font);
+    background: var(--sf-bg);
+    color: var(--sf-ink);
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 400;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .sf header {
+    background: var(--sf-card);
+    padding: 4rem 4.5rem 3rem;
+    border-bottom: 1px solid var(--sf-rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 3rem;
+    box-shadow: var(--sf-shadow);
+  }
+  .back-link { display: inline-block; font-size: 12px; font-weight: 500; color: var(--sf-ink-3); text-decoration: none; letter-spacing: .02em; margin-bottom: 1rem; transition: color .15s; }
+  .back-link:hover { color: var(--sf-ink); }
+  .eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--sf-ink-3); margin-bottom: .75rem; font-weight: 500; }
+  .sf h1 { font-family: var(--sf-font); font-size: clamp(2.6rem,5vw,4.2rem); line-height: 1; font-weight: 700; letter-spacing: -.03em; color: var(--sf-ink); }
+  .sf h1 em { font-style: normal; font-weight: 300; color: var(--sf-ink-3); }
+  .header-right { text-align: right; color: var(--sf-ink-2); font-size: 13px; line-height: 1.9; font-weight: 400; }
+  .header-right strong { display: block; font-family: var(--sf-font); font-size: 2.2rem; font-weight: 700; letter-spacing: -.02em; color: var(--sf-ink); line-height: 1; margin-bottom: .3rem; }
+
+  /* LAYOUT */
+  .sf main { max-width: 1160px; margin: 0 auto; padding: 2rem 4.5rem 6rem; }
+  .sf section { padding: 2.5rem 0; animation: fadeUp .5s ease both; }
+  .sf section:nth-child(1){animation-delay:.05s} .sf section:nth-child(2){animation-delay:.1s}
+  .sf section:nth-child(3){animation-delay:.15s} .sf section:nth-child(4){animation-delay:.2s}
+  .sf section:nth-child(5){animation-delay:.25s} .sf section:nth-child(6){animation-delay:.3s}
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+  .section-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sf-ink-3); font-weight: 500; margin-bottom: 1.2rem; }
+
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--sf-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--sf-shadow); }
+  .stat-cell { background: var(--sf-card); padding: 1.6rem 1.4rem; }
+  .stat-value { font-family: var(--sf-font); font-size: 2.2rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; margin-bottom: .3rem; color: var(--sf-ink); }
+  .stat-label { font-size: 11px; color: var(--sf-ink-3); letter-spacing: .06em; font-weight: 500; }
+
+  /* RACE CALENDAR */
+  .race-calendar { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--sf-rule); border-radius: 8px 8px 0 0; overflow: hidden; box-shadow: var(--sf-shadow); }
+  .race-card { background: var(--sf-card); padding: 1.8rem 1.6rem; position: relative; }
+  .race-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .race-card.r-sprint::before { background: var(--sf-race-e); }
+  .race-card.r-diag::before { background: var(--sf-race-a); }
+  .race-card.r-vasa::before { background: var(--sf-race-b); }
+  .race-card.r-703::before  { background: var(--sf-race-c); }
+  .race-card.r-full::before { background: var(--sf-race-d); }
+  .race-card.dimmed { opacity: .55; }
+  .race-num { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--sf-ink-3); margin-bottom: .5rem; font-weight: 500; }
+  .race-name { font-family: var(--sf-font); font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; margin-bottom: .4rem; color: var(--sf-ink); }
+  .race-date { font-size: 13px; color: var(--sf-ink-2); margin-bottom: .8rem; }
+  .race-meta { font-size: 12.5px; color: var(--sf-ink-3); line-height: 1.7; margin-bottom: 1rem; }
+  .race-badge { display: inline-block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .7rem; border-radius: 4px; font-weight: 500; }
+  .badge-open   { background: #e6f0ee; color: var(--sf-race-e); }
+  .badge-ski    { background: #efedfb; color: var(--sf-race-a); }
+  .badge-winter { background: #e8f0f8; color: var(--sf-race-b); }
+  .badge-tri    { background: #e9f3ec; color: var(--sf-race-c); }
+  .badge-target { background: var(--sf-ink); color: #fff; }
+  .race-gap { font-size: 12px; color: var(--sf-ink-3); margin-top: .6rem; }
+  .race-gap strong { color: var(--sf-ink-2); font-weight: 600; }
+
+  .race-note {
+    background: var(--sf-card-alt);
+    border: 1px solid var(--sf-rule);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 1.2rem 1.6rem;
+    font-size: 13px;
+    color: var(--sf-ink-2);
+    line-height: 1.7;
+    box-shadow: var(--sf-shadow);
+  }
+  .race-note strong { color: var(--sf-ink); font-weight: 600; }
+  .race-note em { font-style: italic; color: var(--sf-ink-3); }
+
+  /* SEASON VISUALIZATION */
+  .season-vis {
+    position: relative;
+    background: var(--sf-card);
+    border-radius: 8px;
+    box-shadow: var(--sf-shadow);
+    padding: 1.4rem 1.4rem 1rem;
+    overflow: visible;
+  }
+
+  /* Phase bar row */
+  .phase-row { display: flex; gap: 3px; margin-bottom: 1rem; }
+  .phase-bar {
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: opacity .15s, filter .15s;
+    overflow: hidden;
+    color: #fff;
+    position: relative;
+  }
+  .phase-row.has-active .phase-bar { opacity: .35; transition: opacity .2s, filter .15s; }
+  .phase-row.has-active .phase-bar.active { opacity: 1; }
+  .phase-row.has-active .phase-bar:hover { opacity: .7; }
+  .phase-bar:hover { filter: brightness(1.1); }
+  .phase-bar.active { box-shadow: 0 0 0 2px var(--sf-ink); z-index: 1; }
+  .phase-bar.active::before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--sf-ink);
+    z-index: 2;
+  }
+  .phase-bar.rehab { background: var(--sf-phase-rehab); }
+  .phase-bar.skibase { background: var(--sf-phase-skibase); }
+  .phase-bar.winter { background: var(--sf-phase-winter); }
+  .phase-bar.tri703 { background: var(--sf-phase-tri703); }
+  .phase-bar.imspec { background: var(--sf-phase-imspec); }
+  .phase-bar.taper { background: var(--sf-phase-taper); }
+  .phase-bar-name { font-size: 11px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+  .phase-bar-sub { font-size: 10px; font-weight: 400; opacity: .75; white-space: nowrap; }
+  .phase-bar.current::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  /* Volume bars */
+  :global(.vol-bars) { display: flex; align-items: flex-end; gap: 2px; height: 100px; position: relative; }
+  :global(.vb) { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative; }
+  :global(.vbar) { width: 100%; border-radius: 2px 2px 0 0; }
+  :global(.vbar:hover) { opacity: .7; cursor: default; }
+  :global(.vbar.dl) { opacity: .3; }
+  :global(.race-marker) { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  :global(.rm-dot) { width: 7px; height: 7px; border-radius: 50%; margin-top: 1px; flex-shrink: 0; }
+  :global(.rm-line) { width: 1px; flex: 1; opacity: .25; }
+
+  /* Shared axis */
+  .season-axis { display: flex; justify-content: space-between; font-size: 10px; color: var(--sf-ink-3); margin-top: .5rem; font-weight: 500; }
+
+  /* Today needle (spans full vis) */
+  .today-needle {
+    position: absolute;
+    top: 1.4rem;
+    bottom: 2rem;
+    width: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--sf-ink);
+    border-radius: 1px;
+    opacity: .35;
+    transform: translateX(-50%);
+  }
+  .today-label {
+    position: absolute;
+    bottom: -1.4rem;
+    left: 0;
+    transform: translateX(-50%);
+    font-size: 9px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--sf-ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* PHASE DETAIL */
+  .phase-detail { display: none; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1px; background: var(--sf-rule); border: 1px solid var(--sf-rule); border-top: 3px solid var(--sf-rule); border-radius: 8px; overflow: hidden; animation: fadeIn .25s ease; margin-top: .75rem; box-shadow: var(--sf-shadow); }
+  .phase-detail.visible { display: grid; }
+  #detail-rehab.visible { border-top-color: var(--sf-phase-rehab); }
+  #detail-skibase.visible { border-top-color: var(--sf-phase-skibase); }
+  #detail-winter.visible { border-top-color: var(--sf-phase-winter); }
+  #detail-tri703.visible { border-top-color: var(--sf-phase-tri703); }
+  #detail-imspec.visible { border-top-color: var(--sf-phase-imspec); }
+  #detail-taper.visible { border-top-color: var(--sf-phase-taper); }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .dc { background: var(--sf-card); padding: 1.8rem 1.6rem; }
+  .dl { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--sf-ink-3); margin-bottom: .9rem; font-weight: 500; }
+  .zone-row { display: flex; align-items: center; gap: .7rem; margin-bottom: .65rem; }
+  .zlbl { font-size: 11.5px; width: 1.8rem; color: var(--sf-ink-2); font-weight: 500; }
+  .ztrack { flex: 1; height: 6px; background: var(--sf-bg); border-radius: 3px; overflow: hidden; }
+  .zfill { height: 100%; border-radius: 3px; }
+  .z1f{background:var(--sf-z1)} .z2f{background:var(--sf-z2)} .z3f{background:var(--sf-z3)}
+  .zpct { font-size: 11.5px; width: 2.2rem; text-align: right; color: var(--sf-ink-2); font-weight: 500; }
+  .pills { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+  .pill { font-size: 11px; padding: .25rem .65rem; border: 1px solid var(--sf-rule); border-radius: 20px; color: var(--sf-ink-2); background: var(--sf-card); }
+  .pill.p { border-color: var(--sf-ink-3); color: var(--sf-ink); font-weight: 500; }
+  .kp { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+  .kp li { font-size: 13px; color: var(--sf-ink-2); line-height: 1.55; padding-left: 1rem; position: relative; }
+  .kp li::before { content:'–'; position:absolute; left:0; color:var(--sf-ink-3); }
+  .bignum { font-family: var(--sf-font); font-size: 2.4rem; font-weight: 700; letter-spacing: -.02em; line-height: 1; margin-bottom: .2rem; }
+
+  /* WEEKLY RHYTHM TABLE (inside phase detail) */
+  .week-table { width: 100%; border-collapse: collapse; }
+  .week-table tr { border-bottom: 1px solid var(--sf-rule); }
+  .week-table tr:last-child { border-bottom: none; }
+  .week-table td { padding: .4rem 0; vertical-align: top; font-size: 12px; }
+  .week-table .wd { width: 2.2rem; font-weight: 600; color: var(--sf-ink-3); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; padding-top: .5rem; }
+  .week-table .ws { color: var(--sf-ink); font-weight: 500; }
+  .week-table .wt { color: var(--sf-ink-3); font-size: 11px; margin-top: 1px; }
+  .week-table tr.rest-row td { color: var(--sf-ink-3); }
+  .week-table tr.rest-row .ws { font-weight: 400; }
+
+
+  /* VOLUME CHART */
+  :global(.vol-bars) { display: flex; align-items: flex-end; gap: 2px; height: 130px; padding-bottom: 18px; }
+  :global(.vb) { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative; }
+  :global(.vbar) { width: 100%; border-radius: 3px 3px 0 0; }
+  :global(.vbar:hover) { opacity: .7; cursor: default; }
+  :global(.vbar.dl) { opacity: .3; }
+  :global(.race-marker) { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  :global(.rm-dot) { width: 7px; height: 7px; border-radius: 50%; margin-top: 1px; flex-shrink: 0; }
+  :global(.rm-line) { width: 1px; flex: 1; opacity: .25; }
+
+  /* PRINCIPLES */
+  .principles { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--sf-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--sf-shadow); }
+  .principle { background: var(--sf-card); padding: 1.8rem 1.6rem; }
+  .pnum { font-family: var(--sf-font); font-size: 2.4rem; font-weight: 800; letter-spacing: -.02em; color: var(--sf-rule); line-height: 1; margin-bottom: .7rem; }
+  .ptitle { font-size: 13.5px; font-weight: 600; margin-bottom: .5rem; color: var(--sf-ink); }
+  .pbody { font-size: 12.5px; color: var(--sf-ink-2); line-height: 1.7; }
+
+  /* FOOTER */
+  .sf footer { padding: 1.8rem 4.5rem; border-top: 1px solid var(--sf-rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--sf-ink-3); flex-wrap: wrap; gap: .5rem; font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .sf header, .sf main, .sf footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .sf header { grid-template-columns: 1fr; }
+    .header-right { text-align: left; }
+    .stat-row, .race-calendar { grid-template-columns: 1fr 1fr; }
+    .phase-detail, .principles { grid-template-columns: 1fr; }
+    .phase-bar-sub { display: none; }
+    .phase-bar-name { font-size: 9px; }
+  }
+</style>
+
+<script>
+  const PLAN_START = new Date('2026-08-03');
+  const PLAN_END   = new Date('2027-10-17');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  const totalMs = PLAN_END.getTime() - PLAN_START.getTime();
+  const elapsedMs = today.getTime() - PLAN_START.getTime();
+  const pct = Math.max(0, Math.min(100, (elapsedMs / totalMs) * 100));
+  const weekNum = Math.max(0, Math.floor(elapsedMs / (7 * 86400000)) + 1);
+
+  // ── Current phase detection & auto-open ──
+  const bars = document.querySelectorAll<HTMLElement>('.phase-bar');
+  let currentPhaseId: string | null = null;
+
+  bars.forEach(bar => {
+    const start = new Date(bar.dataset.start!);
+    const end = new Date(bar.dataset.end!);
+    if (today >= start && today <= end) {
+      bar.classList.add('current');
+      currentPhaseId = bar.dataset.phase!;
+    }
+  });
+
+  // Phase week ranges (0-indexed) for volume bar highlighting
+  const phaseWeekRanges: Record<string, [number, number]> = {
+    rehab: [0, 9], skibase: [10, 20], winter: [21, 30], tri703: [31, 43], imspec: [44, 59], taper: [60, 62]
+  };
+  const phaseRow = document.querySelector('.phase-row')!;
+  phaseRow.classList.add('has-active');
+
+  function openPhase(id: string) {
+    bars.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.phase-detail').forEach(d => d.classList.remove('visible'));
+    const target = document.querySelector<HTMLElement>(`.phase-bar[data-phase="${id}"]`);
+    target?.classList.add('active');
+    document.getElementById('detail-' + id)?.classList.add('visible');
+
+    // Dim volume bars outside the active phase
+    const [start, end] = phaseWeekRanges[id] || [0, 62];
+    document.querySelectorAll<HTMLElement>('.vb').forEach((vb, i) => {
+      vb.style.opacity = (i >= start && i <= end) ? '1' : '.25';
+      vb.style.transition = 'opacity .2s';
+    });
+  }
+
+  // Auto-open current phase (or default to first)
+  openPhase(currentPhaseId || 'rehab');
+
+  // Click handlers
+  bars.forEach(bar => {
+    bar.addEventListener('click', () => {
+      openPhase(bar.dataset.phase!);
+    });
+  });
+
+  // ── Today needle ──
+  const needle = document.getElementById('todayNeedle')!;
+  const label = document.getElementById('todayLabel')!;
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dateStr = `${today.getDate()} ${monthNames[today.getMonth()]}`;
+
+  if (today < PLAN_START || today > PLAN_END) {
+    needle.style.display = 'none';
+  } else {
+    needle.style.left = `calc(1.4rem + (100% - 2.8rem) * ${pct / 100})`;
+    label.textContent = `${dateStr} · Wk ${weekNum}`;
+  }
+
+  // ── Volume chart (deterministic weekly hours) ──
+  (function() {
+    const phases: { name: string; color: string; vols: number[] }[] = [
+      { name: 'Rehab & Rebuild', color: '#4c8c7d', vols: [5, 5.5, 6, 4.5, 6.5, 7, 7.5, 5.5, 7.5, 8] },
+      { name: 'Ski Base',        color: '#2b6cb0', vols: [8, 8.5, 9, 6.5, 9.5, 10, 10.5, 7, 10.5, 11, 9] },
+      { name: 'Winter Races',    color: '#5a4ec9', vols: [9, 9.5, 6, 6, 9.5, 10, 9, 9, 6.5, 4.5] },
+      { name: '70.3 Build',      color: '#22804a', vols: [5.5, 8, 9, 6.5, 10, 10.5, 11, 7, 10.5, 11, 9.5, 7.5, 5.5] },
+      { name: 'IM Specific',     color: '#c05525', vols: [8, 11, 12.5, 9, 13, 13.5, 14, 10, 13.5, 14, 14.5, 10.5, 14, 15, 13.5, 11] },
+      { name: 'Peak & Taper',    color: '#943064', vols: [9.5, 6.5, 4] },
+    ];
+    const races: Record<number, {color: string; label: string}> = {
+      2:  {color:'#111110', label:'Sprint Triathlon'},
+      23: {color:'#111110', label:'La Diagonela'},
+      30: {color:'#111110', label:'Vasaloppet'},
+      43: {color:'#111110', label:'Ironman 70.3 Rapperswil'},
+      62: {color:'#111110', label:'Ironman Port Macquarie'},
+    };
+    const maxH = 80, maxV = 16;
+    const container = document.getElementById('volBars');
+    if (!container) return;
+    let wi = 0;
+
+    function fmtDate(d: Date) {
+      return `${d.getDate()} ${monthNames[d.getMonth()]}`;
+    }
+
+    phases.forEach(ph => {
+      const mean = ph.vols.reduce((a, b) => a + b, 0) / ph.vols.length;
+      ph.vols.forEach(vol => {
+        const isRace = !!races[wi];
+        const isDeload = !isRace && vol < mean * 0.82;
+        const h = Math.round((Math.max(3, Math.min(16, vol)) / maxV) * maxH);
+
+        const wkStart = new Date(PLAN_START.getTime() + wi * 7 * 86400000);
+        const wkEnd = new Date(wkStart.getTime() + 6 * 86400000);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'vb';
+        wrap.title = `Wk ${wi+1} · ${fmtDate(wkStart)}–${fmtDate(wkEnd)}\n~${vol.toFixed(1)} hrs · ${ph.name}${isRace ? ' · race' : isDeload ? ' (recovery)' : ''}`;
+
+        const bar = document.createElement('div');
+        bar.className = 'vbar' + (isDeload ? ' dl' : '');
+        bar.style.cssText = `height:${h}px;background:${ph.color}`;
+        wrap.appendChild(bar);
+
+        if (races[wi]) {
+          const r = races[wi];
+          const mk = document.createElement('div');
+          mk.className = 'race-marker';
+          mk.title = r.label;
+          const dot = document.createElement('div');
+          dot.className = 'rm-dot';
+          dot.style.background = r.color;
+          const line = document.createElement('div');
+          line.className = 'rm-line';
+          line.style.cssText = `background:${r.color};height:${h-8}px`;
+          mk.appendChild(dot);
+          mk.appendChild(line);
+          wrap.appendChild(mk);
+        }
+
+        container.appendChild(wrap);
+        wi++;
+      });
+    });
+  })();
+</script>
