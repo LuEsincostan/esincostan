@@ -1,0 +1,402 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Bikes — Three bikes, three jobs"
+  description="The three bikes in Ludwig's garage and what each one is for: Canyon Exceed CF 7 for light MTB & gravel, Canyon Endurace CF SLX 7 for road training, and the Van Rysel XCR for triathlon racing."
+>
+  <div class="garage">
+    <header>
+      <div>
+        <a href="/ludwig" class="back-link">&larr; Ludwig</a>
+        <p class="eyebrow">3 bikes · one rider · three jobs</p>
+        <h1>Bikes</h1>
+      </div>
+      <div class="header-right">
+        <strong>3</strong>
+        bikes, each built for a different world<br>
+        Off-road adventure · road endurance · race-day aero<br>
+        Click a bike to see where it lives
+      </div>
+    </header>
+
+    <main>
+      <!-- ── The garage ── -->
+      <section>
+        <p class="section-label">The garage — click a bike to highlight it</p>
+        <div class="bike-grid" id="bikeGrid">
+
+          <!-- Exceed -->
+          <article class="bike-card mtb" data-bike="mtb">
+            <div class="bike-kicker">Cross-country · gravel</div>
+            <h2 class="bike-name">Canyon Exceed CF 7</h2>
+            <p class="bike-purpose">Light MTB &amp; gravel — trails, forest roads and mixed-surface adventure.</p>
+            <div class="bike-chips">
+              <span class="chip">XC hardtail</span>
+              <span class="chip">Carbon · 29"</span>
+              <span class="chip">~10.6 kg</span>
+            </div>
+            <ul class="bike-for">
+              <li>Singletrack &amp; forest trails</li>
+              <li>Gravel and unpaved roads</li>
+              <li>Marathon XC &amp; adventure days</li>
+            </ul>
+            <div class="bike-foot">Shimano XT 1&times;12 · 100&nbsp;mm fork · knobby tubeless</div>
+          </article>
+
+          <!-- Endurace -->
+          <article class="bike-card road" data-bike="road">
+            <div class="bike-kicker">Endurance road</div>
+            <h2 class="bike-name">Canyon Endurace CF SLX 7</h2>
+            <p class="bike-purpose">Road cycling &amp; general road training — long, comfortable, all-day miles.</p>
+            <div class="bike-chips">
+              <span class="chip">Endurance road</span>
+              <span class="chip">Carbon SLX</span>
+              <span class="chip">~8.4 kg</span>
+            </div>
+            <ul class="bike-for">
+              <li>Long road rides &amp; sportives</li>
+              <li>Base miles &amp; everyday training</li>
+              <li>All-day comfort, up to 38&nbsp;mm tyres</li>
+            </ul>
+            <div class="bike-foot">SRAM Rival AXS · disc brakes · aero-endurance frame</div>
+          </article>
+
+          <!-- XCR -->
+          <article class="bike-card tri" data-bike="tri">
+            <div class="bike-kicker">Triathlon · time trial</div>
+            <h2 class="bike-name">Van Rysel XCR</h2>
+            <p class="bike-purpose">Triathlon racing — an aggressive aero position built to go fast and save the legs.</p>
+            <div class="bike-chips">
+              <span class="chip">Tri / TT</span>
+              <span class="chip">Aero carbon</span>
+              <span class="chip">79° seat tube</span>
+            </div>
+            <ul class="bike-for">
+              <li>Triathlon &amp; time-trial racing</li>
+              <li>Flat, fast courses at race pace</li>
+              <li>Holding aero for hours, fresh to run</li>
+            </ul>
+            <div class="bike-foot">Ultegra Di2 · deep aero wheels · Swiss Side tuned</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── Terrain spectrum ── -->
+      <section>
+        <p class="section-label">Where each bike lives</p>
+        <div class="spectrum" id="spectrum">
+          <div class="spectrum-track">
+            <div class="spec-dot mtb"  data-bike="mtb"  style="left:15%"><span class="spec-dot-label">Exceed</span></div>
+            <div class="spec-dot road" data-bike="road" style="left:58%"><span class="spec-dot-label">Endurace</span></div>
+            <div class="spec-dot tri"  data-bike="tri"  style="left:90%"><span class="spec-dot-label">XCR</span></div>
+          </div>
+          <div class="spectrum-axis">
+            <span>Gravel &amp; trail</span>
+            <span>All-road comfort</span>
+            <span>Smooth tarmac · pure speed</span>
+          </div>
+        </div>
+        <div class="spectrum-note">
+          One rider, one surface spectrum. The <strong>Exceed</strong> owns everything off the tarmac, the <strong>Endurace</strong> sits in the all-day comfort zone with room for light gravel, and the <strong>XCR</strong> is dialled all the way to aero speed on smooth roads. No two overlap enough to make one redundant — each covers ground the others simply can't.
+        </div>
+      </section>
+
+      <!-- ── Head to head ── -->
+      <section>
+        <p class="section-label">Head to head</p>
+        <div class="table-wrap">
+          <table class="compare">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="c-mtb">Exceed CF 7</th>
+                <th class="c-road">Endurace CF SLX 7</th>
+                <th class="c-tri">Van Rysel XCR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="rl">Discipline</td><td>Cross-country MTB</td><td>Endurance road</td><td>Triathlon / TT</td></tr>
+              <tr><td class="rl">Primary use</td><td>Light MTB &amp; gravel</td><td>Road training &amp; long rides</td><td>Race day</td></tr>
+              <tr><td class="rl">Frame</td><td>Carbon hardtail, 29"</td><td>Carbon SLX, aero-endurance</td><td>High-modulus aero carbon</td></tr>
+              <tr><td class="rl">Weight</td><td>~10.6 kg</td><td>~8.4 kg</td><td>Aero-first (~1.5 kg frame)</td></tr>
+              <tr><td class="rl">Suspension</td><td>100 mm front fork</td><td>None</td><td>None</td></tr>
+              <tr><td class="rl">Groupset</td><td>Shimano XT 1&times;12</td><td>SRAM Rival AXS 2&times;12</td><td>Shimano Ultegra Di2</td></tr>
+              <tr><td class="rl">Tyres</td><td>Knobby 2.35" tubeless</td><td>Road slick, up to 38 mm</td><td>Fast aero road slick</td></tr>
+              <tr><td class="rl">Position</td><td>Upright, controllable</td><td>Relaxed, all-day comfort</td><td>Aggressive aero, 79° seat</td></tr>
+              <tr><td class="rl">Handlebar</td><td>Flat bar</td><td>Drop bar</td><td>Aerobars + extensions</td></tr>
+              <tr><td class="rl">Happiest on</td><td>Trails &amp; gravel</td><td>Open roads, any distance</td><td>Flat, fast, timed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Which bike today ── -->
+      <section>
+        <p class="section-label">Which bike today?</p>
+        <div class="scenarios">
+          <div class="scenario mtb">
+            <div class="scenario-q">Forest trails, gravel roads or an off-road adventure?</div>
+            <div class="scenario-a">Canyon Exceed CF 7</div>
+            <div class="scenario-why">Suspension, grip and a wide gear range for anything the tarmac ends into.</div>
+          </div>
+          <div class="scenario road">
+            <div class="scenario-q">A long road ride or an everyday base-mile session?</div>
+            <div class="scenario-a">Canyon Endurace CF SLX 7</div>
+            <div class="scenario-why">Comfortable endurance geometry that stays fast and fresh all day.</div>
+          </div>
+          <div class="scenario tri">
+            <div class="scenario-q">A triathlon, a time trial or race-pace aero work?</div>
+            <div class="scenario-a">Van Rysel XCR</div>
+            <div class="scenario-why">Race-specific aero position — fastest against the clock, legs saved for the run.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Built around one date ── -->
+      <section>
+        <p class="section-label">Built around one date</p>
+        <div class="timeline">
+          <div class="tl-cell">
+            <div class="tl-value tl-tri">6 Jun 2027</div>
+            <div class="tl-label">Ironman 70.3 · Rapperswil — the first race that needs an aero position</div>
+          </div>
+          <div class="tl-cell">
+            <div class="tl-value">≈ 10 months</div>
+            <div class="tl-label">From today to the start line</div>
+          </div>
+          <div class="tl-cell">
+            <div class="tl-value">4–6 months</div>
+            <div class="tl-label">To adapt to the position and bank the aero savings</div>
+          </div>
+          <div class="tl-cell tl-now">
+            <div class="tl-value">This winter</div>
+            <div class="tl-label">The low-intensity base block — the ideal time to adapt, and it starts now</div>
+          </div>
+        </div>
+        <div class="argument">
+          A triathlon isn't won on the spec sheet — it's won by the athlete who can hold race power in an aero tuck for hours and still run well off the bike. That position is a <strong>trained adaptation, not a purchase</strong>: it takes months of consistent riding in the exact 79° geometry the Exceed and Endurace simply can't replicate. Counting back from Rapperswil — and the full Ironman that follows it — that adaptation block lands squarely on this winter's aerobic base. Which is the quiet case for the third bike: it earns its place in the garage <strong>now</strong>, while there's still a full season to grow into it, rather than next spring when the calendar has already run out of time.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Bikes · 3 bikes, three jobs</span>
+      <span>Exceed CF 7 · Endurace CF SLX 7 · Van Rysel XCR</span>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .garage {
+    --g-ink:   #111110;
+    --g-ink-2: #46453f;
+    --g-ink-3: #7a7972;
+    --g-bg:    #e8e6e1;
+    --g-card:  #ffffff;
+    --g-card-alt: #f8f7f5;
+    --g-rule:  #d5d3cc;
+    --g-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --g-shadow-lg: 0 4px 12px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
+
+    --bike-mtb:  #3f7d4e; /* trail green  — Exceed */
+    --bike-road: #2b6cb0; /* road blue    — Endurace */
+    --bike-tri:  #c0472b; /* race red     — XCR */
+
+    --g-font: 'Inter', system-ui, -apple-system, sans-serif;
+
+    font-family: var(--g-font);
+    background: var(--g-bg);
+    color: var(--g-ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .garage header {
+    background: var(--g-card);
+    padding: 4rem 4.5rem 3rem;
+    border-bottom: 1px solid var(--g-rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 3rem;
+    box-shadow: var(--g-shadow);
+  }
+  .back-link { display: inline-block; font-size: 12px; font-weight: 500; color: var(--g-ink-3); text-decoration: none; letter-spacing: .02em; margin-bottom: 1rem; transition: color .15s; }
+  .back-link:hover { color: var(--g-ink); }
+  .eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--g-ink-3); margin-bottom: .75rem; font-weight: 500; }
+  .garage h1 { font-family: var(--g-font); font-size: clamp(2.6rem,5vw,4.2rem); line-height: 1; font-weight: 700; letter-spacing: -.03em; color: var(--g-ink); }
+  .header-right { text-align: right; color: var(--g-ink-2); font-size: 13px; line-height: 1.9; }
+  .header-right strong { display: block; font-size: 2.2rem; font-weight: 700; letter-spacing: -.02em; color: var(--g-ink); line-height: 1; margin-bottom: .3rem; }
+
+  /* LAYOUT */
+  .garage main { max-width: 1160px; margin: 0 auto; padding: 2rem 4.5rem 6rem; }
+  .garage section { padding: 2.5rem 0; animation: fadeUp .5s ease both; }
+  .garage section:nth-child(1){animation-delay:.05s} .garage section:nth-child(2){animation-delay:.1s}
+  .garage section:nth-child(3){animation-delay:.15s} .garage section:nth-child(4){animation-delay:.2s}
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+  .section-label { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--g-ink-3); font-weight: 500; margin-bottom: 1.2rem; }
+
+  /* BIKE CARDS */
+  .bike-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--g-shadow); }
+  .bike-card {
+    background: var(--g-card);
+    padding: 2rem 1.7rem;
+    position: relative;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s;
+  }
+  .bike-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .bike-card.mtb::before  { background: var(--bike-mtb); }
+  .bike-card.road::before { background: var(--bike-road); }
+  .bike-card.tri::before  { background: var(--bike-tri); }
+  .bike-card:hover { filter: brightness(.995); }
+  /* selection dimming */
+  .bike-grid.has-active .bike-card { opacity: .42; }
+  .bike-grid.has-active .bike-card.active { opacity: 1; }
+  .bike-card.active { box-shadow: inset 0 0 0 2px var(--g-ink); }
+  .bike-card.mtb.active  { box-shadow: inset 0 0 0 2px var(--bike-mtb); }
+  .bike-card.road.active { box-shadow: inset 0 0 0 2px var(--bike-road); }
+  .bike-card.tri.active  { box-shadow: inset 0 0 0 2px var(--bike-tri); }
+
+  .bike-kicker { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; margin-bottom: .6rem; }
+  .bike-card.mtb  .bike-kicker { color: var(--bike-mtb); }
+  .bike-card.road .bike-kicker { color: var(--bike-road); }
+  .bike-card.tri  .bike-kicker { color: var(--bike-tri); }
+  .bike-name { font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; margin-bottom: .6rem; color: var(--g-ink); }
+  .bike-purpose { font-size: 13px; color: var(--g-ink-2); line-height: 1.6; margin-bottom: 1rem; }
+  .bike-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
+  .chip { font-size: 11px; padding: .25rem .65rem; border: 1px solid var(--g-rule); border-radius: 20px; color: var(--g-ink-2); background: var(--g-card-alt); }
+  .bike-for { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.2rem; }
+  .bike-for li { font-size: 12.5px; color: var(--g-ink-2); line-height: 1.5; padding-left: 1rem; position: relative; }
+  .bike-for li::before { content:'–'; position:absolute; left:0; color:var(--g-ink-3); }
+  .bike-foot { font-size: 11px; color: var(--g-ink-3); border-top: 1px solid var(--g-rule); padding-top: .9rem; line-height: 1.6; }
+
+  /* SPECTRUM */
+  .spectrum { background: var(--g-card); border-radius: 8px; box-shadow: var(--g-shadow); padding: 2.6rem 2.4rem 1.4rem; }
+  .spectrum-track {
+    position: relative;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--bike-mtb) 0%, var(--bike-road) 58%, var(--bike-tri) 100%);
+    opacity: .9;
+    margin: 2rem 0 .5rem;
+  }
+  .spec-dot {
+    position: absolute; top: 50%;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--g-card);
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 0 3px currentColor, var(--g-shadow);
+    transition: transform .18s, box-shadow .18s;
+  }
+  .spec-dot.mtb  { color: var(--bike-mtb); }
+  .spec-dot.road { color: var(--bike-road); }
+  .spec-dot.tri  { color: var(--bike-tri); }
+  .spec-dot-label {
+    position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
+    font-size: 11px; font-weight: 600; white-space: nowrap; color: var(--g-ink);
+  }
+  .spec-dot.active { transform: translate(-50%,-50%) scale(1.55); }
+  .spectrum.has-active .spec-dot:not(.active) { opacity: .35; }
+  .spectrum-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--g-ink-3); margin-top: 1.2rem; font-weight: 500; }
+  .spectrum-axis span:nth-child(2) { text-align: center; }
+  .spectrum-axis span:last-child { text-align: right; }
+  .spectrum-note { margin-top: 1.2rem; font-size: 13px; color: var(--g-ink-2); line-height: 1.7; background: var(--g-card-alt); border: 1px solid var(--g-rule); border-radius: 8px; padding: 1.1rem 1.4rem; }
+  .spectrum-note strong { color: var(--g-ink); font-weight: 600; }
+
+  /* COMPARE TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 8px; box-shadow: var(--g-shadow); }
+  .compare { width: 100%; border-collapse: collapse; background: var(--g-card); min-width: 640px; }
+  .compare th, .compare td { padding: .85rem 1.1rem; text-align: left; font-size: 13px; border-bottom: 1px solid var(--g-rule); }
+  .compare thead th { font-size: 12.5px; font-weight: 700; color: var(--g-ink); border-bottom: 2px solid var(--g-rule); position: relative; }
+  .compare thead th::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:2px; }
+  .compare thead th.c-mtb::after  { background: var(--bike-mtb); }
+  .compare thead th.c-road::after { background: var(--bike-road); }
+  .compare thead th.c-tri::after  { background: var(--bike-tri); }
+  .compare td.rl { font-weight: 600; color: var(--g-ink-3); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+  .compare td { color: var(--g-ink-2); }
+  .compare tbody tr:last-child td { border-bottom: none; }
+  .compare tbody tr:hover td { background: var(--g-card-alt); }
+
+  /* SCENARIOS */
+  .scenarios { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--g-shadow); }
+  .scenario { background: var(--g-card); padding: 1.8rem 1.6rem; border-top: 3px solid var(--g-rule); }
+  .scenario.mtb  { border-top-color: var(--bike-mtb); }
+  .scenario.road { border-top-color: var(--bike-road); }
+  .scenario.tri  { border-top-color: var(--bike-tri); }
+  .scenario-q { font-size: 13px; color: var(--g-ink-3); line-height: 1.6; margin-bottom: 1rem; min-height: 2.8em; }
+  .scenario-a { font-size: 1.05rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .5rem; }
+  .scenario.mtb  .scenario-a { color: var(--bike-mtb); }
+  .scenario.road .scenario-a { color: var(--bike-road); }
+  .scenario.tri  .scenario-a { color: var(--bike-tri); }
+  .scenario-why { font-size: 12.5px; color: var(--g-ink-2); line-height: 1.6; }
+
+  /* TIMELINE — why now */
+  .timeline { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--g-rule); border-radius: 8px; overflow: hidden; box-shadow: var(--g-shadow); }
+  .tl-cell { background: var(--g-card); padding: 1.6rem 1.4rem; position: relative; }
+  .tl-cell.tl-now { background: var(--g-card-alt); }
+  .tl-cell.tl-now::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--bike-tri); }
+  .tl-value { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; margin-bottom: .5rem; color: var(--g-ink); }
+  .tl-value.tl-tri { color: var(--bike-tri); }
+  .tl-label { font-size: 11.5px; color: var(--g-ink-3); line-height: 1.5; }
+  .argument { margin-top: 1.2rem; font-size: 13.5px; color: var(--g-ink-2); line-height: 1.75; background: var(--g-card); border: 1px solid var(--g-rule); border-left: 3px solid var(--bike-tri); border-radius: 8px; padding: 1.3rem 1.6rem; box-shadow: var(--g-shadow); }
+  .argument strong { color: var(--g-ink); font-weight: 600; }
+
+  /* FOOTER */
+  .garage footer { padding: 1.8rem 4.5rem; border-top: 1px solid var(--g-rule); display: flex; justify-content: space-between; font-size: 11px; color: var(--g-ink-3); flex-wrap: wrap; gap: .5rem; font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .garage header, .garage main, .garage footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .garage header { grid-template-columns: 1fr; }
+    .header-right { text-align: left; }
+    .bike-grid, .scenarios { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .spectrum { padding: 2.6rem 1.4rem 1.4rem; }
+    .spectrum-axis { font-size: 10px; }
+  }
+</style>
+
+<script>
+  const grid = document.getElementById('bikeGrid');
+  const spectrum = document.getElementById('spectrum');
+  const cards = document.querySelectorAll<HTMLElement>('.bike-card');
+  const dots = document.querySelectorAll<HTMLElement>('.spec-dot');
+
+  function clear() {
+    grid?.classList.remove('has-active');
+    spectrum?.classList.remove('has-active');
+    cards.forEach(c => c.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+  }
+
+  function select(bike: string) {
+    clear();
+    grid?.classList.add('has-active');
+    spectrum?.classList.add('has-active');
+    document.querySelectorAll<HTMLElement>(`[data-bike="${bike}"]`).forEach(el => el.classList.add('active'));
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const bike = card.dataset.bike!;
+      if (card.classList.contains('active')) {
+        clear();
+      } else {
+        select(bike);
+      }
+    });
+  });
+
+  // Clicking a spectrum dot selects too
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const bike = dot.dataset.bike!;
+      if (dot.classList.contains('active')) clear();
+      else select(bike);
+    });
+  });
+</script>
