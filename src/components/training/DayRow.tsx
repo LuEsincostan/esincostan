@@ -1,7 +1,6 @@
 import {
-  LOCATIONS,
   dayKey,
-  optionSummary,
+  locationGroups,
   optionsForLocation,
   type Location,
   type PlanDay,
@@ -26,17 +25,13 @@ interface Props {
 export function DayRow({ day, isToday, expanded, onToggle, location, onLocation }: Props) {
   const { template } = day;
   const rest = template.kind === "rest";
-  const options = optionsForLocation(day, location);
+  const groups = locationGroups(day);
+  // Fall back to the first button this day actually has. The chosen location is
+  // shared down the whole agenda, so it will often name somewhere a given day
+  // does not go — Saturday is outdoors only — and a card must never open blank.
+  const shown = groups.find((group) => group.locations.includes(location)) ?? groups[0];
+  const options = shown ? optionsForLocation(day, shown.key) : [];
   const id = dayKey(day.date);
-
-  // the rest row already says "Rest" in its focus — no need to say it twice
-  const summary = rest
-    ? ""
-    : options.length === 0
-      ? "—"
-      : options.length === 1
-        ? optionSummary(options[0])
-        : `${options.length} options`;
 
   return (
     <article
@@ -67,51 +62,39 @@ export function DayRow({ day, isToday, expanded, onToggle, location, onLocation 
         <span class="tp-day-focus">{template.focus}</span>
         {isToday && <span class="tp-day-today">Today</span>}
 
-        {summary && <span class="tp-day-summary">{summary}</span>}
         {!rest && <span class="tp-day-chevron" aria-hidden="true" />}
       </button>
 
       {expanded && !rest && (
         <div class="tp-day-body" id={`body-${id}`}>
           <div class="tp-tabs" role="tablist" aria-label="Where are you training?">
-            {LOCATIONS.map((entry) => {
-              const stocked = optionsForLocation(day, entry.key).length > 0;
+            {groups.map((group) => {
+              const active = group === shown;
               return (
                 <button
                   type="button"
-                  key={entry.key}
+                  key={group.key}
                   role="tab"
-                  aria-selected={entry.key === location}
+                  aria-selected={active}
                   aria-controls={`panel-${id}`}
-                  class={[
-                    "tp-tab",
-                    entry.key === location ? "is-active" : "",
-                    stocked ? "" : "is-empty",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  onClick={() => onLocation(entry.key)}
+                  class={`tp-tab ${active ? "is-active" : ""}`}
+                  // already inside this group — don't shuffle the shared choice
+                  onClick={() => !active && onLocation(group.key)}
                 >
-                  {entry.label}
+                  {group.label}
                 </button>
               );
             })}
           </div>
 
-          {options.length === 0 ? (
-            <p class="tp-notice" id={`panel-${id}`} role="tabpanel">
-              {template.emptyNote ?? "Nothing scheduled here — try another location."}
-            </p>
-          ) : (
-            <ul class="tp-options" id={`panel-${id}`} role="tabpanel">
-              {options.map((option) => (
-                <li class="tp-option" key={option.key}>
-                  <p class="tp-option-label">{option.label}</p>
-                  <OptionBody option={option} />
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul class="tp-options" id={`panel-${id}`} role="tabpanel">
+            {options.map((option) => (
+              <li class="tp-option" key={option.key}>
+                <p class="tp-option-label">{option.label}</p>
+                <OptionBody option={option} />
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </article>

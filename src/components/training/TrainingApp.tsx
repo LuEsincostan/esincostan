@@ -1,13 +1,11 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import {
   PLAN_END,
   PLAN_START,
   PLAN_WEEKS,
-  PLAN_WEEK_COUNT,
   dayKey,
   daysBetween,
   formatDayShort,
-  getPlanDay,
   getWeekNumber,
   sameDay,
   startOfDay,
@@ -42,7 +40,7 @@ export function TrainingApp() {
   const [now, setNow] = useState(PLAN_START);
   const [openDate, setOpenDate] = useState<Date | null>(PLAN_START);
   // shared by every day: choose "Travelling" once and the whole plan follows
-  const [location, setLocation] = useState<Location>("home");
+  const [location, setLocation] = useState<Location>("indoor");
 
   useEffect(() => {
     const real = startOfDay(new Date());
@@ -56,7 +54,21 @@ export function TrainingApp() {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  const status = getPlanDay(now).status;
+  // The pinned bar covers the top of the viewport, so scroll targets need a
+  // matching scroll-margin or they land underneath it. Measure rather than
+  // hardcode — the bar is a different height on a phone than on a desktop.
+  const pinnedRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = pinnedRef.current;
+    if (!el) return;
+    const publish = () =>
+      document.documentElement.style.setProperty("--tp-pinned-h", `${el.offsetHeight}px`);
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const activeWeek = openDate ? getWeekNumber(openDate) : null;
 
   function jumpToToday() {
@@ -67,22 +79,24 @@ export function TrainingApp() {
 
   return (
     <div class="tp">
-      <header class="tp-head">
-        <div class="tp-head-row">
-          <h1 class="tp-title">Training</h1>
-          <button type="button" class="tp-jump" onClick={jumpToToday}>
-            Today
-          </button>
-        </div>
-        <p class="tp-sub">
-          <Subtitle now={now} status={status} activeWeek={activeWeek} />
-        </p>
-      </header>
+      {/* Pinned: the title, the Today button and the twelve-week bar stay put
+          while the agenda scrolls under them, so jumping between weeks never
+          scrolls the controls off the screen. */}
+      <div class="tp-pinned" ref={pinnedRef}>
+        <header class="tp-head">
+          <div class="tp-head-row">
+            <h1 class="tp-title">Training</h1>
+            <button type="button" class="tp-jump" onClick={jumpToToday}>
+              Today
+            </button>
+          </div>
+        </header>
 
-      <PlanProgress
-        activeWeek={activeWeek}
-        onSelectWeek={(week) => scrollTo(`week-${week}`, "start", true)}
-      />
+        <PlanProgress
+          activeWeek={activeWeek}
+          onSelectWeek={(week) => scrollTo(`week-${week}`, "start", true)}
+        />
+      </div>
 
       <div class="tp-agenda">
         {PLAN_WEEKS.map((week) => {
@@ -117,36 +131,6 @@ export function TrainingApp() {
         })}
       </div>
     </div>
-  );
-}
-
-function Subtitle({
-  now,
-  status,
-  activeWeek,
-}: {
-  now: Date;
-  status: string;
-  activeWeek: number | null;
-}) {
-  if (status === "before") {
-    const days = daysBetween(now, PLAN_START);
-    return (
-      <>
-        <strong>{days}</strong> {days === 1 ? "day" : "days"} until week 1 &middot;{" "}
-        {formatDayShort(PLAN_START)} &middot; six sessions a week, Friday off
-      </>
-    );
-  }
-
-  if (status === "after") return <>Plan complete &middot; {PLAN_WEEK_COUNT} weeks done</>;
-
-  const week = activeWeek ?? getWeekNumber(now) ?? 1;
-  const entry = PLAN_WEEKS[week - 1];
-  return (
-    <>
-      Week {week} of {PLAN_WEEK_COUNT} &middot; {entry.block} &middot; {entry.phase}
-    </>
   );
 }
 

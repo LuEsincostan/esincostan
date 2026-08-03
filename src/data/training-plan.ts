@@ -10,10 +10,11 @@
  *   play      tennis — a duration; the game supplies the intensity
  *
  * Every option declares the locations it works in. Location is the only axis
- * the UI turns into tabs — home, outdoor, travelling — and a day may offer
+ * the UI turns into tabs — indoor, outdoor, travelling — and a day may offer
  * several options at one location, which are listed rather than tabbed. An
  * option can sit in two places at once: kettlebell work is the same in the
- * living room or the garden, so it belongs to home and outdoor alike.
+ * living room or the garden, so indoor and outdoor collapse into one "Home"
+ * button on those days (see locationGroups).
  *
  * Limits: Tue/Wed cap at 60 min, Saturday floors at 120 min. Strength is
  * never expressed in minutes and does not scale — it progresses by load.
@@ -35,10 +36,10 @@ export type Format = "sets" | "steady" | "intervals" | "play";
  * Where the session happens. These three are the only tabs in the UI —
  * everything else a day offers is a list item inside the chosen location.
  */
-export type Location = "home" | "outdoor" | "travel";
+export type Location = "indoor" | "outdoor" | "travel";
 
 export const LOCATIONS: { key: Location; label: string }[] = [
-  { key: "home", label: "Home" },
+  { key: "indoor", label: "Indoor" },
   { key: "outdoor", label: "Outdoor" },
   { key: "travel", label: "Travelling" },
 ];
@@ -54,7 +55,6 @@ export interface OptionTemplate {
   /** an option can belong to more than one — kettlebell work is the same in or out */
   locations: Location[];
   sports: string[];
-  equipment: string;
   format: Format;
   /* sets */
   sets?: number;
@@ -83,8 +83,6 @@ export interface DayTemplate {
   kind: SessionKind;
   maxMinutes?: number;
   minMinutes?: number;
-  /** shown when the chosen location offers nothing — says why, rather than sitting blank */
-  emptyNote?: string;
   options: OptionTemplate[];
 }
 
@@ -142,9 +140,8 @@ export const DAY_TEMPLATES: DayTemplate[] = [
       {
         key: "kettlebell",
         label: "Kettlebell & band",
-        locations: ["home", "outdoor"],
+        locations: ["indoor", "outdoor"],
         sports: ["Kettlebell", "Band", "Bodyweight"],
-        equipment: "Kettlebell, resistance band, mat",
         format: "sets",
         sets: STRENGTH_SETS,
         reps: STRENGTH_REPS,
@@ -163,7 +160,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Bodyweight",
         locations: ["travel"],
         sports: ["Bodyweight"],
-        equipment: "",
         format: "sets",
         sets: STRENGTH_SETS,
         reps: STRENGTH_REPS,
@@ -190,9 +186,8 @@ export const DAY_TEMPLATES: DayTemplate[] = [
       {
         key: "erg",
         label: "Rower or SkiErg",
-        locations: ["home"],
+        locations: ["indoor"],
         sports: ["Rowing", "SkiErg"],
-        equipment: "Rower or SkiErg",
         format: "steady",
         minutes: 50,
         hr: HR_STEADY,
@@ -202,7 +197,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Run, swim or ski",
         locations: ["outdoor"],
         sports: ["Running", "Swimming", "XC ski"],
-        equipment: "Shoes, goggles or skis",
         format: "steady",
         minutes: 50,
         hr: HR_STEADY,
@@ -212,7 +206,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Easy run",
         locations: ["travel"],
         sports: ["Running"],
-        equipment: "Shoes",
         format: "steady",
         minutes: 40,
         hr: HR_STEADY,
@@ -230,9 +223,8 @@ export const DAY_TEMPLATES: DayTemplate[] = [
       {
         key: "erg",
         label: "Rower or SkiErg",
-        locations: ["home"],
+        locations: ["indoor"],
         sports: ["Rowing", "SkiErg"],
-        equipment: "Rower or SkiErg",
         format: "intervals",
         warmup: 10,
         sets: 4,
@@ -247,7 +239,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Tennis",
         locations: ["outdoor"],
         sports: ["Tennis"],
-        equipment: "Racket, balls, a court and an opponent",
         format: "play",
         minutes: 60,
         style: "Match play",
@@ -255,9 +246,8 @@ export const DAY_TEMPLATES: DayTemplate[] = [
       {
         key: "rope",
         label: "Rope jumping",
-        locations: ["home", "outdoor"],
+        locations: ["indoor", "outdoor"],
         sports: ["Rope jumping"],
-        equipment: "Rope, flat ground",
         format: "intervals",
         warmup: 8,
         sets: 8,
@@ -272,7 +262,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Stair intervals",
         locations: ["travel"],
         sports: ["Stairs"],
-        equipment: "Stairwell",
         format: "intervals",
         warmup: 8,
         sets: 6,
@@ -294,9 +283,8 @@ export const DAY_TEMPLATES: DayTemplate[] = [
       {
         key: "kettlebell",
         label: "Kettlebell & band",
-        locations: ["home", "outdoor"],
+        locations: ["indoor", "outdoor"],
         sports: ["Kettlebell", "Band", "Bodyweight"],
-        equipment: "Kettlebell, resistance band, pull-up bar",
         format: "sets",
         sets: STRENGTH_SETS,
         reps: STRENGTH_REPS,
@@ -315,7 +303,6 @@ export const DAY_TEMPLATES: DayTemplate[] = [
         label: "Bodyweight",
         locations: ["travel"],
         sports: ["Bodyweight"],
-        equipment: "",
         format: "sets",
         sets: STRENGTH_SETS,
         reps: STRENGTH_REPS,
@@ -347,14 +334,12 @@ export const DAY_TEMPLATES: DayTemplate[] = [
     kind: "long",
     minMinutes: LONG_DAY_FLOOR,
     // outdoor only — a treadmill is not an option for the long day
-    emptyNote: "The long day is outdoors. There is no indoor or travelling substitute.",
     options: [
       {
         key: "outdoor",
         label: "Run, ride or ski",
         locations: ["outdoor"],
         sports: ["Running", "Cycling", "XC ski"],
-        equipment: "Full kit, food",
         format: "steady",
         minutes: 150,
         hr: HR_STEADY,
@@ -367,14 +352,12 @@ export const DAY_TEMPLATES: DayTemplate[] = [
     long: "Sunday",
     focus: "Recovery",
     kind: "recovery",
-    emptyNote: "Recovery happens outdoors — get out of the house.",
     options: [
       {
         key: "any",
         label: "Cycling or hiking",
         locations: ["outdoor"],
         sports: ["Hiking", "Cycling"],
-        equipment: "Shoes or bikes",
         format: "steady",
         minutes: 70,
         hr: HR_EASY,
@@ -427,7 +410,6 @@ export interface ScaledOption {
   label: string;
   locations: Location[];
   sports: string[];
-  equipment: string;
   format: Format;
   /** sets */
   sets?: number;
@@ -479,7 +461,6 @@ function scaleOption(
     label: option.label,
     locations: option.locations,
     sports: option.sports,
-    equipment: option.equipment,
     format: option.format,
   };
 
@@ -571,9 +552,46 @@ export function optionsForLocation(day: PlanDay, location: Location): ScaledOpti
   return day.options.filter((option) => option.locations.includes(location));
 }
 
-/** First location with something in it, so a day never opens on an empty tab. */
-export function firstStockedLocation(day: PlanDay): Location | null {
-  return LOCATIONS.find((l) => optionsForLocation(day, l.key).length > 0)?.key ?? null;
+export interface LocationGroup {
+  /** the location a click on this button selects */
+  key: Location;
+  label: string;
+  /** every location the button stands for */
+  locations: Location[];
+}
+
+/**
+ * The buttons one day actually needs.
+ *
+ * Locations with nothing scheduled get no button at all, and where indoor and
+ * outdoor come to the same work — kettlebells are kettlebells in the living
+ * room or the garden — the two collapse into a single "Home". Only days where
+ * the choice changes the session, like rower against a run, spend two buttons
+ * on it.
+ */
+export function locationGroups(day: PlanDay): LocationGroup[] {
+  const label = (key: Location) => LOCATIONS.find((l) => l.key === key)!.label;
+  const signature = (key: Location) =>
+    optionsForLocation(day, key)
+      .map((option) => option.key)
+      .join("|");
+
+  const indoor = signature("indoor");
+  const outdoor = signature("outdoor");
+  const groups: LocationGroup[] = [];
+
+  if (indoor && indoor === outdoor) {
+    groups.push({ key: "indoor", label: "Home", locations: ["indoor", "outdoor"] });
+  } else {
+    if (indoor) groups.push({ key: "indoor", label: label("indoor"), locations: ["indoor"] });
+    if (outdoor) groups.push({ key: "outdoor", label: label("outdoor"), locations: ["outdoor"] });
+  }
+
+  if (signature("travel")) {
+    groups.push({ key: "travel", label: label("travel"), locations: ["travel"] });
+  }
+
+  return groups;
 }
 
 /** Stable key for a date — also the DOM id the agenda scrolls to. */
@@ -593,13 +611,6 @@ export function formatDuration(minutes: number): string {
   if (h === 0) return `${m} min`;
   if (m === 0) return `${h} h`;
   return `${h} h ${m.toString().padStart(2, "0")}`;
-}
-
-/** One-line summary for the compact week rows. */
-export function optionSummary(option: ScaledOption): string {
-  if (option.format === "sets") return `${option.sets} × ${option.reps}`;
-  if (option.format === "intervals") return `${option.sets} × ${option.work}`;
-  return formatDuration(option.minutes ?? 0);
 }
 
 const MONTHS = [

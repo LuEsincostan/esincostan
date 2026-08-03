@@ -23,6 +23,18 @@
   --tp-rule: #e2e8f0;
   --tp-rule-soft: #eef2f7;
 
+  /* Two independent axes, two visual languages, so they never read as the
+     same fact: session kind carries the colour, week load stays monochrome.
+     The timeline already encodes load in bar height, so hue there was
+     redundant as well as ambiguous (blue = cardio AND build week). */
+
+  /* monochrome week-load ramp — light is easy, dark is hard */
+  --tp-load-deload: #cbd5e1;
+  --tp-load-base:   #94a3b8;
+  --tp-load-test:   #94a3b8;
+  --tp-load-build:  #64748b;
+  --tp-load-peak:   #0f172a;
+
   /* vivid session-kind palette */
   --tp-strength: #ea580c;
   --tp-cardio: #0284c7;
@@ -67,9 +79,20 @@
 
 .tp-page main { max-width: 900px; margin: 0 auto; padding: 0 var(--tp-gutter) 4rem; }
 
+/* ── Pinned top ──────────────────────────────────────────────── */
+
+.tp-pinned {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--tp-bg);
+  border-bottom: 1px solid var(--tp-rule);
+  padding-bottom: 0.4rem;
+}
+
 /* ── Page head ───────────────────────────────────────────────── */
 
-.tp-head { padding-bottom: 0.9rem; }
+.tp-head { padding: 0.25rem 0 0.4rem; }
 .tp-head-row {
   display: flex;
   align-items: center;
@@ -77,14 +100,14 @@
   gap: 1rem;
 }
 .tp-title {
-  font-size: 1.9rem;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
 .tp-jump {
   flex-shrink: 0;
-  min-height: 40px;
+  min-height: 34px;
   padding: 0 0.9rem;
   border: 1px solid var(--tp-rule);
   border-radius: 8px;
@@ -99,9 +122,6 @@
 }
 .tp-jump:hover { background: var(--tp-ink); border-color: var(--tp-ink); color: #fff; }
 
-.tp-sub { font-size: 13px; color: var(--tp-ink-2); margin-top: 0.3rem; }
-.tp-sub strong { font-family: var(--tp-mono); font-size: 1.05rem; color: var(--tp-ink); }
-
 /* ── 12-week bar ─────────────────────────────────────────────── */
 
 .tp-progress {
@@ -109,7 +129,6 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 2px;
   align-items: end;
-  padding-bottom: 1rem;
 }
 .tp-progress-week {
   background: none;
@@ -127,17 +146,18 @@
 .tp-progress-week:hover { background: var(--tp-card-alt); }
 .tp-progress-week.is-active { background: var(--tp-card-alt); box-shadow: inset 0 0 0 2px var(--tp-ink); }
 
-.tp-progress-bar-track { width: 100%; height: 34px; display: flex; align-items: flex-end; justify-content: center; }
+.tp-progress-bar-track { width: 100%; height: 22px; display: flex; align-items: flex-end; justify-content: center; }
 .tp-progress-bar { width: 72%; min-height: 4px; border-radius: 3px 3px 0 0; background: currentColor; display: block; }
 .tp-progress-num { font-family: var(--tp-mono); font-size: 10px; font-weight: 700; color: var(--tp-ink-3); }
 .tp-progress-week.is-active .tp-progress-num { color: var(--tp-ink); }
 
-/* phase colours drive the bars */
-.tp-progress-week.tp-phase--base    { color: var(--tp-ink-3); }
-.tp-progress-week.tp-phase--build   { color: var(--tp-cardio); }
-.tp-progress-week.tp-phase--peak    { color: var(--tp-intensity); }
-.tp-progress-week.tp-phase--deload  { color: var(--tp-long); }
-.tp-progress-week.tp-phase--test    { color: var(--tp-recovery); }
+/* monochrome: darker bar = harder week. No hue, so nothing here collides
+   with a session colour further down the page. */
+.tp-progress-week.tp-phase--deload  { color: var(--tp-load-deload); }
+.tp-progress-week.tp-phase--base    { color: var(--tp-load-base); }
+.tp-progress-week.tp-phase--test    { color: var(--tp-load-test); }
+.tp-progress-week.tp-phase--build   { color: var(--tp-load-build); }
+.tp-progress-week.tp-phase--peak    { color: var(--tp-load-peak); }
 
 /* the progress bars are buttons, so the pill background must not apply */
 .tp-progress-week.tp-phase--base,
@@ -159,26 +179,24 @@
   color: #fff;
   white-space: nowrap;
 }
-.tp-phase--base    { background: var(--tp-ink-3); }
-.tp-phase--build   { background: var(--tp-cardio); }
-.tp-phase--peak    { background: var(--tp-intensity); }
-.tp-phase--deload  { background: var(--tp-long); }
-.tp-phase--test    { background: var(--tp-recovery); }
+.tp-phase--deload  { background: var(--tp-load-deload); color: var(--tp-ink); }
+.tp-phase--base    { background: var(--tp-load-base); }
+.tp-phase--test    { background: var(--tp-load-test); }
+.tp-phase--build   { background: var(--tp-load-build); }
+.tp-phase--peak    { background: var(--tp-load-peak); }
 
 /* ── Agenda ──────────────────────────────────────────────────── */
 
-.tp-agenda { display: flex; flex-direction: column; gap: 1.4rem; }
+.tp-agenda { display: flex; flex-direction: column; gap: 0.9rem; padding-top: 0.5rem; }
+.tp-block, .tp-day { scroll-margin-top: calc(var(--tp-pinned-h, 118px) + 0.5rem); }
 
 .tp-block-head {
-  position: sticky;
-  top: 0;
-  z-index: 2;
   display: flex;
   align-items: baseline;
   gap: 0.45rem;
   flex-wrap: wrap;
-  padding: 0.55rem 0 0.45rem;
-  margin-bottom: 0.5rem;
+  padding: 0.25rem 0 0.25rem;
+  margin-bottom: 0.3rem;
   background: var(--tp-bg);
   border-bottom: 1px solid var(--tp-rule);
 }
@@ -199,7 +217,7 @@
   border-left: 4px solid var(--tp-accent, var(--tp-rule));
   border-radius: 8px;
   background: var(--tp-card);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.22rem;
   overflow: hidden;
 }
 .tp-day.is-today { box-shadow: 0 0 0 2px var(--tp-ink); }
@@ -211,8 +229,8 @@
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  min-height: 52px;
-  padding: 0.55rem 0.75rem;
+  min-height: 40px;
+  padding: 0.3rem 0.7rem;
   background: none;
   border: none;
   cursor: pointer;
@@ -257,17 +275,9 @@
   border-radius: 20px;
   padding: 0.1rem 0.45rem;
 }
-.tp-day-summary {
-  flex: 0 0 auto;
-  margin-left: auto;
-  font-family: var(--tp-mono);
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--tp-ink-2);
-  white-space: nowrap;
-}
 .tp-day-chevron {
   flex: 0 0 auto;
+  margin-left: auto;
   width: 0.45rem;
   height: 0.45rem;
   border-right: 2px solid var(--tp-ink-3);
@@ -277,7 +287,7 @@
 }
 .tp-day.is-open .tp-day-chevron { transform: rotate(-135deg); }
 
-.tp-day-body { padding: 0.2rem 0.75rem 0.9rem; }
+.tp-day-body { padding: 0.1rem 0.7rem 0.5rem; }
 
 /* ── Location tabs ───────────────────────────────────────────── */
 
@@ -307,8 +317,6 @@
   color: #fff;
 }
 /* nothing scheduled there — still reachable, just not advertised */
-.tp-tab.is-empty { color: var(--tp-ink-3); border-style: dashed; }
-.tp-tab.is-empty.is-active { color: #fff; border-style: solid; }
 
 /* ── Options ─────────────────────────────────────────────────── */
 
@@ -327,17 +335,6 @@
   font-weight: 700;
   color: var(--tp-ink);
   margin-bottom: 0.55rem;
-}
-
-.tp-sports { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.7rem; }
-.tp-sport {
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 20px;
-  color: var(--tp-accent, var(--tp-ink-2));
-  background: color-mix(in srgb, var(--tp-accent, #888) 12%, #fff);
-  white-space: nowrap;
 }
 
 .tp-headline {
@@ -369,7 +366,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.42rem 0;
+  padding: 0.26rem 0;
   border-bottom: 1px solid var(--tp-rule-soft);
   font-size: 13px;
 }
@@ -384,11 +381,6 @@
 .tp-exercise--total .tp-exercise-name,
 .tp-exercise--total .tp-exercise-reps { color: var(--tp-accent, var(--tp-ink)); font-weight: 700; }
 
-.tp-equipment {
-  margin-top: 0.7rem;
-  font-size: 11.5px;
-  color: var(--tp-ink-3);
-}
 
 .tp-notice {
   font-size: 12.5px;
@@ -418,7 +410,6 @@
 
   .tp-day-when { flex-basis: 2.6rem; }
   .tp-day-focus { font-size: 14px; }
-  .tp-day-summary { font-size: 12px; }
 
   /* a location with two sessions shows them side by side */
   .tp-options {
