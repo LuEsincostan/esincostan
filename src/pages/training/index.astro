@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { TrainingApp } from "../../components/training/TrainingApp";
+import "../../styles/training.css";
+---
+
+<BaseLayout
+  title="Training Plan"
+  description="A 12-week training plan from 10 August 2026: six sessions a week, Friday rest, each session available at home, outdoors or while travelling."
+>
+  <div class="tp-page">
+    <nav class="tp-backbar">
+      <a href="/andra" class="back-link">&larr; Andra</a>
+    </nav>
+
+    <main>
+      <TrainingApp client:load />
+    </main>
+  </div>
+</BaseLayout>
