@@ -1,180 +1,155 @@
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import {
-  DAY_TEMPLATES,
   PLAN_END,
   PLAN_START,
+  PLAN_WEEKS,
   PLAN_WEEK_COUNT,
-  addDays,
+  dayKey,
   daysBetween,
-  formatDayLong,
   formatDayShort,
-  formatMonth,
   getPlanDay,
   getWeekNumber,
+  sameDay,
   startOfDay,
-  startOfWeek,
-  weekStartDate,
+  weekDays,
+  type Location,
 } from "../../data/training-plan";
-import { SessionDetail } from "./SessionDetail";
-import { WeekView } from "./WeekView";
-import { MonthGrid } from "./MonthGrid";
+import { DayRow } from "./DayRow";
 import { PlanProgress } from "./PlanProgress";
 
-type View = "month" | "week" | "day";
-
-const VIEWS: { key: View; label: string }[] = [
-  { key: "month", label: "Month" },
-  { key: "week", label: "Week" },
-  { key: "day", label: "Day" },
-];
-
 /**
- * Where the calendar opens. Today can sit outside the plan window, and an
- * empty week is a useless landing view, so the calendar clamps into the plan
- * while the card above still reports the real date.
+ * The plan reads as one vertical scroll: twelve week blocks, seven days each,
+ * with the current day open where you land. There is no month grid and no
+ * view switcher — a training plan is a list you work down, not a calendar you
+ * navigate.
  */
-function initialCursor(today: Date): Date {
+
+/** Where the agenda opens. Today can sit outside the twelve weeks. */
+function focusDate(today: Date): Date {
   if (daysBetween(PLAN_START, today) < 0) return PLAN_START;
   if (daysBetween(today, PLAN_END) < 0) return PLAN_END;
   return today;
 }
 
 export function TrainingApp() {
-  // seeded at build time, corrected on mount — a static page must not ship a
-  // frozen "today"
-  const [now, setNow] = useState(() => startOfDay(new Date()));
-  const [cursor, setCursor] = useState(() => initialCursor(startOfDay(new Date())));
-  const [view, setView] = useState<View>("week");
+  // Seeded with day 1 and corrected on mount. These initialisers must NOT read
+  // the clock: the hydration render would then disagree with the prerendered
+  // markup, and preact's hydrate reuses matched DOM without patching its
+  // attributes — the is-open and is-today classes would stick to day 1 for the
+  // life of the page even as the right body opened underneath them. Seeding a
+  // constant keeps hydration identical to the HTML, so the effect below lands
+  // as an ordinary diff that does update the DOM.
+  const [now, setNow] = useState(PLAN_START);
+  const [openDate, setOpenDate] = useState<Date | null>(PLAN_START);
+  // shared by every day: choose "Travelling" once and the whole plan follows
+  const [location, setLocation] = useState<Location>("home");
 
   useEffect(() => {
     const real = startOfDay(new Date());
+    const focus = focusDate(real);
     setNow(real);
-    setCursor(initialCursor(real));
+    setOpenDate(focus);
+
+    // day 1 already sits at the top of the page — only scroll when it is not
+    if (sameDay(focus, PLAN_START)) return;
+    const frame = requestAnimationFrame(() => scrollTo(`day-${dayKey(focus)}`, "center"));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  const cursorPlan = useMemo(() => getPlanDay(cursor), [cursor]);
-  const weekStart = useMemo(() => startOfWeek(cursor), [cursor]);
-  const cursorWeek = getWeekNumber(cursor);
+  const status = getPlanDay(now).status;
+  const activeWeek = openDate ? getWeekNumber(openDate) : null;
 
-  function step(delta: number) {
-    if (view === "month") setCursor(new Date(cursor.getFullYear(), cursor.getMonth() + delta, 1));
-    else if (view === "week") setCursor(addDays(cursor, delta * 7));
-    else setCursor(addDays(cursor, delta));
+  function jumpToToday() {
+    const focus = focusDate(now);
+    setOpenDate(focus);
+    scrollTo(`day-${dayKey(focus)}`, "center", true);
   }
-
-  function selectDay(date: Date) {
-    setCursor(date);
-    setView("day");
-  }
-
-  const rangeLabel =
-    view === "month"
-      ? formatMonth(cursor)
-      : view === "week"
-        ? `${formatDayShort(weekStart)} – ${formatDayShort(addDays(weekStart, 6))}`
-        : formatDayLong(cursor);
-
-  const weekLabel = view === "week" ? getWeekNumber(weekStart) : cursorWeek;
 
   return (
     <div class="tp">
-      <section class="tp-section tp-section--today">
-        {/* the page's h1 — no hero, this opens the page */}
-        <h1 class="tp-section-label">Today</h1>
-        <TodayPanel today={now} />
-      </section>
-
-      <section class="tp-section">
-        <PlanProgress
-          activeWeek={cursorWeek}
-          onSelectWeek={(week) => {
-            setCursor(weekStartDate(week));
-            setView("week");
-          }}
-        />
-      </section>
-
-      <section class="tp-section">
-        <div class="tp-calendar-bar">
-          <div class="tp-views">
-            {VIEWS.map((v) => (
-              <button
-                type="button"
-                key={v.key}
-                class={`tp-view-btn ${view === v.key ? "is-active" : ""}`}
-                onClick={() => setView(v.key)}
-              >
-                {v.label}
-              </button>
-            ))}
-          </div>
-
-          <div class="tp-range">
-            <span class="tp-range-label">{rangeLabel}</span>
-            {weekLabel !== null && (
-              <span class="tp-range-week">
-                Week {weekLabel}/{PLAN_WEEK_COUNT}
-              </span>
-            )}
-          </div>
-
-          <div class="tp-nav">
-            <button type="button" class="tp-nav-btn" onClick={() => step(-1)} aria-label="Previous">
-              &larr;
-            </button>
-            <button type="button" class="tp-nav-btn tp-nav-today" onClick={() => setCursor(now)}>
-              Today
-            </button>
-            <button type="button" class="tp-nav-btn" onClick={() => step(1)} aria-label="Next">
-              &rarr;
-            </button>
-          </div>
+      <header class="tp-head">
+        <div class="tp-head-row">
+          <h1 class="tp-title">Training</h1>
+          <button type="button" class="tp-jump" onClick={jumpToToday}>
+            Today
+          </button>
         </div>
+        <p class="tp-sub">
+          <Subtitle now={now} status={status} activeWeek={activeWeek} />
+        </p>
+      </header>
 
-        {view === "month" && (
-          <MonthGrid cursor={cursor} today={now} selected={cursor} onSelectDay={selectDay} />
-        )}
-        {view === "week" && <WeekView weekStart={weekStart} today={now} onSelectDay={selectDay} />}
-        {view === "day" && <SessionDetail day={cursorPlan} tone="day" />}
+      <PlanProgress
+        activeWeek={activeWeek}
+        onSelectWeek={(week) => scrollTo(`week-${week}`, "start", true)}
+      />
 
-        <Legend />
-      </section>
+      <div class="tp-agenda">
+        {PLAN_WEEKS.map((week) => {
+          const days = weekDays(week.week);
+
+          return (
+            <section class="tp-block" id={`week-${week.week}`} key={week.week}>
+              <header class="tp-block-head">
+                <span class="tp-block-week">Week {week.week}</span>
+                <span class="tp-block-name">{week.block}</span>
+                <span class={`tp-phase tp-phase--${week.phase.toLowerCase()}`}>{week.phase}</span>
+                <span class="tp-block-range">
+                  {formatDayShort(days[0].date)} &ndash; {formatDayShort(days[6].date)}
+                </span>
+              </header>
+
+              {days.map((day) => (
+                <DayRow
+                  key={dayKey(day.date)}
+                  day={day}
+                  isToday={sameDay(day.date, now)}
+                  expanded={openDate !== null && sameDay(day.date, openDate)}
+                  onToggle={() =>
+                    setOpenDate(openDate !== null && sameDay(day.date, openDate) ? null : day.date)
+                  }
+                  location={location}
+                  onLocation={setLocation}
+                />
+              ))}
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
-function TodayPanel({ today }: { today: Date }) {
-  const plan = getPlanDay(today);
-
-  if (plan.status === "before") {
-    const days = daysBetween(today, PLAN_START);
+function Subtitle({
+  now,
+  status,
+  activeWeek,
+}: {
+  now: Date;
+  status: string;
+  activeWeek: number | null;
+}) {
+  if (status === "before") {
+    const days = daysBetween(now, PLAN_START);
     return (
       <>
-        <p class="tp-countdown">
-          <strong>{days}</strong> {days === 1 ? "day" : "days"} until week 1 &middot;{" "}
-          {formatDayShort(PLAN_START)}
-        </p>
-        <SessionDetail day={getPlanDay(PLAN_START)} tone="today" eyebrow="Day 1 · Mon 10 Aug" />
+        <strong>{days}</strong> {days === 1 ? "day" : "days"} until week 1 &middot;{" "}
+        {formatDayShort(PLAN_START)} &middot; six sessions a week, Friday off
       </>
     );
   }
 
-  if (plan.status === "after") {
-    return <p class="tp-countdown">Plan complete.</p>;
-  }
+  if (status === "after") return <>Plan complete &middot; {PLAN_WEEK_COUNT} weeks done</>;
 
-  return <SessionDetail day={plan} tone="today" />;
+  const week = activeWeek ?? getWeekNumber(now) ?? 1;
+  const entry = PLAN_WEEKS[week - 1];
+  return (
+    <>
+      Week {week} of {PLAN_WEEK_COUNT} &middot; {entry.block} &middot; {entry.phase}
+    </>
+  );
 }
 
-function Legend() {
-  return (
-    <div class="tp-legend">
-      {DAY_TEMPLATES.map((day) => (
-        <span class={`tp-legend-item tp-kind-${day.kind}`} key={day.short}>
-          <span class="tp-legend-dot" />
-          {day.short}
-        </span>
-      ))}
-    </div>
-  );
+function scrollTo(id: string, block: ScrollLogicalPosition, smooth = false) {
+  document.getElementById(id)?.scrollIntoView({ block, behavior: smooth ? "smooth" : "auto" });
 }
