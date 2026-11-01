@@ -8,9 +8,10 @@ dist
 data/srtm/
 data/graph-cache.json
 
-# LinkedIn data exports
+# LinkedIn data exports (personal archive dumps; do not commit)
+linkedin_export/
 linkedin_full/
-Basic_LinkedInDataExport*
+*LinkedInDataExport*
 
 # Local planning docs (training agent)
 docs/
