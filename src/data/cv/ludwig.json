@@ -1,109 +1,245 @@
 {
   "name": "Ludwig Ehlert",
-  "title": "Senior Ecosystem Architect",
+  "title": "Senior Ecosystem Architect, Platform Strategy",
+  "headline": "Applied AI, Agents & MCP · 10+ yrs Enterprise Pre-Sales",
   "location": "Zürich, Switzerland",
-  "summary": "",
+  "summary": "Pre-sales architect with 10+ years helping large pharma/life-sciences and manufacturing enterprises turn new technology into production systems their people actually use. At Dataiku I helped build Dataiku Headless, an Anthropic-verified Claude Code plugin with a Python MCP server that lets coding agents work inside a governed data platform. Before that: applied-AI pre-sales for Swiss pharma (RAG, agents, automated LLM evaluation on customer data) and about eight years at Tableau/Salesforce on $5–10M ACV deals, including one of Tableau's largest European deployments (35k users). I build my own products with Claude Code and want to help Swiss and European enterprises deploy Claude safely and reliably, from first technical discovery to production.",
+  "cvPdf": "/ludwig-ehlert-cv.pdf",
   "links": {
-    "linkedin": "https://www.linkedin.com/in/ludwigehlert",
-    "github": ""
+    "email": "ludwig.ehlert@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ludwigehlert"
   },
   "experience": [
     {
       "company": "Dataiku",
-      "location": "Zürich, Switzerland",
+      "location": "Zürich",
       "roles": [
-        { "title": "Senior Ecosystem Architect", "period": "Mar 2026 – Present" },
-        { "title": "Senior Sales Engineer", "period": "Mar 2025 – Mar 2026" }
+        {
+          "title": "Senior Ecosystem Architect, Platform Strategy",
+          "period": "Mar 2026 – Present",
+          "bullets": [
+            "Helped build and launch Dataiku Headless, which lets coding agents like Claude Code, Codex and Cursor build Dataiku projects over MCP inside a governed platform",
+            "Contributed Python code to the Headless MCP server and agent plugin, now listed as Anthropic-verified in Claude's plugin directory",
+            "Responsible for the technical integration of Dataiku's platform with AWS and Databricks"
+          ]
+        },
+        {
+          "title": "Senior Sales Engineer",
+          "period": "Mar 2025 – Mar 2026",
+          "bullets": [
+            "Technical pre-sales for pharmaceutical customers in Switzerland",
+            "Ran AI product trials with customers, including automated LLM evals on their own data",
+            "Built RAG and agent workflows in Python on Dataiku for customer business cases",
+            "Worked extensively with the Dataiku API and with external data APIs as data sources"
+          ]
+        }
       ]
     },
     {
-      "company": "Tableau",
-      "location": "Frankfurt, Germany",
+      "company": "Tableau/Salesforce",
       "roles": [
-        { "title": "Lead Solution Engineer", "period": "Dec 2023 – Mar 2025" }
+        {
+          "title": "Lead Solution Engineer",
+          "period": "2024 – 2025",
+          "note": "Rehired into my previous role"
+        }
       ]
     },
     {
       "company": "One Data",
-      "location": "Frankfurt, Germany",
+      "location": "Frankfurt am Main",
       "roles": [
-        { "title": "Director Solution Engineering", "period": "Jun 2023 – Dec 2023" }
+        {
+          "title": "Director Solution Engineering",
+          "period": "Jun 2023 – Dec 2023",
+          "bullets": [
+            "Built the solution engineering practice and field intake process",
+            "Onboarded and supported partners in sales and consulting activities",
+            "Developed industry sales plays for manufacturing and sustainability"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Tableau/Salesforce",
+      "location": "Frankfurt am Main",
+      "roles": [
+        {
+          "title": "Lead Solution Engineer",
+          "period": "May 2020 – May 2023",
+          "bullets": [
+            "Pre-sales lead for large DACH enterprises in manufacturing and pharma/life sciences, working with stakeholders from database admins and engineering teams up to C-level",
+            "Led the technical side of one of Tableau's largest European deployments (35k users)",
+            "Supported complex, multi-stakeholder deals with ACVs typically between $5M and $10M",
+            "Advised on platform integration, data governance and data strategy; moved customers to scalable cloud data and analytics architectures on AWS, Snowflake and Databricks",
+            "Ran workshops from single solutions to enterprise data strategy; spoke at Tableau Conference (San Diego, Munich, Berlin, London) and customer events",
+            "Fed EMEA customer feedback back to product management and engineering; built engagement strategies with marketing, sales, customer success and professional services",
+            "Supported team upskilling and hiring for sales, pre-sales and professional services roles"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Tableau/Salesforce",
+      "location": "Frankfurt am Main",
+      "roles": [
+        {
+          "title": "Solution Architect",
+          "period": "May 2017 – May 2020",
+          "bullets": [
+            "Technical advisor for large enterprise deployments: platform integration, automation, adoption and scaling concepts",
+            "Scoped, managed and delivered projects of up to 250 consulting days with globally distributed teams of up to 5",
+            "Built custom admin capabilities in Python for customers running Tableau Server",
+            "Secured follow-up projects worth approximately $5M"
+          ]
+        }
       ]
     },
     {
       "company": "Tableau",
-      "location": "Germany / EMEA",
+      "location": "Frankfurt am Main",
       "roles": [
-        { "title": "Lead Solutions Engineer", "period": "Aug 2021 – Jun 2023" },
-        { "title": "Senior Solutions Engineer", "period": "May 2020 – Aug 2021" },
-        { "title": "Solution Architect", "period": "Jul 2018 – May 2020" },
-        { "title": "Associate Solution Architect", "period": "Jan 2018 – Jul 2018" },
-        { "title": "Business Consultant", "period": "Jul 2017 – Jan 2018" },
-        { "title": "Product Consultant", "period": "May 2016 – Jun 2017" }
+        {
+          "title": "Product Consultant",
+          "period": "May 2016 – May 2017",
+          "bullets": [
+            "Technical sales support for 250+ small and medium business accounts in a high-velocity motion (60+ new logos per month)"
+          ]
+        }
       ]
     },
     {
       "company": "DHI",
-      "location": "Köln, Germany",
+      "location": "Köln",
       "roles": [
-        { "title": "Software Solution Consultant", "period": "Oct 2014 – Apr 2016" }
-      ],
-      "bullets": [
-        "Technical and thematic software support in MIKE URBAN for customers in Germany and Switzerland"
-      ]
-    },
-    {
-      "company": "Wheels over Frankfurt e.V.",
-      "location": "Frankfurt, Germany",
-      "roles": [
-        { "title": "Chairman", "period": "Jul 2022 – Mar 2024" }
-      ],
-      "bullets": [
-        "Advancing mountainbike culture and community around Frankfurt am Main"
+        {
+          "title": "Software Consultant",
+          "period": "Oct 2014 – Apr 2016",
+          "bullets": [
+            "Pre-sales, customer support, business development and project management for water-network modelling software",
+            "Created content and ran software trainings"
+          ]
+        }
       ]
     }
   ],
   "education": [
     {
-      "school": "TU Dresden",
+      "school": "Technical University Dresden",
       "degree": "M.Sc. Water Management",
-      "period": "2011 – 2014"
-    },
-    {
-      "school": "University of Hagen",
-      "degree": "B.Sc. Computer Science",
-      "period": "2015 – 2018"
-    },
-    {
-      "school": "TU Dresden",
-      "degree": "B.Sc. Hydrology and Water Resources Science",
-      "period": "2008 – 2011"
+      "period": "2011 – 2014",
+      "location": "Dresden, Germany"
     },
     {
       "school": "Luleå University of Technology",
-      "degree": "Exchange — Environmental Engineering Technology",
-      "period": "2012 – 2013"
+      "degree": "Environmental Engineering (exchange)",
+      "period": "2012 – 2013",
+      "location": "Luleå, Sweden"
+    },
+    {
+      "school": "Technical University Dresden",
+      "degree": "B.Sc. Hydrology",
+      "period": "2008 – 2011",
+      "location": "Dresden, Germany"
     }
   ],
-  "certifications": [
-    "Dataiku ML Practitioner",
-    "Cross Country Ski Instructor (Swissski J+S)",
-    "Tableau Server Certified Professional",
-    "Tableau Desktop Certified Professional"
+  "skillGroups": [
+    {
+      "name": "AI",
+      "items": [
+        "Claude Code",
+        "Codex",
+        "Cursor",
+        "MCP",
+        "AI agents",
+        "RAG",
+        "LLM evaluation",
+        "LLMs",
+        "Machine learning"
+      ]
+    },
+    {
+      "name": "Platforms",
+      "items": ["AWS", "Databricks", "Dataiku", "Snowflake", "Azure", "GCP"]
+    },
+    {
+      "name": "Code",
+      "items": ["Python", "SQL", "Dataiku API", "REST/data APIs", "Git"]
+    },
+    {
+      "name": "Pre-sales",
+      "items": [
+        "Technical discovery",
+        "Solution architecture",
+        "Workshops",
+        "Exec presentations",
+        "MEDDPICC"
+      ]
+    },
+    {
+      "name": "Industries",
+      "items": ["Pharma & life sciences", "Manufacturing", "Water & utilities"]
+    }
   ],
-  "skills": [
-    "Solution Engineering",
-    "Data Analytics",
-    "Machine Learning",
-    "Tableau",
-    "Sports Coaching",
-    "Youth Development"
+  "projects": [
+    {
+      "name": "findsnow.ai",
+      "href": "https://findsnow.ai",
+      "description": "Open cross-country ski trails in Switzerland, built with Claude Code"
+    },
+    {
+      "name": "extrablue.app",
+      "href": "https://extrablue.app",
+      "description": "Waxing journal and community for cross-country skiers, built with Claude Code"
+    },
+    {
+      "name": "theunhooked.life",
+      "href": "https://theunhooked.life",
+      "description": "A movement that gets people off their phones and into their bodies"
+    }
+  ],
+  "awards": [
+    "Tableau Solution Engineer EMEA MVP, FY23",
+    "EMEA Tableau Rockstar Award, 2020",
+    "Tableau High Performance Program, 2018"
+  ],
+  "volunteering": [
+    {
+      "company": "LC Zürich-Doppelstock",
+      "roles": [
+        {
+          "title": "J+S Coach (Cross-Country Skiing)",
+          "period": "Jan 2026 – Present",
+          "bullets": ["Coaching kids' cross-country ski training"]
+        }
+      ]
+    },
+    {
+      "company": "Wheels over Frankfurt e.V.",
+      "roles": [
+        {
+          "title": "Chairman of the Board",
+          "period": "2022 – 2024",
+          "bullets": [
+            "Led a non-profit of 200+ members with 4 board members and 10 workgroup leaders"
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Bergwacht Sachsen",
+      "roles": [
+        {
+          "title": "Mountain Rescue",
+          "period": "2009 – 2014",
+          "bullets": ["64 rescue operations"]
+        }
+      ]
+    }
   ],
   "languages": [
     { "lang": "German", "level": "Native" },
-    { "lang": "English", "level": "Full Professional" },
-    { "lang": "Romanian", "level": "Elementary" },
-    { "lang": "Russian", "level": "Elementary" },
-    { "lang": "Swedish", "level": "Elementary" }
+    { "lang": "English", "level": "Fluent" },
+    { "lang": "Romanian", "level": "Elementary" }
   ]
 }

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const projects = [
+  {
+    title: "Rollerski Routes",
+    description: "Find the best rollerski routes around Wädenswil & Zurich",
+    href: "/rollerski",
+    status: "In progress",
+  },
+  {
+    title: "Sport & Fitness",
+    description:
+      "2026/27 dual season — Vasaloppet & La Diagonela on snow, then Ironman in Port Macquarie",
+    href: "/sport",
+    status: "In progress",
+  },
+];
+---
+
+<BaseLayout
+  title="Ludwig — Past projects"
+  description="Earlier projects by Ludwig Ehlert: Rollerski Routes and the 2026/27 sport and fitness season."
+>
+  <main class="person-landing">
+    <header class="person-header">
+      <a href="/" class="person-back">&larr; esincostan</a>
+      <div class="person-header-row">
+        <h1 class="person-heading">Ludwig</h1>
+        <nav class="person-tabs" aria-label="Ludwig">
+          <a href="/ludwig" class="person-tab">Projects</a>
+          <a href="/ludwig/archive" class="person-tab person-tab--active" aria-current="page">Archive</a>
+          <a href="/ludwig/about" class="person-tab">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <p class="projects-note">Past projects, still on this site.</p>
+
+    <section class="projects-grid" aria-label="Past projects">
+      {projects.map((project) => (
+        <a href={project.href} class="project-card">
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <span class="project-status">{project.status}</span>
+        </a>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
