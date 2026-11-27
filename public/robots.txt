@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://esincostan.com/sitemap-index.xml
