@@ -3,39 +3,81 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const projects = [
   {
-    title: "Rollerski Routes",
-    description: "Find the best rollerski routes around Wädenswil & Zurich",
-    href: "/rollerski",
-    status: "In progress",
+    title: "ExtraBlue",
+    description:
+      "A waxing journal and community for cross-country skiers — log skis and waxes, rate glide and kick, and share wax tips and race recommendations. Track. Wax. Glide.",
+    href: "https://extrablue.app",
+    status: "extrablue.app",
+    external: true,
+    image: "/projects/extrablue.png",
+    imageAlt: "extrablue — Track. Wax. Glide.",
+    imageHeight: 502,
   },
   {
-    title: "Sport & Fitness",
-    description: "2026/27 dual season — Vasaloppet & La Diagonela on snow, then Ironman in Port Macquarie",
-    href: "/sport",
-    status: "In progress",
+    title: "FindSnow",
+    description:
+      "Which ski trails are open? Groomed kilometres of cross-country trail, and whether to go by train or car.",
+    href: "https://findsnow.ai",
+    status: "findsnow.ai",
+    external: true,
+    image: "/projects/findsnow.png",
+    imageAlt: "findsnow.ai — Which ski trails are open?",
+    imageHeight: 422,
+  },
+  {
+    title: "The Unhooked Life",
+    description:
+      "A movement for movement. Get humanity healthy again: off the phone, back into our bodies, and back to each other.",
+    href: "https://theunhooked.life",
+    status: "theunhooked.life",
+    external: true,
+    image: "/projects/the-unhooked-life.png",
+    imageAlt: "The Unhooked Life",
+    imageHeight: 504,
   },
 ];
 ---
 
-<BaseLayout title="Ludwig — Projects" description="Projects by Ludwig Ehlert">
-  <main class="person-landing">
+<BaseLayout
+  title="Ludwig — Projects"
+  description="ExtraBlue, FindSnow, and The Unhooked Life — current projects by Ludwig Ehlert, Senior Ecosystem Architect, Platform Strategy at Dataiku."
+>
+  <main class="person-landing person-landing--wide">
     <header class="person-header">
       <a href="/" class="person-back">&larr; esincostan</a>
       <div class="person-header-row">
         <h1 class="person-heading">Ludwig</h1>
-        <nav class="person-tabs">
-          <a href="/ludwig" class="person-tab person-tab--active">Projects</a>
+        <nav class="person-tabs" aria-label="Ludwig">
+          <a href="/ludwig" class="person-tab person-tab--active" aria-current="page">Projects</a>
+          <a href="/ludwig/archive" class="person-tab">Archive</a>
           <a href="/ludwig/about" class="person-tab">About</a>
         </nav>
       </div>
     </header>
 
-    <section class="projects-grid">
+    <section class="projects-grid projects-grid--featured" aria-label="Current projects">
       {projects.map((project) => (
-        <a href={project.href} class="project-card">
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <span class="project-status">{project.status}</span>
+        <a
+          href={project.href}
+          class:list={["project-card", project.image && "project-card--media"]}
+          target={project.external ? "_blank" : undefined}
+          rel={project.external ? "noopener noreferrer" : undefined}
+        >
+          {project.image && (
+            <img
+              class="project-card-media"
+              src={project.image}
+              alt={project.imageAlt}
+              width="960"
+              height={project.imageHeight}
+            />
+          )}
+          <div class={project.image ? "project-card-body" : undefined}>
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+            <span class="project-status">{project.status}</span>
+            {project.external && <span class="sr-only"> (opens in a new tab)</span>}
+          </div>
         </a>
       ))}
     </section>
